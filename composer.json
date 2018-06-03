@@ -27,8 +27,7 @@
 		"php-http/client-implementation": "^1.0",
 		"php-http/httplug": "^1.0",
 		"php-http/message-factory": "^1.0",
-		"php-http/discovery": "^1.0",
-		"php-http/guzzle6-adapter": "*"
+		"php-http/discovery": "^1.0"
 	},
 	"require-dev": {
 		"php-http/mock-client": "^1.0",
