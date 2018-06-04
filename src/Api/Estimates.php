@@ -113,4 +113,60 @@ class Estimates extends AbstractApi {
 	public function remove( int $estimateId ) {
 		return $this->delete( '/estimates/' . rawurlencode( $estimateId ) );
 	}
+
+	/**
+	 * Marks a draft estimate as sent.
+	 *
+	 * @param int $estimateId The ID of the estimate.
+	 * @return array|string
+	 */
+	public function send( int $estimateId ) {
+		$parameters = [
+			'event_type' => 'send',
+		];
+
+		return $this->post( '/estimates/' . rawurlencode( $estimateId ) . '/messages', $parameters );
+	}
+
+	/**
+	 * Marks an open estimate as accepted.
+	 *
+	 * @param int $estimateId The ID of the estimate.
+	 * @return array|string
+	 */
+	public function accept( int $estimateId ) {
+		$parameters = [
+			'event_type' => 'accept',
+		];
+
+		return $this->post( '/estimates/' . rawurlencode( $estimateId ) . '/messages', $parameters );
+	}
+
+	/**
+	 * Marks an open estimate as declined.
+	 *
+	 * @param int $estimateId The ID of the estimate.
+	 * @return array|string
+	 */
+	public function decline( int $estimateId ) {
+		$parameters = [
+			'event_type' => 'decline',
+		];
+
+		return $this->post( '/estimates/' . rawurlencode( $estimateId ) . '/messages', $parameters );
+	}
+
+	/**
+	 * Re-opens a closed estimate
+	 *
+	 * @param int $estimateId The ID of the estimate.
+	 * @return array|string
+	 */
+	public function reopen( int $estimateId ) {
+		$parameters = [
+			'event_type' => 're-open',
+		];
+
+		return $this->post( '/estimates/' . rawurlencode( $estimateId ) . '/messages', $parameters );
+	}
 }
