@@ -157,7 +157,7 @@ class TimeEntries extends AbstractApi {
 	 *
 	 * @return \Required\Harvest\Api\TimeEntry\ExternalReference;
 	 */
-	public function external_reference() {
+	public function externalReference() {
 		return new ExternalReference( $this->client );
 	}
 }
