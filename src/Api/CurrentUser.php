@@ -20,4 +20,13 @@ class CurrentUser extends AbstractApi {
 	public function show() {
 		return $this->get( '/users/me' );
 	}
+
+	/**
+	 * Gets the authenticated user's project assignments.
+	 *
+	 * @return \Required\Harvest\Api\CurrentUser\ProjectAssignments;
+	 */
+	public function projectAssignments() {
+		return new CurrentUser\ProjectAssignments( $this->client );
+	}
 }
