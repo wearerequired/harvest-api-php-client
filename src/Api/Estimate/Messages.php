@@ -13,7 +13,7 @@ use Required\Harvest\Exception\MissingArgumentException;
 /**
  * API client for estimate messages endpoint.
  *
- * @link https://help.getharvest.com/api-v2/estimates-api/estimates/user-assignments/
+ * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimate-messages/
  */
 class Messages extends AbstractApi {
 
