@@ -64,7 +64,7 @@ class TimeEntries extends AbstractApi {
 	}
 
 	/**
-	 * Creates a new time entry object
+	 * Creates a new time entry object.
 	 *
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
