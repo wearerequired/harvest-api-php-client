@@ -17,7 +17,7 @@ use Required\Harvest\Exception\MissingArgumentException;
 class Tasks extends AbstractApi {
 
 	/**
-	 * Retrieves a list of tasks
+	 * Retrieves a list of tasks.
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of tasks. Default empty array.
@@ -32,14 +32,6 @@ class Tasks extends AbstractApi {
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
-		}
-
-		if ( isset( $parameters['from'] ) && $parameters['from'] instanceof DateTime ) {
-			$parameters['from'] = $parameters['from']->format( 'Y-m-d' );
-		}
-
-		if ( isset( $parameters['to'] ) && $parameters['to'] instanceof DateTime ) {
-			$parameters['to'] = $parameters['to']->format( 'Y-m-d' );
 		}
 
 		return $this->get( '/tasks', $parameters );
