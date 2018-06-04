@@ -84,8 +84,7 @@ class Tasks extends AbstractApi {
 	/**
 	 * Deletes a task.
 	 *
-	 * Deleting a task is only possible if it’s not closed and the associated project and task haven’t been
-	 * archived. However, Admins can delete closed entries.
+	 * Delete a task. Deleting a task is only possible if it has no time entries associated with it.
 	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
