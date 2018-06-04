@@ -39,10 +39,10 @@ class UserAssignments extends AbstractApi {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments' );
 	}
 
-
 	/**
 	 * Retrieves the user assignment with the given ID.
 	 *
+	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
 	 */
@@ -56,6 +56,7 @@ class UserAssignments extends AbstractApi {
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters The parameters of the new user assignment object.
 	 * @return array|string
 	 */
@@ -76,6 +77,7 @@ class UserAssignments extends AbstractApi {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @param array $parameters
 	 * @return array|string
@@ -89,6 +91,7 @@ class UserAssignments extends AbstractApi {
 	 *
 	 * Deleting a user assignment is only possible if it has no time entries or expenses associated with it.
 	 *
+	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
 	 */
