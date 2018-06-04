@@ -137,4 +137,13 @@ class Projects extends AbstractApi {
 	public function remove( int $projectId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) );
 	}
+
+	/**
+	 * Gets a projects's user assignments.
+	 *
+	 * @return \Required\Harvest\Api\Project\UserAssignments;
+	 */
+	public function userAssignments() {
+		return new Project\UserAssignments( $this->client );
+	}
 }

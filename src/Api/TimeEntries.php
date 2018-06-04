@@ -6,7 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Required\Harvest\Api\TimeEntry\ExternalReference;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 
@@ -158,6 +157,6 @@ class TimeEntries extends AbstractApi {
 	 * @return \Required\Harvest\Api\TimeEntry\ExternalReference;
 	 */
 	public function externalReference() {
-		return new ExternalReference( $this->client );
+		return new TimeEntry\ExternalReference( $this->client );
 	}
 }
