@@ -39,10 +39,10 @@ class TaskAssignments extends AbstractApi {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments' );
 	}
 
-
 	/**
 	 * Retrieves the task assignment with the given ID.
 	 *
+	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
 	 */
@@ -56,6 +56,7 @@ class TaskAssignments extends AbstractApi {
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters The parameters of the new task assignment object.
 	 * @return array|string
 	 */
@@ -76,7 +77,8 @@ class TaskAssignments extends AbstractApi {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
-	 * @param int $taskAssignmentId The ID of the task assignment.
+	 * @param int   $projectId        The ID of the project.
+	 * @param int   $taskAssignmentId The ID of the task assignment.
 	 * @param array $parameters
 	 * @return array|string
 	 */
@@ -89,6 +91,7 @@ class TaskAssignments extends AbstractApi {
 	 *
 	 * Deleting a task assignment is only possible if it has no time entries associated with it.
 	 *
+	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
 	 */
