@@ -146,4 +146,13 @@ class Projects extends AbstractApi {
 	public function userAssignments() {
 		return new Project\UserAssignments( $this->client );
 	}
+
+	/**
+	 * Gets a projects's task assignments.
+	 *
+	 * @return \Required\Harvest\Api\Project\TaskAssignments;
+	 */
+	public function taskAssignments() {
+		return new Project\TaskAssignments( $this->client );
+	}
 }
