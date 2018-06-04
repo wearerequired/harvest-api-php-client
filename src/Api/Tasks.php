@@ -84,7 +84,7 @@ class Tasks extends AbstractApi {
 	/**
 	 * Deletes a task.
 	 *
-	 * Delete a task. Deleting a task is only possible if it has no time entries associated with it.
+	 * Deleting a task is only possible if it has no time entries associated with it.
 	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
