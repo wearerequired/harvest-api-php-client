@@ -91,13 +91,34 @@ class Client {
 			case 'me':
 			case 'currentUser':
 				return new Api\CurrentUser( $this );
-				break;
 			case 'currentCompany':
 				return new Api\CurrentCompany( $this );
-				break;
+			case 'estimateItemCategories':
+				return new Api\EstimateItemCategories( $this );
+			case 'estimates':
+				return new Api\estimates( $this );
+			case 'expenseCategories':
+				return new Api\ExpenseCategories( $this );
+			case 'expenses':
+				return new Api\Expenses( $this );
+			case 'invoiceItemCategories':
+				return new Api\InvoiceItemCategories( $this );
+			case 'invoices':
+				return new Api\Invoices( $this );
+			case 'projects':
+				return new Api\Projects( $this );
+			case 'roles':
+				return new Api\Roles( $this );
+			case 'taskAssignments':
+				return new Api\TaskAssignments( $this );
+			case 'tasks':
+				return new Api\Tasks( $this );
 			case 'timeEntries':
 				return new Api\TimeEntries( $this );
-				break;
+			case 'userAssignments':
+				return new Api\UserAssignments( $this );
+			case 'users':
+				return new Api\Users( $this );
 			default:
 				throw new InvalidArgumentException( sprintf( 'Undefined api instance called: "%s"', $name ) );
 		}
