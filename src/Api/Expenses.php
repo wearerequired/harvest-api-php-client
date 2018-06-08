@@ -47,6 +47,10 @@ class Expenses extends AbstractApi {
 			$parameters['to'] = $parameters['to']->format( 'Y-m-d' );
 		}
 
+		if ( isset( $parameters['is_billed'] ) ) {
+			$parameters['is_billed'] = filter_var( $parameters['is_billed'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
+		}
+
 		return $this->get( '/expenses', $parameters );
 	}
 
