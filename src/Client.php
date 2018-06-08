@@ -22,7 +22,19 @@ use Required\Harvest\HttpClient\Plugin\ResponseExceptionThrower;
  * @method \Required\Harvest\Api\Contacts contacts()
  * @method \Required\Harvest\Api\CurrentUser currentUser()
  * @method \Required\Harvest\Api\CurrentCompany currentCompany()
+ * @method \Required\Harvest\Api\EstimateItemCategories estimateItemCategories()
+ * @method \Required\Harvest\Api\Estimates estimates()
+ * @method \Required\Harvest\Api\ExpenseCategories expenseCategories()
+ * @method \Required\Harvest\Api\Expenses expenses()
+ * @method \Required\Harvest\Api\InvoiceItemCategories invoiceItemCategories()
+ * @method \Required\Harvest\Api\Invoices invoices()
+ * @method \Required\Harvest\Api\Projects projects()
+ * @method \Required\Harvest\Api\Roles roles()
+ * @method \Required\Harvest\Api\TaskAssignments taskAssignments()
+ * @method \Required\Harvest\Api\Tasks tasks()
  * @method \Required\Harvest\Api\TimeEntries timeEntries()
+ * @method \Required\Harvest\Api\UserAssignments userAssignments()
+ * @method \Required\Harvest\Api\Users users()
  */
 class Client {
 
