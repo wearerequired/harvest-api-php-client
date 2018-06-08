@@ -13,7 +13,7 @@ use Required\Harvest\Exception\MissingArgumentException;
 /**
  * API client for project task assignments endpoint.
  *
- * @link https://help.getharvest.com/api-v2/projects-api/projects/user-assignments/
+ * @link https://help.getharvest.com/api-v2/projects-api/projects/task-assignments/
  */
 class TaskAssignments extends AbstractApi {
 
@@ -34,6 +34,10 @@ class TaskAssignments extends AbstractApi {
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
+		}
+
+		if ( isset( $parameters['is_active'] ) ) {
+			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments' );
