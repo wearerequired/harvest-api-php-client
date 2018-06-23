@@ -49,10 +49,12 @@ class Invoices extends AbstractApi {
 
 		$state_options = [ 'draft', 'sent', 'accepted', 'declined' ];
 		if ( isset( $parameters['state'] ) && ! in_array( $parameters['state'], $state_options, true ) ) {
-			throw new InvalidArgumentException( sprintf(
-				'The "state" parameter must be one out of: %s.',
-				implode( ', ', $state_options )
-			) );
+			throw new InvalidArgumentException(
+				sprintf(
+					'The "state" parameter must be one out of: %s.',
+					implode( ', ', $state_options )
+				)
+			);
 		}
 
 		return $this->get( '/invoices', $parameters );

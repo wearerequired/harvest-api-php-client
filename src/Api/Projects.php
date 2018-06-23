@@ -96,18 +96,22 @@ class Projects extends AbstractApi {
 
 		$bill_by_options = [ 'Project', 'Tasks', 'People', 'None' ];
 		if ( ! is_string( $parameters['bill_by'] ) || ! in_array( $parameters['bill_by'], $bill_by_options, true ) ) {
-			throw new InvalidArgumentException( sprintf(
-				'The "bill_by" parameter must be one out of: %s.',
-				implode( ', ', $bill_by_options )
-			) );
+			throw new InvalidArgumentException(
+				sprintf(
+					'The "bill_by" parameter must be one out of: %s.',
+					implode( ', ', $bill_by_options )
+				)
+			);
 		}
 
 		$budget_by_options = [ 'project', 'project_cost', 'task', 'task_fees', 'person', 'none' ];
 		if ( ! is_string( $parameters['budget_by'] ) || ! in_array( $parameters['budget_by'], $budget_by_options, true ) ) {
-			throw new InvalidArgumentException( sprintf(
-				'The "budget_by" parameter must be one out of: %s.',
-				implode( ', ', $budget_by_options )
-			) );
+			throw new InvalidArgumentException(
+				sprintf(
+					'The "budget_by" parameter must be one out of: %s.',
+					implode( ', ', $budget_by_options )
+				)
+			);
 		}
 
 		return $this->post( '/projects/', $parameters );

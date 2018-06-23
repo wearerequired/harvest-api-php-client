@@ -56,9 +56,13 @@ class Client {
 		$this->httpClientBuilder->addPlugin( new ResponseExceptionThrower() );
 		$this->httpClientBuilder->addPlugin( new Plugin\RedirectPlugin() );
 		$this->httpClientBuilder->addPlugin( new Plugin\BaseUriPlugin( UriFactoryDiscovery::find()->createUri( 'https://api.harvestapp.com/v2' ) ) );
-		$this->httpClientBuilder->addPlugin( new Plugin\HeaderDefaultsPlugin( [
-			'User-Agent' => 'harvest-api-php-client (https://github.com/wearerequired/harvest-api-php-client)',
-		] ) );
+		$this->httpClientBuilder->addPlugin(
+			new Plugin\HeaderDefaultsPlugin(
+				[
+					'User-Agent' => 'harvest-api-php-client (https://github.com/wearerequired/harvest-api-php-client)',
+				]
+			)
+		);
 	}
 
 	/**

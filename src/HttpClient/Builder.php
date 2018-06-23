@@ -181,15 +181,17 @@ class Builder {
 	 * @param CacheItemPoolInterface $cachePool A cache item object.
 	 * @param array                  $config    Config options passed to the cache plugin.
 	 */
-	public function addCache( CacheItemPoolInterface $cachePool, array $config = [] ): void  {
+	public function addCache( CacheItemPoolInterface $cachePool, array $config = [] ): void {
 		if ( ! isset( $config['cache_key_generator'] ) ) {
-			$config['cache_key_generator'] = new HeaderCacheKeyGenerator( [
+			$config['cache_key_generator'] = new HeaderCacheKeyGenerator(
+				[
 				'Authorization',
 				'Harvest-Account-Id',
 				'Cookie',
 				'Accept',
 				'Content-type',
-			] );
+				 ]
+			);
 		}
 
 		$this->cachePlugin        = Plugin\CachePlugin::clientCache( $cachePool, $this->streamFactory, $config );

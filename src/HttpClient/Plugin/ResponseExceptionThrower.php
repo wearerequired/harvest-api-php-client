@@ -35,32 +35,34 @@ class ResponseExceptionThrower implements Plugin {
 	 *                               HttpAsyncClient).
 	 */
 	public function handleRequest( RequestInterface $request, callable $next, callable $first ): Promise {
-		return $next( $request )->then( function ( ResponseInterface $response ) use ( $request ) {
-			$statusCode = $response->getStatusCode();
+		return $next( $request )->then(
+			function ( ResponseInterface $response ) {
+				$statusCode = $response->getStatusCode();
 
-			if ( $statusCode < 400 || $statusCode > 600 ) {
-				return $response;
+				if ( $statusCode < 400 || $statusCode > 600 ) {
+					return $response;
+				}
+
+				if ( 429 === $statusCode ) {
+					throw new HarvestApiRateLimitExceedException();
+				}
+
+				$content = ResponseMediator::getContent( $response );
+
+				if ( 401 === $statusCode ) {
+					throw new AuthenticationException( $content['error_description'] ?? $content );
+				}
+
+				if ( 403 === $statusCode ) {
+					throw new AuthorizationException();
+				}
+
+				if ( 404 === $statusCode ) {
+					throw new NotFoundException();
+				}
+
+				throw new RuntimeException( $content['error_description'] ?? $content, $statusCode );
 			}
-
-			if ( 429 === $statusCode ) {
-				throw new HarvestApiRateLimitExceedException();
-			}
-
-			$content = ResponseMediator::getContent( $response );
-
-			if ( 401 === $statusCode ) {
-				throw new AuthenticationException( $content['error_description'] ?? $content );
-			}
-
-			if ( 403 === $statusCode ) {
-				throw new AuthorizationException();
-			}
-
-			if ( 404 === $statusCode ) {
-				throw new NotFoundException();
-			}
-
-			throw new RuntimeException( $content['error_description'] ?? $content, $statusCode );
-		} );
+		);
 	}
 }
