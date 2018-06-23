@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<ruleset name="Coding standard for harvest-api-php-client">
+
+	<arg name="extensions" value="php"/>
+	<file>.</file>
+
+	<arg value="ps"/>
+
+	<config name="encoding" value="utf-8"/>
+
+	<arg name="tab-width" value="4"/>
+
+	<rule ref="PSR2">
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+
+		<exclude name="PSR2.Methods.FunctionCallSignature"/>
+		<exclude name="PSR2.ControlStructures.ControlStructureSpacing"/>
+		<exclude name="Squiz.ControlStructures.ForEachLoopDeclaration"/>
+
+		<!-- Allow opening and closing braces for functions and classes to be on the same line -->
+		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+		<exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+		<exclude name="Squiz.WhiteSpace.ScopeClosingBrace"/>
+	</rule>
+
+	<!-- Tabs, no spaces. -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="indent" value="4"/>
+			<property name="tabIndent" value="true"/>
+		</properties>
+	</rule>
+
+	<!-- Class/function opening braces should be on the same line as the statement. -->
+	<rule ref="Generic.Classes.OpeningBraceSameLine"/>
+	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie">
+		<properties>
+			<property name="checkClosures" value="true"/>
+		</properties>
+	</rule>
+
+	<!-- Spacing for function calls. -->
+	<rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+		<properties>
+			<property name="equalsSpacing" value="1"/>
+			<property name="requiredSpacesAfterOpen" value="1"/>
+			<property name="requiredSpacesBeforeClose" value="1"/>
+		</properties>
+	</rule>
+	<rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose">
+		<severity>0</severity>
+	</rule>
+
+	<rule ref="PEAR.Functions.FunctionCallSignature">
+		<properties>
+			<property name="requiredSpacesAfterOpen" value="1"/>
+			<property name="requiredSpacesBeforeClose" value="1"/>
+		</properties>
+	</rule>
+	<rule ref="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket">
+		<severity phpcs-only="true">0</severity>
+	</rule>
+	<rule ref="PEAR.Functions.FunctionCallSignature.CloseBracketLine">
+		<severity phpcs-only="true">0</severity>
+	</rule>
+
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+
+	<!-- Increase line length a bit. -->
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="200"/>
+			<property name="absoluteLineLimit" value="0"/>
+		</properties>
+	</rule>
+</ruleset>
