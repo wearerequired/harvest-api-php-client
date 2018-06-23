@@ -9,8 +9,10 @@ use Http\Client\Common\Plugin;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Required\Harvest\Exception\AuthorizationException;
 use Required\Harvest\Exception\HarvestApiRateLimitExceedException;
 use Required\Harvest\Exception\AuthenticationException;
+use Required\Harvest\Exception\NotFoundException;
 use Required\Harvest\Exception\RuntimeException;
 use Required\Harvest\HttpClient\Message\ResponseMediator;
 
@@ -48,6 +50,14 @@ class ResponseExceptionThrower implements Plugin {
 
 			if ( 401 === $statusCode ) {
 				throw new AuthenticationException( $content['error_description'] ?? $content );
+			}
+
+			if ( 403 === $statusCode ) {
+				throw new AuthorizationException();
+			}
+
+			if ( 404 === $statusCode ) {
+				throw new NotFoundException();
 			}
 
 			throw new RuntimeException( $content['error_description'] ?? $content, $statusCode );
