@@ -85,7 +85,7 @@ class UsersTest extends TestCase {
 	}
 
 	/**
-	 * Test retrieving all active users with `'updated_since' => DateTime`.
+	 * Test retrieving all users with `'updated_since' => DateTime`.
 	 */
 	public function testAllUpdatedSinceWithDateTime() {
 		$expectedArray = $this->getFixture( 'users' );
@@ -102,7 +102,7 @@ class UsersTest extends TestCase {
 	}
 
 	/**
-	 * Test retrieving all active users with `'updated_since' => 2017-06-26 00:00`.
+	 * Test retrieving all users with `'updated_since' => 2017-06-26 00:00`.
 	 */
 	public function testAllUpdatedSinceWithString() {
 		$expectedArray = $this->getFixture( 'users' );

@@ -3,7 +3,7 @@
  * TestCase class.
  */
 
-namespace Required\Harvest\Tests\API;
+namespace Required\Harvest\Tests\Api;
 
 use Http\Client\HttpClient;
 use PHPUnit_Framework_MockObject_MockObject;
