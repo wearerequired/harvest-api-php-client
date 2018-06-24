@@ -18,12 +18,12 @@ class TimeZones {
 	/**
 	 * @var string Name for Pacific/Midway.
 	 */
-	public const PACIFIC_MIDWAY = 'International Date Line West';
+	public const PACIFIC_MIDWAY = 'Midway Island';
 
 	/**
 	 * @var string Name for Pacific/Midway.
 	 */
-	public const PACIFIC_MIDWAY = 'Midway Island';
+	public const PACIFIC_MIDWAY_2 = 'International Date Line West';
 
 	/**
 	 * @var string Name for Pacific/Honolulu.
@@ -78,12 +78,12 @@ class TimeZones {
 	/**
 	 * @var string Name for America/Mexico_City.
 	 */
-	public const AMERICA_MEXICO_CITY = 'Guadalajara';
+	public const AMERICA_MEXICO_CITY = 'Mexico City';
 
 	/**
 	 * @var string Name for America/Mexico_City.
 	 */
-	public const AMERICA_MEXICO_CITY = 'Mexico City';
+	public const AMERICA_MEXICO_CITY_2 = 'Guadalajara';
 
 	/**
 	 * @var string Name for America/Monterrey.
@@ -118,7 +118,7 @@ class TimeZones {
 	/**
 	 * @var string Name for America/Lima.
 	 */
-	public const AMERICA_LIMA = 'Quito';
+	public const AMERICA_LIMA_2 = 'Quito';
 
 	/**
 	 * @var string Name for America/Halifax.
@@ -196,11 +196,6 @@ class TimeZones {
 	public const EUROPE_DUBLIN = 'Dublin';
 
 	/**
-	 * @var string Name for Europe/London.
-	 */
-	public const EUROPE_LONDON = 'Edinburgh';
-
-	/**
 	 * @var string Name for Europe/Lisbon.
 	 */
 	public const EUROPE_LISBON = 'Lisbon';
@@ -209,6 +204,11 @@ class TimeZones {
 	 * @var string Name for Europe/London.
 	 */
 	public const EUROPE_LONDON = 'London';
+
+	/**
+	 * @var string Name for Europe/London.
+	 */
+	public const EUROPE_LONDON_2 = 'Edinburgh';
 
 	/**
 	 * @var string Name for Africa/Monrovia.
@@ -234,11 +234,6 @@ class TimeZones {
 	 * @var string Name for Europe/Berlin.
 	 */
 	public const EUROPE_BERLIN = 'Berlin';
-
-	/**
-	 * @var string Name for Europe/Zurich.
-	 */
-	public const EUROPE_ZURICH = 'Bern';
 
 	/**
 	 * @var string Name for Europe/Bratislava.
@@ -324,6 +319,11 @@ class TimeZones {
 	 * @var string Name for Europe/Zurich.
 	 */
 	public const EUROPE_ZURICH = 'Zurich';
+
+	/**
+	 * @var string Name for Europe/Zurich.
+	 */
+	public const EUROPE_ZURICH_2 = 'Bern';
 
 	/**
 	 * @var string Name for Europe/Athens.
@@ -416,6 +416,11 @@ class TimeZones {
 	public const EUROPE_MOSCOW = 'Moscow';
 
 	/**
+	 * @var string Name for Europe/Moscow.
+	 */
+	public const EUROPE_MOSCOW_2 = 'St. Petersburg';
+
+	/**
 	 * @var string Name for Africa/Nairobi.
 	 */
 	public const AFRICA_NAIROBI = 'Nairobi';
@@ -424,11 +429,6 @@ class TimeZones {
 	 * @var string Name for Asia/Riyadh.
 	 */
 	public const ASIA_RIYADH = 'Riyadh';
-
-	/**
-	 * @var string Name for Europe/Moscow.
-	 */
-	public const EUROPE_MOSCOW = 'St. Petersburg';
 
 	/**
 	 * @var string Name for Europe/Volgograd.
@@ -443,17 +443,17 @@ class TimeZones {
 	/**
 	 * @var string Name for Asia/Muscat.
 	 */
-	public const ASIA_MUSCAT = 'Abu Dhabi';
+	public const ASIA_MUSCAT = 'Muscat';
+
+	/**
+	 * @var string Name for Asia/Muscat.
+	 */
+	public const ASIA_MUSCAT_2 = 'Abu Dhabi';
 
 	/**
 	 * @var string Name for Asia/Baku.
 	 */
 	public const ASIA_BAKU = 'Baku';
-
-	/**
-	 * @var string Name for Asia/Muscat.
-	 */
-	public const ASIA_MUSCAT = 'Muscat';
 
 	/**
 	 * @var string Name for Europe/Samara.
@@ -483,12 +483,12 @@ class TimeZones {
 	/**
 	 * @var string Name for Asia/Karachi.
 	 */
-	public const ASIA_KARACHI = 'Islamabad';
+	public const ASIA_KARACHI = 'Karachi';
 
 	/**
 	 * @var string Name for Asia/Karachi.
 	 */
-	public const ASIA_KARACHI = 'Karachi';
+	public const ASIA_KARACHI_2 = 'Islamabad';
 
 	/**
 	 * @var string Name for Asia/Tashkent.
@@ -498,22 +498,22 @@ class TimeZones {
 	/**
 	 * @var string Name for Asia/Kolkata.
 	 */
-	public const ASIA_KOLKATA = 'Chennai';
-
-	/**
-	 * @var string Name for Asia/Kolkata.
-	 */
 	public const ASIA_KOLKATA = 'Kolkata';
 
 	/**
 	 * @var string Name for Asia/Kolkata.
 	 */
-	public const ASIA_KOLKATA = 'Mumbai';
+	public const ASIA_KOLKATA_2 = 'Chennai';
 
 	/**
 	 * @var string Name for Asia/Kolkata.
 	 */
-	public const ASIA_KOLKATA = 'New Delhi';
+	public const ASIA_KOLKATA_3 = 'Mumbai';
+
+	/**
+	 * @var string Name for Asia/Kolkata.
+	 */
+	public const ASIA_KOLKATA_4 = 'New Delhi';
 
 	/**
 	 * @var string Name for Asia/Colombo.
@@ -533,12 +533,12 @@ class TimeZones {
 	/**
 	 * @var string Name for Asia/Dhaka.
 	 */
-	public const ASIA_DHAKA = 'Astana';
+	public const ASIA_DHAKA = 'Dhaka';
 
 	/**
 	 * @var string Name for Asia/Dhaka.
 	 */
-	public const ASIA_DHAKA = 'Dhaka';
+	public const ASIA_DHAKA_2 = 'Astana';
 
 	/**
 	 * @var string Name for Asia/Urumqi.
@@ -558,7 +558,7 @@ class TimeZones {
 	/**
 	 * @var string Name for Asia/Bangkok.
 	 */
-	public const ASIA_BANGKOK = 'Hanoi';
+	public const ASIA_BANGKOK_2 = 'Hanoi';
 
 	/**
 	 * @var string Name for Asia/Jakarta.
@@ -623,22 +623,22 @@ class TimeZones {
 	/**
 	 * @var string Name for Asia/Tokyo.
 	 */
-	public const ASIA_TOKYO = 'Osaka';
+	public const ASIA_TOKYO = 'Tokyo';
 
 	/**
 	 * @var string Name for Asia/Tokyo.
 	 */
-	public const ASIA_TOKYO = 'Sapporo';
+	public const ASIA_TOKYO_2 = 'Osaka';
+
+	/**
+	 * @var string Name for Asia/Tokyo.
+	 */
+	public const ASIA_TOKYO_3 = 'Sapporo';
 
 	/**
 	 * @var string Name for Asia/Seoul.
 	 */
 	public const ASIA_SEOUL = 'Seoul';
-
-	/**
-	 * @var string Name for Asia/Tokyo.
-	 */
-	public const ASIA_TOKYO = 'Tokyo';
 
 	/**
 	 * @var string Name for Asia/Yakutsk.
@@ -663,7 +663,12 @@ class TimeZones {
 	/**
 	 * @var string Name for Australia/Melbourne.
 	 */
-	public const AUSTRALIA_MELBOURNE = 'Canberra';
+	public const AUSTRALIA_MELBOURNE = 'Melbourne';
+
+	/**
+	 * @var string Name for Australia/Melbourne.
+	 */
+	public const AUSTRALIA_MELBOURNE_2 = 'Canberra';
 
 	/**
 	 * @var string Name for Pacific/Guam.
@@ -674,11 +679,6 @@ class TimeZones {
 	 * @var string Name for Australia/Hobart.
 	 */
 	public const AUSTRALIA_HOBART = 'Hobart';
-
-	/**
-	 * @var string Name for Australia/Melbourne.
-	 */
-	public const AUSTRALIA_MELBOURNE = 'Melbourne';
 
 	/**
 	 * @var string Name for Pacific/Port_Moresby.
@@ -721,6 +721,11 @@ class TimeZones {
 	public const PACIFIC_AUCKLAND = 'Auckland';
 
 	/**
+	 * @var string Name for Pacific/Auckland.
+	 */
+	public const PACIFIC_AUCKLAND_2 = 'Wellington';
+
+	/**
 	 * @var string Name for Pacific/Fiji.
 	 */
 	public const PACIFIC_FIJI = 'Fiji';
@@ -734,11 +739,6 @@ class TimeZones {
 	 * @var string Name for Pacific/Majuro.
 	 */
 	public const PACIFIC_MAJURO = 'Marshall Is.';
-
-	/**
-	 * @var string Name for Pacific/Auckland.
-	 */
-	public const PACIFIC_AUCKLAND = 'Wellington';
 
 	/**
 	 * @var string Name for Pacific/Chatham.
