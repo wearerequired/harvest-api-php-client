@@ -1,0 +1,25 @@
+{
+	"id": 2,
+	"first_name": "Project",
+	"last_name": "Manager",
+	"email": "pm@example.com",
+	"telephone": "888-555-1212",
+	"timezone": "Eastern Time (US & Canada)",
+	"has_access_to_all_future_projects": true,
+	"is_contractor": false,
+	"is_admin": false,
+	"is_project_manager": true,
+	"can_see_rates": true,
+	"can_create_projects": true,
+	"can_create_invoices": true,
+	"is_active": true,
+	"weekly_capacity": 126000,
+	"default_hourly_rate": 120,
+	"cost_rate": 50,
+	"roles": [
+		"Project Manager"
+	],
+	"avatar_url": "https://{ACCOUNT_SUBDOMAIN}.harvestapp.com/assets/profile_images/big_ben.png?1485372046",
+	"created_at": "2017-01-25T19:20:46Z",
+	"updated_at": "2017-01-25T19:20:57Z"
+}

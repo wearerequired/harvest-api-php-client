@@ -1,0 +1,26 @@
+{
+	"id": 1782884,
+	"first_name": "Bob",
+	"last_name": "Powell",
+	"email": "bobpowell@example.com",
+	"telephone": "",
+	"timezone": "Mountain Time (US & Canada)",
+	"has_access_to_all_future_projects": false,
+	"is_contractor": false,
+	"is_admin": true,
+	"is_project_manager": false,
+	"can_see_rates": true,
+	"can_create_projects": true,
+	"can_create_invoices": true,
+	"is_active": true,
+	"created_at": "2017-06-26T20:41:00Z",
+	"updated_at": "2017-06-26T20:42:25Z",
+	"weekly_capacity": 126000,
+	"default_hourly_rate": 100.0,
+	"cost_rate": 75.0,
+	"roles": [
+		"Founder",
+		"CEO"
+	],
+	"avatar_url": "https://cache.harvestapp.com/assets/profile_images/allen_bradley_clock_tower.png?1498509661"
+}

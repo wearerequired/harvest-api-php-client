@@ -1,0 +1,25 @@
+{
+	"id": 3,
+	"first_name": "George",
+	"last_name": "Frank",
+	"email": "george@example.com",
+	"telephone": "",
+	"timezone": "Eastern Time (US & Canada)",
+	"has_access_to_all_future_projects": false,
+	"is_contractor": false,
+	"is_admin": false,
+	"is_project_manager": true,
+	"can_see_rates": false,
+	"can_create_projects": false,
+	"can_create_invoices": false,
+	"is_active": true,
+	"weekly_capacity": 126000,
+	"default_hourly_rate": 0,
+	"cost_rate": 0,
+	"roles": [
+		"Project Manager"
+	],
+	"avatar_url": "https://yolo.harvestapp.com/assets/profile_images/big_ben.png?1485372046",
+	"created_at": "2017-01-25T19:20:46Z",
+	"updated_at": "2017-01-25T19:20:57Z"
+}
