@@ -7,6 +7,7 @@ namespace Required\Harvest;
 
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
+use Http\Client\HttpClient;
 use Http\Discovery\UriFactoryDiscovery;
 use Required\Harvest\Api\ApiInterface;
 use Required\Harvest\Exception\BadMethodCallException;
@@ -66,6 +67,17 @@ class Client {
 	}
 
 	/**
+	 * Creates a Harvest\Client using a HttpClient.
+	 *
+	 * @param \Http\Client\HttpClient $httpClient The HttpClient.
+	 * @return \Required\Harvest\Client Harvest API client.
+	 */
+	public static function createWithHttpClient( HttpClient $httpClient ) {
+		$builder = new Builder( $httpClient );
+		return new self( $builder );
+	}
+
+	/**
 	 * Authenticates a user for all next requests.
 	 *
 	 * @link https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/
@@ -100,7 +112,7 @@ class Client {
 			case 'estimateItemCategories':
 				return new Api\EstimateItemCategories( $this );
 			case 'estimates':
-				return new Api\estimates( $this );
+				return new Api\Estimates( $this );
 			case 'expenseCategories':
 				return new Api\ExpenseCategories( $this );
 			case 'expenses':
