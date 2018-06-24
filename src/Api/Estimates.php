@@ -88,7 +88,7 @@ class Estimates extends AbstractApi {
 			throw new InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
 		}
 
-		return $this->post( '/estimates/', $parameters );
+		return $this->post( '/estimates', $parameters );
 	}
 
 	/**

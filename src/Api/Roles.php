@@ -53,7 +53,7 @@ class Roles extends AbstractApi {
 			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/roles/', $parameters );
+		return $this->post( '/roles', $parameters );
 	}
 
 	/**

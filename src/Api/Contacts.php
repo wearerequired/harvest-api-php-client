@@ -72,7 +72,7 @@ class Contacts extends AbstractApi {
 			throw new InvalidArgumentException( 'The "first_name" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/clients/', $parameters );
+		return $this->post( '/clients', $parameters );
 	}
 
 	/**

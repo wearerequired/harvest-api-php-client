@@ -104,7 +104,7 @@ class TimeEntries extends AbstractApi {
 			throw new InvalidArgumentException( 'The "spent_date" parameter must be DateTime instance or an ISO 8601 formatted date string.' );
 		}
 
-		return $this->post( '/time_entries/', $parameters );
+		return $this->post( '/time_entries', $parameters );
 	}
 
 	/**

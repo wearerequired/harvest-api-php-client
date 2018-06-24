@@ -69,7 +69,7 @@ class Tasks extends AbstractApi {
 			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/tasks/', $parameters );
+		return $this->post( '/tasks', $parameters );
 	}
 
 	/**

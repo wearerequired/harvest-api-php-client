@@ -70,7 +70,7 @@ class ExpenseCategories extends AbstractApi {
 			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/expense_categories/', $parameters );
+		return $this->post( '/expense_categories', $parameters );
 	}
 
 	/**

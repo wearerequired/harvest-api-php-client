@@ -88,7 +88,7 @@ class Invoices extends AbstractApi {
 			throw new InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
 		}
 
-		return $this->post( '/invoices/', $parameters );
+		return $this->post( '/invoices', $parameters );
 	}
 
 	/**

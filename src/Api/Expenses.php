@@ -98,7 +98,7 @@ class Expenses extends AbstractApi {
 			throw new InvalidArgumentException( 'The "spent_date" parameter must be DateTime instance or an ISO 8601 formatted date string.' );
 		}
 
-		return $this->post( '/expenses/', $parameters );
+		return $this->post( '/expenses', $parameters );
 	}
 
 	/**

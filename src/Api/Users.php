@@ -85,7 +85,7 @@ class Users extends AbstractApi {
 			throw new InvalidArgumentException( 'The "email" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/users/', $parameters );
+		return $this->post( '/users', $parameters );
 	}
 
 	/**

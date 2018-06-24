@@ -114,7 +114,7 @@ class Projects extends AbstractApi {
 			);
 		}
 
-		return $this->post( '/projects/', $parameters );
+		return $this->post( '/projects', $parameters );
 	}
 
 	/**

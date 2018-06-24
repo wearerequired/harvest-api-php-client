@@ -63,7 +63,7 @@ class EstimateItemCategories extends AbstractApi {
 			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/estimate_item_categories/', $parameters );
+		return $this->post( '/estimate_item_categories', $parameters );
 	}
 
 	/**
