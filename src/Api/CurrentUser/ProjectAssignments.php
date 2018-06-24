@@ -9,7 +9,7 @@ use DateTime;
 use Required\Harvest\Api\AbstractApi;
 
 /**
- * API client for user project assignments endpoint.
+ * API client for current user project assignments endpoint.
  *
  * @link https://help.getharvest.com/api-v2/users-api/users/project-assignments/
  */
@@ -31,6 +31,6 @@ class ProjectAssignments extends AbstractApi {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
 		}
 
-		return $this->get( '/users/me/project_assignments' );
+		return $this->get( '/users/me/project_assignments', $parameters );
 	}
 }
