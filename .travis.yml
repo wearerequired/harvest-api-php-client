@@ -1,0 +1,38 @@
+language: php
+sudo: false
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+_envs:
+  - &stage_test
+    before_script:
+      - export PATH="$HOME/.composer/vendor/bin:$PATH"
+      - composer global require "phpunit/phpunit:^7"
+    script:
+       - phpunit
+
+jobs:
+  include:
+    - stage: lint
+      php: 7.1
+      script:
+        - phpcs
+
+    - stage: test
+      php: 7.1
+      <<: *stage_test
+
+    - stage: test
+      php: 7.2
+      <<: *stage_test
