@@ -14,6 +14,7 @@ use Required\Harvest\Exception\HarvestApiRateLimitExceedException;
 use Required\Harvest\Exception\AuthenticationException;
 use Required\Harvest\Exception\NotFoundException;
 use Required\Harvest\Exception\RuntimeException;
+use Required\Harvest\Exception\ValidationFailedException;
 use Required\Harvest\HttpClient\Message\ResponseMediator;
 
 /**
@@ -61,7 +62,11 @@ class ResponseExceptionThrower implements Plugin {
 					throw new NotFoundException();
 				}
 
-				throw new RuntimeException( $content['error_description'] ?? $content, $statusCode );
+				if ( 422 === $statusCode ) {
+					throw new ValidationFailedException( $content['message'] ?? json_encode( $content ), $statusCode );
+				}
+
+				throw new RuntimeException( $content['message'] ?? json_encode( $content ), $statusCode );
 			}
 		);
 	}
