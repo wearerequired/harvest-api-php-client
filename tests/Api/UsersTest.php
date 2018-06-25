@@ -28,28 +28,47 @@ class UsersTest extends TestCase {
 	 * Test retrieving all users.
 	 */
 	public function testAll() {
-		$expectedArray = $this->getFixture( 'users' );
+		$response      = $this->getFixture( 'users' );
+		$expectedArray = $response['users'];
 
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users' )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all() );
+	}
+
+	/**
+	 * Test retrieving all users.
+	 *
+	 * @expectedException \Required\Harvest\Exception\RuntimeException
+	 */
+	public function testAllWithInvalidResponse() {
+		$response = [];
+
+		$api = $this->getApiMock();
+		$api->expects( $this->once() )
+			->method( 'get' )
+			->with( '/users' )
+			->will( $this->returnValue( $response ) );
+
+		$api->all();
 	}
 
 	/**
 	 * Test retrieving all active users with `'is_active' => true`.
 	 */
 	public function testAllActiveBooleanTrue() {
-		$expectedArray = $this->getFixture( 'users' );
+		$response      = $this->getFixture( 'users' );
+		$expectedArray = $response['users'];
 
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users', [ 'is_active' => 'true' ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'is_active' => true ] ) );
 	}
@@ -58,13 +77,14 @@ class UsersTest extends TestCase {
 	 * Test retrieving all active users with `'is_active' => 1`.
 	 */
 	public function testAllActiveIntegerTrue() {
-		$expectedArray = $this->getFixture( 'users' );
+		$response      = $this->getFixture( 'users' );
+		$expectedArray = $response['users'];
 
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users', [ 'is_active' => 'true' ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'is_active' => 1 ] ) );
 	}
@@ -73,13 +93,14 @@ class UsersTest extends TestCase {
 	 * Test retrieving all active users with `'is_active' => 'true'`.
 	 */
 	public function testAllActiveStringTrue() {
-		$expectedArray = $this->getFixture( 'users' );
+		$response      = $this->getFixture( 'users' );
+		$expectedArray = $response['users'];
 
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users', [ 'is_active' => 'true' ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'is_active' => 'true' ] ) );
 	}
@@ -88,7 +109,8 @@ class UsersTest extends TestCase {
 	 * Test retrieving all users with `'updated_since' => DateTime`.
 	 */
 	public function testAllUpdatedSinceWithDateTime() {
-		$expectedArray = $this->getFixture( 'users' );
+		$response      = $this->getFixture( 'users' );
+		$expectedArray = $response['users'];
 
 		$updatedSince = new DateTime( '2017-06-26 00:00:00', new DateTimeZone( 'Europe/Zurich' ) );
 
@@ -96,7 +118,7 @@ class UsersTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users', [ 'updated_since' => $updatedSince->format( 'Y-m-d H:i' ) ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'updated_since' => $updatedSince ] ) );
 	}
@@ -105,7 +127,8 @@ class UsersTest extends TestCase {
 	 * Test retrieving all users with `'updated_since' => 2017-06-26 00:00`.
 	 */
 	public function testAllUpdatedSinceWithString() {
-		$expectedArray = $this->getFixture( 'users' );
+		$response      = $this->getFixture( 'users' );
+		$expectedArray = $response['users'];
 
 		$updatedSince = '2017-06-26 00:00';
 
@@ -113,7 +136,7 @@ class UsersTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users', [ 'updated_since' => $updatedSince ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'updated_since' => $updatedSince ] ) );
 	}

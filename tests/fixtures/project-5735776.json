@@ -1,0 +1,30 @@
+{
+	"id": 14308112,
+	"name": "Your New Project",
+	"code": null,
+	"is_active": true,
+	"bill_by": "Project",
+	"budget": 10000.0,
+	"budget_by": "project",
+	"budget_is_monthly": false,
+	"notify_when_over_budget": false,
+	"over_budget_notification_percentage": 80.0,
+	"over_budget_notification_date": null,
+	"show_budget_to_all": false,
+	"created_at": "2017-06-26T21:56:52Z",
+	"updated_at": "2017-06-26T21:56:52Z",
+	"starts_on": null,
+	"ends_on": null,
+	"is_billable": true,
+	"is_fixed_fee": false,
+	"notes": "",
+	"client": {
+		"id": 5735776,
+		"name": "123 Industries",
+		"currency": "EUR"
+	},
+	"cost_budget": null,
+	"cost_budget_include_expenses": false,
+	"hourly_rate": 100.0,
+	"fee": null
+}

@@ -25,15 +25,33 @@ class RolesTest extends TestCase {
 	 * Test retrieving all roles.
 	 */
 	public function testAll() {
-		$expectedArray = $this->getFixture( 'roles' );
+		$response      = $this->getFixture( 'roles' );
+		$expectedArray = $response['roles'];
 
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/roles' )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all() );
+	}
+
+	/**
+	 * Test retrieving all roles with invalid response.
+	 *
+	 * @expectedException \Required\Harvest\Exception\RuntimeException
+	 */
+	public function testAllWithInvalidResponse() {
+		$response = [];
+
+		$api = $this->getApiMock();
+		$api->expects( $this->once() )
+			->method( 'get' )
+			->with( '/roles' )
+			->will( $this->returnValue( $response ) );
+
+		$api->all();
 	}
 
 	/**
