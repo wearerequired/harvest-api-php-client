@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for contacts endpoint.
@@ -33,7 +34,12 @@ class Contacts extends AbstractApi {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
 		}
 
-		return $this->get( '/contacts', $parameters );
+		$result = $this->get( '/contacts', $parameters );
+		if ( ! isset( $result['contacts'] ) || ! is_array( $result['contacts'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['contacts'];
 	}
 
 	/**

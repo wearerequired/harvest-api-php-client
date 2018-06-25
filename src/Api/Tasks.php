@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for tasks endpoint.
@@ -27,7 +28,7 @@ class Tasks extends AbstractApi {
 	 *     @type \DateTime|string $updated_since Only return tasks that have been updated since the given
 	 *                                           date and time.
 	 * }
-	 * @return array|string
+	 * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -38,7 +39,12 @@ class Tasks extends AbstractApi {
 			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/tasks', $parameters );
+		$result = $this->get( '/tasks', $parameters );
+		if ( ! isset( $result['tasks'] ) || ! is_array( $result['tasks'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['tasks'];
 	}
 
 	/**

@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for expense categories endpoint.
@@ -39,7 +40,12 @@ class ExpenseCategories extends AbstractApi {
 			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/expense_categories', $parameters );
+		$result = $this->get( '/expense_categories', $parameters );
+		if ( ! isset( $result['expense_categories'] ) || ! is_array( $result['expense_categories'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['expense_categories'];
 	}
 
 	/**

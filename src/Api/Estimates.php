@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for estimates endpoint.
@@ -57,7 +58,12 @@ class Estimates extends AbstractApi {
 			);
 		}
 
-		return $this->get( '/estimates', $parameters );
+		$result = $this->get( '/estimates', $parameters );
+		if ( ! isset( $result['estimates'] ) || ! is_array( $result['estimates'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['estimates'];
 	}
 
 	/**

@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for invoices endpoint.
@@ -57,7 +58,12 @@ class Invoices extends AbstractApi {
 			);
 		}
 
-		return $this->get( '/invoices', $parameters );
+		$result = $this->get( '/invoices', $parameters );
+		if ( ! isset( $result['invoices'] ) || ! is_array( $result['invoices'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['invoices'];
 	}
 
 	/**

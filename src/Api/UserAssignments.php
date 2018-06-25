@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for user assignments endpoint.
@@ -25,7 +26,7 @@ class UserAssignments extends AbstractApi {
 	 *     @type \DateTime|string $updated_since Only return user assignments that have been updated since the given
 	 *                                           date and time.
 	 * }
-	 * @return array|string
+	 * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -36,6 +37,11 @@ class UserAssignments extends AbstractApi {
 			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/user_assignments', $parameters );
+		$result = $this->get( '/user_assignments', $parameters );
+		if ( ! isset( $result['user_assignments'] ) || ! is_array( $result['user_assignments'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['user_assignments'];
 	}
 }

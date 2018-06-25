@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for clients endpoint.
@@ -38,7 +39,12 @@ class Clients extends AbstractApi {
 			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/contacts', $parameters );
+		$result = $this->get( '/clients', $parameters );
+		if ( ! isset( $result['clients'] ) || ! is_array( $result['clients'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['clients'];
 	}
 
 	/**

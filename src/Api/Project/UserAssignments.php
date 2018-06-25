@@ -9,6 +9,7 @@ use DateTime;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for project user assignments endpoint.
@@ -36,7 +37,12 @@ class UserAssignments extends AbstractApi {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
 		}
 
-		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments' );
+		$result = $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments', $parameters );
+		if ( ! isset( $result['user_assignments'] ) || ! is_array( $result['user_assignments'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['user_assignments'];
 	}
 
 	/**
