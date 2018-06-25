@@ -7,6 +7,7 @@ namespace Required\Harvest\Api;
 
 use Psr\Http\Message\ResponseInterface;
 use Required\Harvest\Client;
+use Required\Harvest\Exception\BadMethodCallException;
 use Required\Harvest\HttpClient\Message\ResponseMediator;
 
 /**
@@ -22,18 +23,9 @@ abstract class AbstractApi implements ApiInterface {
 	protected $client;
 
 	/**
-	 * The requested page.
-	 *
-	 * @var null|int
+	 * @var \Required\Harvest\Api\Pagination
 	 */
-	private $page;
-
-	/**
-	 * Number of items per page.
-	 *
-	 * @var null|int
-	 */
-	protected $perPage;
+	protected $pagination;
 
 	/**
 	 * Constructor.
@@ -41,7 +33,8 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param \Required\Harvest\Client $client
 	 */
 	public function __construct( Client $client ) {
-		$this->client = $client;
+		$this->client     = $client;
+		$this->pagination = new Pagination();
 	}
 
 	/**
@@ -50,7 +43,25 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return null|int
 	 */
 	public function getPage(): ?int {
-		return $this->page;
+		return $this->pagination->getPage();
+	}
+
+	/**
+	 * Retrieves next available page number.
+	 *
+	 * @return null|int
+	 */
+	public function getNextPage(): ?int {
+		return $this->pagination->getNextPage();
+	}
+
+	/**
+	 * Retrieves previous available page number.
+	 *
+	 * @return null|int
+	 */
+	public function getPreviousPage(): ?int {
+		return $this->pagination->getPreviousPage();
 	}
 
 	/**
@@ -60,7 +71,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return \Required\Harvest\Api\AbstractApi The current API instance
 	 */
 	public function setPage( $page ): AbstractApi {
-		$this->page = ( null === $page ? $page : (int) $page );
+		$this->pagination->setPage( $page );
 
 		return $this;
 	}
@@ -71,7 +82,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return null|int
 	 */
 	public function getPerPage(): ?int {
-		return $this->perPage;
+		return $this->pagination->getPerPage();
 	}
 
 	/**
@@ -81,9 +92,43 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return \Required\Harvest\Api\AbstractApi The current API instance
 	 */
 	public function setPerPage( $perPage ): AbstractApi {
-		$this->perPage = ( null === $perPage ? $perPage : (int) $perPage );
+		$this->pagination->setPerPage( $perPage );
 
 		return $this;
+	}
+
+	/**
+	 * Resets pagination.
+	 *
+	 * @return \Required\Harvest\Api\AbstractApi The current API instance
+	 */
+	public function resetPagination() {
+		$this->pagination->reset();
+
+		return $this;
+	}
+
+	/**
+	 * Whether the current request has a next page.
+	 *
+	 * @return bool True if next page exists, false if not.
+	 */
+	public function hasMore(): bool {
+		return $this->pagination->hasMore();
+	}
+
+	/**
+	 * Retrieves a list of items with automatic pagination.
+	 *
+	 * @param array $parameters Optional. Parameters for filtering the list of items. Default empty array.
+	 * @return \Required\Harvest\Api\AutoPagingIterator The iterator.
+	 */
+	public function allWithAutoPagingIterator( array $parameters = [] ): AutoPagingIterator {
+		if ( ! method_exists( static::class, 'all' ) ) {
+			throw new BadMethodCallException( 'The resource does not support retrieving all objects.' );
+		}
+
+		return new AutoPagingIterator( $this, $parameters );
 	}
 
 	/**
@@ -95,11 +140,13 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return array|string
 	 */
 	protected function get( $path, array $parameters = [], array $requestHeaders = [] ) {
-		if ( null !== $this->page && ! isset( $parameters['page'] ) ) {
-			$parameters['page'] = $this->page;
+		$page = $this->pagination->getPage();
+		if ( null !== $page && ! isset( $parameters['page'] ) ) {
+			$parameters['page'] = $page;
 		}
-		if ( null !== $this->perPage && ! isset( $parameters['per_page'] ) ) {
-			$parameters['per_page'] = $this->perPage;
+		$perPage = $this->pagination->getPerPage();
+		if ( null !== $perPage && ! isset( $parameters['per_page'] ) ) {
+			$parameters['per_page'] = $perPage;
 		}
 
 		if ( count( $parameters ) > 0 ) {
@@ -107,6 +154,14 @@ abstract class AbstractApi implements ApiInterface {
 		}
 
 		$response = $this->client->getHttpClient()->get( $path, $requestHeaders );
+
+		$pagination = ResponseMediator::getPagination( $response );
+		if ( $pagination ) {
+			$this->pagination->setTotalEntries( $pagination['total_entries'] );
+			$this->pagination->setTotalPages( $pagination['total_pages'] );
+			$this->pagination->setNextPage( $pagination['next_page'] );
+			$this->pagination->setPreviousPage( $pagination['previous_page'] );
+		}
 
 		return ResponseMediator::getContent( $response );
 	}
@@ -120,7 +175,10 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	protected function head( $path, array $parameters = [], array $requestHeaders = [] ): ResponseInterface {
-		$response = $this->client->getHttpClient()->head( $path . '?' . http_build_query( $parameters ), $requestHeaders );
+		$response = $this->client->getHttpClient()->head(
+			$path . '?' . http_build_query( $parameters ),
+			$requestHeaders
+		);
 
 		return $response;
 	}
