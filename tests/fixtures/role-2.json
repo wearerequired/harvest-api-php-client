@@ -1,0 +1,10 @@
+{
+	"id": 2,
+	"name": "Project Manager",
+	"user_ids": [
+		8083365,
+		8083366
+	],
+	"created_at": "2017-06-26T22:34:41Z",
+	"updated_at": "2017-06-26T22:34:52Z"
+}

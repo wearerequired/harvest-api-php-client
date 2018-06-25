@@ -1,0 +1,18 @@
+{
+	"base_uri": "https://foobar.harvestapp.com",
+	"full_domain": "foobar.harvestapp.com",
+	"name": "API Examples",
+	"is_active": true,
+	"week_start_day": "Monday",
+	"wants_timestamp_timers": true,
+	"time_format": "hours_minutes",
+	"plan_type": "sponsored",
+	"expense_feature": true,
+	"invoice_feature": true,
+	"estimate_feature": true,
+	"approval_required": true,
+	"clock": "12h",
+	"decimal_symbol": ".",
+	"thousands_separator": ",",
+	"color_scheme": "orange"
+}
