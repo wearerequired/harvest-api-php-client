@@ -134,6 +134,8 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return array|string
 	 */
 	protected function post( $path, array $parameters = [], array $requestHeaders = [] ) {
+		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
+
 		$response = $this->client->getHttpClient()->post(
 			$path,
 			$requestHeaders,
@@ -152,6 +154,8 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return array|string
 	 */
 	protected function patch( $path, array $parameters = [], array $requestHeaders = [] ) {
+		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
+
 		$response = $this->client->getHttpClient()->patch(
 			$path,
 			$requestHeaders,
@@ -170,6 +174,8 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return array|string
 	 */
 	protected function put( $path, array $parameters = [], array $requestHeaders = [] ) {
+		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
+
 		$response = $this->client->getHttpClient()->put(
 			$path,
 			$requestHeaders,
@@ -188,6 +194,8 @@ abstract class AbstractApi implements ApiInterface {
 	 * @return array|string
 	 */
 	protected function delete( $path, array $parameters = [], array $requestHeaders = [] ) {
+		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
+
 		$response = $this->client->getHttpClient()->delete(
 			$path,
 			$requestHeaders,
