@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for time entries endpoint.
@@ -34,7 +35,7 @@ class TimeEntries extends AbstractApi {
 	 *     @type \DateTime|string $from          Only return time entries with a `spent_date` on or after the given date.
 	 *     @type \DateTime|string $to            Only return time entries with a `spent_date` on or after the given date.
 	 * }
-	 * @return array|string
+	 * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -57,7 +58,12 @@ class TimeEntries extends AbstractApi {
 			$parameters['is_running'] = filter_var( $parameters['is_running'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/time_entries', $parameters );
+		$result = $this->get( '/time_entries', $parameters );
+		if ( ! isset( $result['time_entries'] ) || ! is_array( $result['time_entries'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['time_entries'];
 	}
 
 	/**

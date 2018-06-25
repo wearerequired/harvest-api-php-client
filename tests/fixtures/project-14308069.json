@@ -1,0 +1,30 @@
+{
+	"id": 14308069,
+	"name": "Online Store - Phase 1",
+	"code": "OS1",
+	"is_active": true,
+	"bill_by": "Project",
+	"budget": 200.0,
+	"budget_by": "project",
+	"budget_is_monthly": false,
+	"notify_when_over_budget": true,
+	"over_budget_notification_percentage": 80.0,
+	"over_budget_notification_date": null,
+	"show_budget_to_all": false,
+	"created_at": "2017-06-26T21:52:18Z",
+	"updated_at": "2017-06-26T21:54:06Z",
+	"starts_on": "2017-06-01",
+	"ends_on": null,
+	"is_billable": true,
+	"is_fixed_fee": false,
+	"notes": "",
+	"client": {
+		"id": 5735776,
+		"name": "123 Industries",
+		"currency": "EUR"
+	},
+	"cost_budget": null,
+	"cost_budget_include_expenses": false,
+	"hourly_rate": 100.0,
+	"fee": null
+}

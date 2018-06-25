@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for roles endpoint.
@@ -19,10 +20,15 @@ class Roles extends AbstractApi {
 	/**
 	 * Retrieves a list of roles.
 	 *
-	 * @return array|string
+	 * @return array
 	 */
 	public function all() {
-		return $this->get( '/roles' );
+		$result = $this->get( '/roles' );
+		if ( ! isset( $result['roles'] ) || ! is_array( $result['roles'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['roles'];
 	}
 
 	/**

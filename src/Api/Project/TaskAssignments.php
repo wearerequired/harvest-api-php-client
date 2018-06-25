@@ -9,6 +9,7 @@ use DateTime;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for project task assignments endpoint.
@@ -40,7 +41,12 @@ class TaskAssignments extends AbstractApi {
 			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments' );
+		$result = $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments', $parameters );
+		if ( ! isset( $result['task_assignments'] ) || ! is_array( $result['task_assignments'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['task_assignments'];
 	}
 
 	/**

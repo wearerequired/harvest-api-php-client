@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for estimate item categories endpoint.
@@ -32,7 +33,12 @@ class EstimateItemCategories extends AbstractApi {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
 		}
 
-		return $this->get( '/estimate_item_categories', $parameters );
+		$result = $this->get( '/estimate_item_categories', $parameters );
+		if ( ! isset( $result['estimate_item_categories'] ) || ! is_array( $result['estimate_item_categories'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['estimate_item_categories'];
 	}
 
 	/**

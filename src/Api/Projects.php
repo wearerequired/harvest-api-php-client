@@ -8,6 +8,7 @@ namespace Required\Harvest\Api;
 use DateTime;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for projects endpoint.
@@ -28,7 +29,7 @@ class Projects extends AbstractApi {
 	 *     @type \DateTime|string $updated_since Only return projects that have been updated since the given
 	 *                                           date and time.
 	 * }
-	 * @return array|string
+	 * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -39,7 +40,12 @@ class Projects extends AbstractApi {
 			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
 		}
 
-		return $this->get( '/projects', $parameters );
+		$result = $this->get( '/projects', $parameters );
+		if ( ! isset( $result['projects'] ) || ! is_array( $result['projects'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['projects'];
 	}
 
 	/**

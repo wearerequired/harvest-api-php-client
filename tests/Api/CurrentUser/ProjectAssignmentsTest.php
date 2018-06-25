@@ -28,22 +28,41 @@ class ProjectAssignmentsTest extends TestCase {
 	 * Test retrieving all project assignments.
 	 */
 	public function testAll() {
-		$expectedArray = $this->getFixture( 'project-assignments' );
+		$response      = $this->getFixture( 'project-assignments' );
+		$expectedArray = $response['project_assignments'];
 
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users/me/project_assignments' )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all() );
+	}
+
+	/**
+	 * Test retrieving all project assignments with invalid response.
+	 *
+	 * @expectedException \Required\Harvest\Exception\RuntimeException
+	 */
+	public function testAllWithInvalidResponse() {
+		$response = [];
+
+		$api = $this->getApiMock();
+		$api->expects( $this->once() )
+			->method( 'get' )
+			->with( '/users/me/project_assignments' )
+			->will( $this->returnValue( $response ) );
+
+		$api->all();
 	}
 
 	/**
 	 * Test retrieving all project assignments with `'updated_since' => DateTime`.
 	 */
 	public function testAllUpdatedSinceWithDateTime() {
-		$expectedArray = $this->getFixture( 'project-assignments' );
+		$response      = $this->getFixture( 'project-assignments' );
+		$expectedArray = $response['project_assignments'];
 
 		$updatedSince = new DateTime( '2017-06-26 00:00:00', new DateTimeZone( 'Europe/Zurich' ) );
 
@@ -51,7 +70,7 @@ class ProjectAssignmentsTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users/me/project_assignments', [ 'updated_since' => $updatedSince->format( 'Y-m-d H:i' ) ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'updated_since' => $updatedSince ] ) );
 	}
@@ -60,7 +79,8 @@ class ProjectAssignmentsTest extends TestCase {
 	 * Test retrieving all project assignments with `'updated_since' => 2017-06-26 00:00`.
 	 */
 	public function testAllUpdatedSinceWithString() {
-		$expectedArray = $this->getFixture( 'project-assignments' );
+		$response      = $this->getFixture( 'project-assignments' );
+		$expectedArray = $response['project_assignments'];
 
 		$updatedSince = '2017-06-26 00:00';
 
@@ -68,7 +88,7 @@ class ProjectAssignmentsTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( '/users/me/project_assignments', [ 'updated_since' => $updatedSince ] )
-			->will( $this->returnValue( $expectedArray ) );
+			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'updated_since' => $updatedSince ] ) );
 	}

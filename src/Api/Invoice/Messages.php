@@ -9,6 +9,7 @@ use DateTime;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
+use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for invoice messages endpoint.
@@ -34,7 +35,12 @@ class Messages extends AbstractApi {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
 		}
 
-		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/messages' );
+		$result = $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/messages', $parameters );
+		if ( ! isset( $result['messages'] ) || ! is_array( $result['messages'] ) ) {
+			throw new RuntimeException( 'Unexpected result.' );
+		}
+
+		return $result['messages'];
 	}
 
 	/**
