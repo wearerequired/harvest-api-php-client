@@ -26,6 +26,7 @@ _envs:
       - phpunit
 
 jobs:
+  fast_finish: true
   include:
     - stage: lint
       before_script:
@@ -42,3 +43,9 @@ jobs:
     - stage: test
       php: 7.2
       <<: *stage_test
+
+    - stage: coverage
+      php: 7.2
+      <<: *stage_test
+      after_script:
+        - bash <(curl -s https://codecov.io/bash)
