@@ -1,5 +1,7 @@
 # PHP client library for the Harvest REST API
 
+[![Build Status](https://travis-ci.com/wearerequired/harvest-api-php-client.svg?branch=master)](https://travis-ci.com/wearerequired/harvest-api-php-client) [![codecov](https://codecov.io/gh/wearerequired/harvest-api-php-client/branch/master/graph/badge.svg?token=W9R3VjbmRL)](https://codecov.io/gh/wearerequired/harvest-api-php-client)
+
 An awesome object oriented wrapper for the Harvest REST API v2, written with and for modern PHP.
 
 ## Install

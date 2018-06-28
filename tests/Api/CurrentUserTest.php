@@ -43,6 +43,6 @@ class CurrentUserTest extends TestCase {
 	public function testProjectAssignments() {
 		$api = $this->getApiMock();
 
-		$this->assertInstanceOf(ProjectAssignments::class, $api->projectAssignments() );
+		$this->assertInstanceOf( ProjectAssignments::class, $api->projectAssignments() );
 	}
 }

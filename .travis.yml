@@ -16,16 +16,23 @@ cache:
 
 _envs:
   - &stage_test
+    before_install:
+      - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
     before_script:
       - export PATH="$HOME/.composer/vendor/bin:$PATH"
       - composer global require "phpunit/phpunit:^7"
+      - composer install
     script:
-       - phpunit
+      - phpunit
 
 jobs:
+  fast_finish: true
   include:
     - stage: lint
-      php: 7.1
+      before_script:
+        - export PATH="$HOME/.composer/vendor/bin:$PATH"
+        - composer global require "squizlabs/php_codesniffer:^3"
+      php: 7.2
       script:
         - phpcs
 
@@ -36,3 +43,10 @@ jobs:
     - stage: test
       php: 7.2
       <<: *stage_test
+
+    - stage: coverage
+      php: 7.2
+      <<: *stage_test
+      before_install: skip
+      after_script:
+        - bash <(curl -s https://codecov.io/bash)
