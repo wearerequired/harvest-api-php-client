@@ -19,6 +19,7 @@ _envs:
     before_script:
       - export PATH="$HOME/.composer/vendor/bin:$PATH"
       - composer global require "phpunit/phpunit:^7"
+      - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
     script:
       - phpunit
 
