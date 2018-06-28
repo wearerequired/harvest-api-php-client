@@ -14,7 +14,6 @@ use Required\Harvest\Api\AbstractApi;
 use function GuzzleHttp\Psr7\stream_for;
 use Required\Harvest\Client;
 
-
 /**
  * Tests for company endpoint.
  */
