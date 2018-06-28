@@ -437,7 +437,7 @@ class ProjectsTest extends TestCase {
 	public function testUserAssignments() {
 		$api = $this->getApiMock();
 
-		$this->assertInstanceOf(UserAssignments::class, $api->userAssignments() );
+		$this->assertInstanceOf( UserAssignments::class, $api->userAssignments() );
 	}
 
 	/**
@@ -446,6 +446,6 @@ class ProjectsTest extends TestCase {
 	public function testTaskAssignments() {
 		$api = $this->getApiMock();
 
-		$this->assertInstanceOf(TaskAssignments::class, $api->taskAssignments() );
+		$this->assertInstanceOf( TaskAssignments::class, $api->taskAssignments() );
 	}
 }
