@@ -16,10 +16,12 @@ cache:
 
 _envs:
   - &stage_test
+    before_install:
+      - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
     before_script:
       - export PATH="$HOME/.composer/vendor/bin:$PATH"
       - composer global require "phpunit/phpunit:^7"
-      - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
+      - composer install
     script:
       - phpunit
 
