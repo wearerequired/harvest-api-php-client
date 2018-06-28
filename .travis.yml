@@ -20,12 +20,15 @@ _envs:
       - export PATH="$HOME/.composer/vendor/bin:$PATH"
       - composer global require "phpunit/phpunit:^7"
     script:
-       - phpunit
+      - phpunit
 
 jobs:
   include:
     - stage: lint
-      php: 7.1
+      before_script:
+        - export PATH="$HOME/.composer/vendor/bin:$PATH"
+        - composer global require "squizlabs/php_codesniffer:^3"
+      php: 7.2
       script:
         - phpcs
 
