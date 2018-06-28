@@ -22,6 +22,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
 	abstract protected function getApiClass(): string;
 
 	/**
+	 * Returns a mock of the API class.
+	 *
 	 * @return \PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getApiMock(): PHPUnit_Framework_MockObject_MockObject {
@@ -41,7 +43,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Retrieves fixture for an endpoint..
+	 * Retrieves fixture for an endpoint.
 	 *
 	 * @param string $name Name of the file without extension.
 	 * @return array Fixture data.
