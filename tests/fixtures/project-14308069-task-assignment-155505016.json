@@ -1,0 +1,18 @@
+{
+	"id": 155505016,
+	"billable": false,
+	"is_active": true,
+	"created_at": "2017-06-26T21:52:18Z",
+	"updated_at": "2017-06-26T21:54:06Z",
+	"hourly_rate": 100.0,
+	"budget": null,
+	"project": {
+		"id": 14308069,
+		"name": "Online Store - Phase 1",
+		"code": "OS1"
+	},
+	"task": {
+		"id": 8083369,
+		"name": "Research"
+	}
+}
