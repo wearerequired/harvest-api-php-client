@@ -37,6 +37,10 @@ class UserAssignments extends AbstractApi {
 			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
 		}
 
+		if ( isset( $parameters['is_active'] ) ) {
+			$parameters['is_active'] = filter_var( $parameters['is_active'], FILTER_VALIDATE_BOOLEAN ) ? 'true' : 'false';
+		}
+
 		$result = $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments', $parameters );
 		if ( ! isset( $result['user_assignments'] ) || ! is_array( $result['user_assignments'] ) ) {
 			throw new RuntimeException( 'Unexpected result.' );
