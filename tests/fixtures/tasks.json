@@ -1,0 +1,66 @@
+{
+	"tasks": [
+		{
+			"id": 8083800,
+			"name": "Business Development",
+			"billable_by_default": false,
+			"default_hourly_rate": 0.0,
+			"is_default": false,
+			"is_active": true,
+			"created_at": "2017-06-26T22:08:25Z",
+			"updated_at": "2017-06-26T22:08:25Z"
+		},
+		{
+			"id": 8083369,
+			"name": "Research",
+			"billable_by_default": false,
+			"default_hourly_rate": 0.0,
+			"is_default": true,
+			"is_active": true,
+			"created_at": "2017-06-26T20:41:00Z",
+			"updated_at": "2017-06-26T21:53:34Z"
+		},
+		{
+			"id": 8083368,
+			"name": "Project Management",
+			"billable_by_default": true,
+			"default_hourly_rate": 100.0,
+			"is_default": true,
+			"is_active": true,
+			"created_at": "2017-06-26T20:41:00Z",
+			"updated_at": "2017-06-26T21:14:10Z"
+		},
+		{
+			"id": 8083366,
+			"name": "Programming",
+			"billable_by_default": true,
+			"default_hourly_rate": 100.0,
+			"is_default": true,
+			"is_active": true,
+			"created_at": "2017-06-26T20:41:00Z",
+			"updated_at": "2017-06-26T21:14:07Z"
+		},
+		{
+			"id": 8083365,
+			"name": "Graphic Design",
+			"billable_by_default": true,
+			"default_hourly_rate": 100.0,
+			"is_default": true,
+			"is_active": true,
+			"created_at": "2017-06-26T20:41:00Z",
+			"updated_at": "2017-06-26T21:14:02Z"
+		}
+	],
+	"per_page": 100,
+	"total_pages": 1,
+	"total_entries": 5,
+	"next_page": null,
+	"previous_page": null,
+	"page": 1,
+	"links": {
+		"first": "https://api.harvestapp.com/v2/tasks?page=1&per_page=100",
+		"next": null,
+		"previous": null,
+		"last": "https://api.harvestapp.com/v2/tasks?page=1&per_page=100"
+	}
+}
