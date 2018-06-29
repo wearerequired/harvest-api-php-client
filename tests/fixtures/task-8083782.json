@@ -1,0 +1,10 @@
+{
+	"id": 8083782,
+	"name": "New Task Name",
+	"billable_by_default": true,
+	"default_hourly_rate": 0,
+	"is_default": false,
+	"is_active": true,
+	"created_at": "2017-06-26T22:04:31Z",
+	"updated_at": "2017-06-26T22:04:31Z"
+}

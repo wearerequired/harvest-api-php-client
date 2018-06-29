@@ -398,7 +398,7 @@ class ProjectsTest extends TestCase {
 	}
 
 	/**
-	 * Test updating user.
+	 * Test updating project.
 	 */
 	public function testUpdateProject() {
 		$expectedArray = $this->getFixture( 'project-14308112' );

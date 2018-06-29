@@ -1,0 +1,18 @@
+{
+	"id": 125068758,
+	"is_project_manager": false,
+	"is_active": true,
+	"budget": null,
+	"created_at": "2017-06-26T22:36:01Z",
+	"updated_at": "2017-06-26T22:36:01Z",
+	"hourly_rate": 75.5,
+	"project": {
+		"id": 14308069,
+		"name": "Online Store - Phase 1",
+		"code": "OS1"
+	},
+	"user": {
+		"id": 1782974,
+		"name": "Jim Allen"
+	}
+}

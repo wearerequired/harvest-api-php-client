@@ -278,7 +278,7 @@ class UsersTest extends TestCase {
 	/**
 	 * Test creating new user.
 	 */
-	public function testCreateNewUser() {
+	public function testCreateNew() {
 		$expectedArray = $this->getFixture( 'user-3' );
 
 		$data = [
@@ -299,7 +299,7 @@ class UsersTest extends TestCase {
 	/**
 	 * Test updating user.
 	 */
-	public function testUpdateUser() {
+	public function testUpdate() {
 		$expectedArray = $this->getFixture( 'user-2' );
 
 		$userId = 2;
@@ -319,7 +319,7 @@ class UsersTest extends TestCase {
 	/**
 	 * Test deleting user.
 	 */
-	public function testDeleteUser() {
+	public function testDelete() {
 		$userId = 2;
 
 		$api = $this->getApiMock();

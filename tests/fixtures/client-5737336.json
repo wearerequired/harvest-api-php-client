@@ -1,0 +1,9 @@
+{
+	"id": 5737336,
+	"name": "Your New Client",
+	"is_active": true,
+	"address": null,
+	"created_at": "2017-06-26T21:39:35Z",
+	"updated_at": "2017-06-26T21:39:35Z",
+	"currency": "EUR"
+}

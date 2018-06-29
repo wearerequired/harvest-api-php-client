@@ -78,7 +78,7 @@ class Contacts extends AbstractApi {
 			throw new InvalidArgumentException( 'The "first_name" parameter must be a non-empty string.' );
 		}
 
-		return $this->post( '/clients', $parameters );
+		return $this->post( '/contacts', $parameters );
 	}
 
 	/**
@@ -91,7 +91,7 @@ class Contacts extends AbstractApi {
 	 * @return array|string
 	 */
 	public function update( int $contactId, array $parameters ) {
-		return $this->patch( '/clients/' . rawurlencode( $contactId ), $parameters );
+		return $this->patch( '/contacts/' . rawurlencode( $contactId ), $parameters );
 	}
 
 	/**
@@ -101,6 +101,6 @@ class Contacts extends AbstractApi {
 	 * @return array|string
 	 */
 	public function remove( int $contactId ) {
-		return $this->delete( '/clients/' . rawurlencode( $contactId ) );
+		return $this->delete( '/contacts/' . rawurlencode( $contactId ) );
 	}
 }
