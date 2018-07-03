@@ -1,0 +1,45 @@
+{
+	"id": 15297032,
+	"notes": null,
+	"total_cost": 13.59,
+	"units": 1.0,
+	"is_closed": false,
+	"is_locked": false,
+	"is_billed": false,
+	"locked_reason": null,
+	"spent_date": "2017-03-01",
+	"created_at": "2017-06-27T15:42:27Z",
+	"updated_at": "2017-06-27T15:42:27Z",
+	"billable": true,
+	"receipt": null,
+	"user": {
+		"id": 1782959,
+		"name": "Kim Allen"
+	},
+	"user_assignment": {
+		"id": 125068553,
+		"is_project_manager": true,
+		"is_active": true,
+		"budget": null,
+		"created_at": "2017-06-26T22:32:52Z",
+		"updated_at": "2017-06-26T22:32:52Z",
+		"hourly_rate": 100.0
+	},
+	"project": {
+		"id": 14308069,
+		"name": "Online Store - Phase 1",
+		"code": "OS1"
+	},
+	"expense_category": {
+		"id": 4195926,
+		"name": "Meals",
+		"unit_price": null,
+		"unit_name": null
+	},
+	"client": {
+		"id": 5735776,
+		"name": "123 Industries",
+		"currency": "EUR"
+	},
+	"invoice": null
+}
