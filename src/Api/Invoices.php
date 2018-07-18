@@ -151,7 +151,7 @@ class Invoices extends AbstractApi {
 	}
 
 	/**
-	 * Re-opens a closed invoice
+	 * Re-opens a closed invoice.
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
