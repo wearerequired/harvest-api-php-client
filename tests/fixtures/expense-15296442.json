@@ -1,0 +1,53 @@
+{
+	"id": 15296442,
+	"notes": "Lunch with client",
+	"total_cost": 33.35,
+	"units": 1.0,
+	"is_closed": false,
+	"is_locked": true,
+	"is_billed": true,
+	"locked_reason": "Expense is invoiced.",
+	"spent_date": "2017-03-03",
+	"created_at": "2017-06-27T15:09:54Z",
+	"updated_at": "2017-06-27T16:47:14Z",
+	"billable": true,
+	"receipt": {
+		"url": "https://{ACCOUNT_SUBDOMAIN}.harvestapp.com/expenses/15296442/receipt",
+		"file_name": "lunch_receipt.gif",
+		"file_size": 39410,
+		"content_type": "image/gif"
+	},
+	"user": {
+		"id": 1782959,
+		"name": "Kim Allen"
+	},
+	"user_assignment": {
+		"id": 125068553,
+		"is_project_manager": true,
+		"is_active": true,
+		"budget": null,
+		"created_at": "2017-06-26T22:32:52Z",
+		"updated_at": "2017-06-26T22:32:52Z",
+		"hourly_rate": 100.0
+	},
+	"project": {
+		"id": 14307913,
+		"name": "Marketing Website",
+		"code": "MW"
+	},
+	"expense_category": {
+		"id": 4195926,
+		"name": "Meals",
+		"unit_price": null,
+		"unit_name": null
+	},
+	"client": {
+		"id": 5735774,
+		"name": "ABC Corp",
+		"currency": "USD"
+	},
+	"invoice": {
+		"id": 13150403,
+		"number": "1001"
+	}
+}

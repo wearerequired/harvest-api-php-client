@@ -1,0 +1,52 @@
+{
+	"id": 13150453,
+	"client_key": "8b86437630b6c260c1bfa289f0154960f83b606d",
+	"number": "1002",
+	"purchase_order": null,
+	"amount": 5000.0,
+	"due_amount": 5000.0,
+	"tax": null,
+	"tax_amount": 0.0,
+	"tax2": null,
+	"tax2_amount": 0.0,
+	"discount": null,
+	"discount_amount": 0.0,
+	"subject": "ABC Project Quote",
+	"notes": null,
+	"state": "draft",
+	"period_start": null,
+	"period_end": null,
+	"issue_date": "2017-06-27",
+	"due_date": "2017-07-27",
+	"payment_term": "custom",
+	"sent_at": null,
+	"paid_at": null,
+	"paid_date": null,
+	"closed_at": null,
+	"created_at": "2017-06-27T16:34:24Z",
+	"updated_at": "2017-06-27T16:34:24Z",
+	"currency": "USD",
+	"client": {
+		"id": 5735774,
+		"name": "ABC Corp"
+	},
+	"estimate": null,
+	"retainer": null,
+	"creator": {
+		"id": 1782884,
+		"name": "Bob Powell"
+	},
+	"line_items": [
+		{
+			"id": 53341928,
+			"kind": "Service",
+			"description": "ABC Project",
+			"quantity": 1.0,
+			"unit_price": 5000.0,
+			"amount": 5000.0,
+			"taxed": false,
+			"taxed2": false,
+			"project": null
+		}
+	]
+}

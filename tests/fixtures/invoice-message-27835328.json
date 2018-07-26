@@ -1,0 +1,19 @@
+{
+	"id": 27835328,
+	"sent_by": "Bob Powell",
+	"sent_by_email": "bobpowell@example.com",
+	"sent_from": "Bob Powell",
+	"sent_from_email": "bobpowell@example.com",
+	"include_link_to_client_invoice": false,
+	"send_me_a_copy": false,
+	"thank_you": false,
+	"reminder": false,
+	"send_reminder_on": null,
+	"created_at": "2017-08-23T22:25:59Z",
+	"updated_at": "2017-08-23T22:25:59Z",
+	"attach_pdf": false,
+	"event_type": "draft",
+	"recipients": [],
+	"subject": null,
+	"body": null
+}
