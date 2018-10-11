@@ -38,9 +38,20 @@ class ResponseMediator {
 	 * @link https://help.getharvest.com/api-v2/introduction/overview/pagination/
 	 *
 	 * @param \Psr\Http\Message\ResponseInterface $response The API response.
-	 * @return array|null
+	 * @return array
 	 */
-	public static function getPagination( ResponseInterface $response ): ?array {
-		return [];
+	public static function getPagination( ResponseInterface $response ): array {
+		$content = self::getContent( $response );
+		if ( ! is_array( $content ) ) {
+			return [];
+		}
+
+		return [
+			'page'          => $content['page'] ?? null,
+			'total_pages'   => $content['total_pages'] ?? null,
+			'total_entries' => $content['total_entries'] ?? null,
+			'next_page'     => $content['next_page'] ?? null,
+			'previous_page' => $content['previous_page'] ?? null,
+		];
 	}
 }
