@@ -27,6 +27,13 @@ $client->authenticate( 'account-id', 'token' );
 
 // Do your API calls.
 $currentUser = $client->currentUser()->show();
+
+// Example request with auto paging.
+$projects = $client->projects()->allWithAutoPagingIterator();
+foreach ( $projects as $project ) {
+	// Do something with $project. The iterator will automatically
+	// fetch new entries if the end of a page is reached.
+}
 ```
 
 ## OAuth
