@@ -38,7 +38,7 @@ foreach ( $projects as $project ) {
 
 ## OAuth
 
-This library doesn't not include a OAuth 2.0 Client. We suggest to use the [PHP League's OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client) with [our OAuth provider for Harvest](https://github.com/wearerequired/oauth2-harvest).
+This library does not include an OAuth 2.0 Client. We suggest to use the [PHP League's OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client) with [our OAuth provider for Harvest](https://github.com/wearerequired/oauth2-harvest).
 
 ## License
 
