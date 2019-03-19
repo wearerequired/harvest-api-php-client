@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+* Changed version constrain for php-http/httplug to continue supporting 1.x.
+
+### Fixed
+* Fixed fatal error by missing php-http/client-common dependency.
+
 ## [0.1.0] - 2018-03-18
 
 ### Added
