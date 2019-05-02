@@ -39,7 +39,7 @@ class TimeEntries extends AbstractApi {
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
-			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
+			$parameters['updated_since'] = $parameters['updated_since']->format(DateTime::ATOM);
 		}
 
 		if ( isset( $parameters['from'] ) && $parameters['from'] instanceof DateTime ) {
