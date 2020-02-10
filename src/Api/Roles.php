@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/roles-api/roles/roles/
  */
-class Roles extends AbstractApi implements RolesInterface
-{
+class Roles extends AbstractApi implements RolesInterface {
+
 
 	/**
 	 * Retrieves a list of roles.

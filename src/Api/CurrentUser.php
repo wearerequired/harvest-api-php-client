@@ -13,8 +13,8 @@ use Required\Harvest\Api\CurrentUser\ProjectAssignmentsInterface;
  *
  * @link https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/#personal-access-tokens
  */
-class CurrentUser extends AbstractApi implements CurrentUserInterface
-{
+class CurrentUser extends AbstractApi implements CurrentUserInterface {
+
 
 	/**
 	 * Retrieves the authenticated user.

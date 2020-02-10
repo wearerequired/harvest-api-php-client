@@ -44,32 +44,32 @@ use Required\Harvest\Exception\InvalidArgumentException;
  * @method UserAssignmentsInterface userAssignments()
  * @method UsersInterface users()
  */
-interface ClientInterface
-{
-    /**
-     * Authenticates a user for all next requests.
-     *
-     * @link https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/
-     *
-     * @param string $accountId The Harvest account ID.
-     * @param string $accessToken The personal access token.
-     */
-    public function authenticate(string $accountId, string $accessToken): void;
+interface ClientInterface {
 
-    /**
-     * Retrieves the API interface for an endpoint name.
-     *
-     * @param string $name The endpoint name.
-     * @return ApiInterface The API interface.
-     * @throws InvalidArgumentException
-     *
-     */
-    public function api($name): ApiInterface;
+	/**
+	 * Authenticates a user for all next requests.
+	 *
+	 * @link https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/
+	 *
+	 * @param string $accountId The Harvest account ID.
+	 * @param string $accessToken The personal access token.
+	 */
+	public function authenticate( string $accountId, string $accessToken): void;
 
-    /**
-     * Retrieves the HTTP client.
-     *
-     * @return HttpMethodsClientInterface
-     */
-    public function getHttpClient(): HttpMethodsClientInterface;
+	/**
+	 * Retrieves the API interface for an endpoint name.
+	 *
+	 * @param string $name The endpoint name.
+	 * @return ApiInterface The API interface.
+	 * @throws InvalidArgumentException
+	 *
+	 */
+	public function api( $name): ApiInterface;
+
+	/**
+	 * Retrieves the HTTP client.
+	 *
+	 * @return HttpMethodsClientInterface
+	 */
+	public function getHttpClient(): HttpMethodsClientInterface;
 }

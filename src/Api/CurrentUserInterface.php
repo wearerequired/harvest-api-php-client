@@ -9,19 +9,19 @@ use Required\Harvest\Api\CurrentUser\ProjectAssignmentsInterface;
  *
  * @link https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/#personal-access-tokens
  */
-interface CurrentUserInterface
-{
-    /**
-     * Retrieves the authenticated user.
-     *
-     * @return array|string
-     */
-    public function show();
+interface CurrentUserInterface {
 
-    /**
-     * Gets the authenticated user's project assignments.
-     *
-     * @return ProjectAssignmentsInterface;
-     */
-    public function projectAssignments(): ProjectAssignmentsInterface;
+	/**
+	 * Retrieves the authenticated user.
+	 *
+	 * @return array|string
+	 */
+	public function show();
+
+	/**
+	 * Gets the authenticated user's project assignments.
+	 *
+	 * @return ProjectAssignmentsInterface;
+	 */
+	public function projectAssignments(): ProjectAssignmentsInterface;
 }

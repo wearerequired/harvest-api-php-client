@@ -17,8 +17,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimates/
  */
-class Estimates extends AbstractApi implements EstimatesInterface
-{
+class Estimates extends AbstractApi implements EstimatesInterface {
+
 
 	/**
 	 * Retrieves a list of estimates.

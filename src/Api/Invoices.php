@@ -19,8 +19,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/invoices-api/invoices/invoices/
  */
-class Invoices extends AbstractApi implements InvoicesInterface
-{
+class Invoices extends AbstractApi implements InvoicesInterface {
+
 
 	/**
 	 * Retrieves a list of invoices.

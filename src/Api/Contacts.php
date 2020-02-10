@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/clients-api/clients/contacts/
  */
-class Contacts extends AbstractApi implements ContactsInterface
-{
+class Contacts extends AbstractApi implements ContactsInterface {
+
 
 	/**
 	 * Retrieves a list of contacts.

@@ -16,8 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/task-assignments/
  */
-class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface
-{
+class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
+
 
 	/**
 	 * Retrieves a list of task assignments for a specific project.

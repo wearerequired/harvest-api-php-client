@@ -16,8 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/users-api/users/users/
  */
-class Users extends AbstractApi implements UsersInterface
-{
+class Users extends AbstractApi implements UsersInterface {
+
 
 	/**
 	 * Retrieves a list of users.

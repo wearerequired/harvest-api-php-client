@@ -43,15 +43,18 @@ class AbstractApiTest extends TestCase {
 		$api = $this->getAbstractApiObject( $client );
 
 		$actual = $this->getMethod( $api, 'get' )
-			->invokeArgs( $api, [
-				'/path',
+			->invokeArgs(
+				$api,
 				[
-					'param' => 'param-value',
-				],
-				[
-					'header' => 'header-value',
-				],
-			] );
+					'/path',
+					[
+						'param' => 'param-value',
+					],
+					[
+						'header' => 'header-value',
+					],
+				]
+			);
 
 		$this->assertEquals( $expectedBody, $actual );
 	}
@@ -88,9 +91,12 @@ class AbstractApiTest extends TestCase {
 		$this->assertSame( $expectedPerPage, $api->getPerPage() );
 
 		$actual = $this->getMethod( $api, 'get' )
-			->invokeArgs( $api, [
-				'/path',
-			] );
+			->invokeArgs(
+				$api,
+				[
+					'/path',
+				]
+			);
 
 		$this->assertEquals( $expectedBody, $actual );
 	}
@@ -119,15 +125,18 @@ class AbstractApiTest extends TestCase {
 		$api = $this->getAbstractApiObject( $client );
 
 		$actual = $this->getMethod( $api, 'head' )
-			->invokeArgs( $api, [
-				'/path',
+			->invokeArgs(
+				$api,
 				[
-					'param' => 'param-value',
-				],
-				[
-					'header' => 'header-value',
-				],
-			] );
+					'/path',
+					[
+						'param' => 'param-value',
+					],
+					[
+						'header' => 'header-value',
+					],
+				]
+			);
 
 		$this->assertInstanceOf( ResponseInterface::class, $actual );
 	}
@@ -163,15 +172,18 @@ class AbstractApiTest extends TestCase {
 		$api = $this->getAbstractApiObject( $client );
 
 		$actual = $this->getMethod( $api, 'post' )
-			->invokeArgs( $api, [
-				'/path',
+			->invokeArgs(
+				$api,
 				[
-					'param' => 'param-value',
-				],
-				[
-					'header' => 'header-value',
-				],
-			] );
+					'/path',
+					[
+						'param' => 'param-value',
+					],
+					[
+						'header' => 'header-value',
+					],
+				]
+			);
 
 		$this->assertEquals( $expectedBody, $actual );
 	}
@@ -207,15 +219,18 @@ class AbstractApiTest extends TestCase {
 		$api = $this->getAbstractApiObject( $client );
 
 		$actual = $this->getMethod( $api, 'patch' )
-			->invokeArgs( $api, [
-				'/path',
+			->invokeArgs(
+				$api,
 				[
-					'param' => 'param-value',
-				],
-				[
-					'header' => 'header-value',
-				],
-			] );
+					'/path',
+					[
+						'param' => 'param-value',
+					],
+					[
+						'header' => 'header-value',
+					],
+				]
+			);
 
 		$this->assertEquals( $expectedBody, $actual );
 	}
@@ -251,15 +266,18 @@ class AbstractApiTest extends TestCase {
 		$api = $this->getAbstractApiObject( $client );
 
 		$actual = $this->getMethod( $api, 'put' )
-			->invokeArgs( $api, [
-				'/path',
+			->invokeArgs(
+				$api,
 				[
-					'param' => 'param-value',
-				],
-				[
-					'header' => 'header-value',
-				],
-			] );
+					'/path',
+					[
+						'param' => 'param-value',
+					],
+					[
+						'header' => 'header-value',
+					],
+				]
+			);
 
 		$this->assertEquals( $expectedBody, $actual );
 	}
@@ -295,15 +313,18 @@ class AbstractApiTest extends TestCase {
 		$api = $this->getAbstractApiObject( $client );
 
 		$actual = $this->getMethod( $api, 'delete' )
-			->invokeArgs( $api, [
-				'/path',
+			->invokeArgs(
+				$api,
 				[
-					'param' => 'param-value',
-				],
-				[
-					'header' => 'header-value',
-				],
-			] );
+					'/path',
+					[
+						'param' => 'param-value',
+					],
+					[
+						'header' => 'header-value',
+					],
+				 ]
+			);
 
 		$this->assertEquals( $expectedBody, $actual );
 	}

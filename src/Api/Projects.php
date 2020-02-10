@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/projects/
  */
-class Projects extends AbstractApi implements ProjectsInterface
-{
+class Projects extends AbstractApi implements ProjectsInterface {
+
 
 	/**
 	 * Retrieves a list of projects.

@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimate-item-categories/
  */
-class EstimateItemCategories extends AbstractApi implements EstimateItemCategoriesInterface
-{
+class EstimateItemCategories extends AbstractApi implements EstimateItemCategoriesInterface {
+
 
 	/**
 	 * Retrieves a list of estimate item categories.

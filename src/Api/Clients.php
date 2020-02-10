@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/clients-api/clients/clients/
  */
-class Clients extends AbstractApi implements ClientsInterface
-{
+class Clients extends AbstractApi implements ClientsInterface {
+
 
 	/**
 	 * Retrieves a list of clients.

@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/tasks-api/tasks/tasks/
  */
-class Tasks extends AbstractApi implements TasksInterface
-{
+class Tasks extends AbstractApi implements TasksInterface {
+
 
 	/**
 	 * Retrieves a list of tasks.

@@ -16,8 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/invoices-api/invoices/invoice-payments/
  */
-class Payments extends AbstractApi implements PaymentsInterface
-{
+class Payments extends AbstractApi implements PaymentsInterface {
+
 
 	/**
 	 * Retrieves a list of invoice payments for a specific invoice.

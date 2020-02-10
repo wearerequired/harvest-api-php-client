@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/expenses-api/expenses/expense-categories/
  */
-class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterface
-{
+class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterface {
+
 
 	/**
 	 * Retrieves a list of expense categories.

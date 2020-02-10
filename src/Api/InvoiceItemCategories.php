@@ -15,8 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/invoices-api/invoices/invoice-item-categories/
  */
-class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategoriesInterface
-{
+class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategoriesInterface {
+
 
 	/**
 	 * Retrieves a list of invoice item categories.

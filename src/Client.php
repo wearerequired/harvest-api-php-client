@@ -54,8 +54,7 @@ use Required\Harvest\HttpClient\Plugin\ResponseExceptionThrower;
  * @method UserAssignmentsInterface userAssignments()
  * @method UsersInterface users()
  */
-class Client implements ClientInterface
-{
+class Client implements ClientInterface {
 
 	/**
 	 * The builder for HTTP clients.

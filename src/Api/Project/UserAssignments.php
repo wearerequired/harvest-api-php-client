@@ -16,8 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/user-assignments/
  */
-class UserAssignments extends AbstractApi implements UserAssignmentsInterface
-{
+class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
+
 
 	/**
 	 * Retrieves a list of user assignments for a specific project.

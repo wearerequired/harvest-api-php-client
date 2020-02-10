@@ -17,8 +17,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/timesheets-api/timesheets/time-entries/
  */
-class TimeEntries extends AbstractApi implements TimeEntriesInterface
-{
+class TimeEntries extends AbstractApi implements TimeEntriesInterface {
+
 
 	/**
 	 * Retrieves a list of time entries.
