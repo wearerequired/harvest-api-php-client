@@ -15,7 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/expenses-api/expenses/expenses/
  */
-class Expenses extends AbstractApi {
+class Expenses extends AbstractApi implements ExpensesInterface
+{
 
 	/**
 	 * Retrieves a list of expenses.
@@ -28,10 +29,10 @@ class Expenses extends AbstractApi {
 	 *     @type int              $project_id    Only return expenses belonging to the project with the given ID.
 	 *     @type bool             $is_billed     Pass `true` to only return expenses that have been invoiced and
 	 *                                           `false` to return expenses that have not been invoiced.
-	 *     @type \DateTime|string $updated_since Only return expenses that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return expenses that have been updated since the given
 	 *                                           date and time.
-	 *     @type \DateTime|string $from          Only return expenses with a `spent_date` on or after the given date.
-	 *     @type \DateTime|string $to            Only return expenses with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $from           Only return expenses with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $to             Only return expenses with a `spent_date` on or after the given date.
 	 * }
 	 * @return array|string
 	 */
@@ -73,8 +74,8 @@ class Expenses extends AbstractApi {
 	/**
 	 * Creates a new expense object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new expense object.
 	 * @return array|string

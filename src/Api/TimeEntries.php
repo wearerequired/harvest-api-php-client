@@ -6,6 +6,8 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Required\Harvest\Api\TimeEntry\ExternalReference;
+use Required\Harvest\Api\TimeEntry\ExternalReferenceInterface;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +17,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/timesheets-api/timesheets/time-entries/
  */
-class TimeEntries extends AbstractApi {
+class TimeEntries extends AbstractApi implements TimeEntriesInterface
+{
 
 	/**
 	 * Retrieves a list of time entries.
@@ -30,10 +33,10 @@ class TimeEntries extends AbstractApi {
 	 *                                           `false` to return time entries that have not been invoiced.
 	 *     @type bool             $is_running    Pass `true` to only return running time entries and `false` to return
 	 *                                           non-running time entries.
-	 *     @type \DateTime|string $updated_since Only return time entries that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return time entries that have been updated since the given
 	 *                                           date and time.
-	 *     @type \DateTime|string $from          Only return time entries with a `spent_date` on or after the given date.
-	 *     @type \DateTime|string $to            Only return time entries with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $from           Only return time entries with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $to             Only return time entries with a `spent_date` on or after the given date.
 	 * }
 	 * @return array
 	 */
@@ -79,8 +82,8 @@ class TimeEntries extends AbstractApi {
 	/**
 	 * Creates a new time entry object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new time entry object.
 	 * @return array|string
@@ -168,9 +171,9 @@ class TimeEntries extends AbstractApi {
 	 *
 	 * This only supports removing an external reference.
 	 *
-	 * @return \Required\Harvest\Api\TimeEntry\ExternalReference;
+	 * @return ExternalReferenceInterface
 	 */
-	public function externalReference() {
-		return new TimeEntry\ExternalReference( $this->client );
+	public function externalReference(): ExternalReferenceInterface {
+		return new ExternalReference( $this->client );
 	}
 }

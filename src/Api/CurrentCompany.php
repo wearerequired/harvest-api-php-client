@@ -10,7 +10,8 @@ namespace Required\Harvest\Api;
  *
  * @link https://help.getharvest.com/api-v2/company-api/company/company/
  */
-class CurrentCompany extends AbstractApi {
+class CurrentCompany extends AbstractApi implements CurrentCompanyInterface
+{
 
 	/**
 	 * Retrieves the company for the currently authenticated user.

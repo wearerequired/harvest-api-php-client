@@ -15,7 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/tasks-api/tasks/tasks/
  */
-class Tasks extends AbstractApi {
+class Tasks extends AbstractApi implements TasksInterface
+{
 
 	/**
 	 * Retrieves a list of tasks.
@@ -25,7 +26,7 @@ class Tasks extends AbstractApi {
 	 *
 	 *     @type bool             $is_active     Pass `true` to only return active tasks and `false` to return
 	 *                                           inactive tasks.
-	 *     @type \DateTime|string $updated_since Only return tasks that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return tasks that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array
@@ -60,8 +61,8 @@ class Tasks extends AbstractApi {
 	/**
 	 * Creates a new task object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new task object.
 	 * @return array|string

@@ -5,8 +5,9 @@
 
 namespace Required\Harvest\Api;
 
+use Http\Client\Exception;
 use Psr\Http\Message\ResponseInterface;
-use Required\Harvest\Client;
+use Required\Harvest\ClientInterface;
 use Required\Harvest\Exception\BadMethodCallException;
 use Required\Harvest\HttpClient\Message\ResponseMediator;
 
@@ -18,21 +19,21 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * The client.
 	 *
-	 * @var \Required\Harvest\Client
+	 * @var ClientInterface
 	 */
 	protected $client;
 
 	/**
-	 * @var \Required\Harvest\Api\Pagination
+	 * @var Pagination
 	 */
 	protected $pagination;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param \Required\Harvest\Client $client
+	 * @param ClientInterface $client
 	 */
-	public function __construct( Client $client ) {
+	public function __construct( ClientInterface $client ) {
 		$this->client     = $client;
 		$this->pagination = new Pagination();
 	}
@@ -68,7 +69,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * Sets requested page number.
 	 *
 	 * @param null|int $page The requested page.
-	 * @return \Required\Harvest\Api\AbstractApi The current API instance
+	 * @return AbstractApi The current API instance
 	 */
 	public function setPage( $page ): AbstractApi {
 		$this->pagination->setPage( $page );
@@ -89,7 +90,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * Sets number of items per page.
 	 *
 	 * @param null|int $perPage Number of items per page.
-	 * @return \Required\Harvest\Api\AbstractApi The current API instance
+	 * @return AbstractApi The current API instance
 	 */
 	public function setPerPage( $perPage ): AbstractApi {
 		$this->pagination->setPerPage( $perPage );
@@ -100,7 +101,7 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Resets pagination.
 	 *
-	 * @return \Required\Harvest\Api\AbstractApi The current API instance
+	 * @return AbstractApi The current API instance
 	 */
 	public function resetPagination() {
 		$this->pagination->reset();
@@ -121,7 +122,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * Retrieves a list of items with automatic pagination.
 	 *
 	 * @param array $parameters Optional. Parameters for filtering the list of items. Default empty array.
-	 * @return \Required\Harvest\Api\AutoPagingIterator The iterator.
+	 * @return AutoPagingIterator The iterator.
 	 */
 	public function allWithAutoPagingIterator( array $parameters = [] ): AutoPagingIterator {
 		if ( ! method_exists( static::class, 'all' ) ) {
@@ -138,6 +139,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param array  $parameters     GET parameters.
 	 * @param array  $requestHeaders Request Headers.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	protected function get( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$page = $this->pagination->getPage();
@@ -172,15 +174,14 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param string $path           Request path.
 	 * @param array  $parameters     HEAD parameters.
 	 * @param array  $requestHeaders Request headers.
-	 * @return \Psr\Http\Message\ResponseInterface
+	 * @return ResponseInterface
+	 * @throws Exception
 	 */
 	protected function head( $path, array $parameters = [], array $requestHeaders = [] ): ResponseInterface {
-		$response = $this->client->getHttpClient()->head(
+		return $this->client->getHttpClient()->head(
 			$path . '?' . http_build_query( $parameters ),
 			$requestHeaders
 		);
-
-		return $response;
 	}
 
 	/**
@@ -190,6 +191,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	protected function post( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
@@ -210,6 +212,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	protected function patch( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
@@ -230,6 +233,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	protected function put( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
@@ -250,6 +254,7 @@ abstract class AbstractApi implements ApiInterface {
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	protected function delete( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );

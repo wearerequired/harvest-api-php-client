@@ -1,3 +1,9 @@
 composer.lock
 vendor/
 clover.xml
+
+# ignore phpunit result cache
+.phpunit.result.cache
+
+# ignore phpstorm project files
+.idea

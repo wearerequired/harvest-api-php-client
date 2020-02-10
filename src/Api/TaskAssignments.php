@@ -13,7 +13,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/task-assignments/
  */
-class TaskAssignments extends AbstractApi {
+class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface
+{
 
 	/**
 	 * Retrieves a list of task assignments.
@@ -23,7 +24,7 @@ class TaskAssignments extends AbstractApi {
 	 *
 	 *     @type bool             $is_active     Pass `true` to only return active task assignments and `false` to
 	 *                                           return  inactive task assignments.
-	 *     @type \DateTime|string $updated_since Only return user assignments that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return user assignments that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array

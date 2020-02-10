@@ -16,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/invoices-api/invoices/invoice-messages/
  */
-class Messages extends AbstractApi {
+class Messages extends AbstractApi implements MessagesInterface
+{
 
 	/**
 	 * Retrieves a list of invoice messages for a specific invoice.
@@ -25,7 +26,7 @@ class Messages extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice messages. Default empty array.
 	 *
-	 *     @type \DateTime|string $updated_since Only return invoice messages that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return invoice messages that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
@@ -57,8 +58,8 @@ class Messages extends AbstractApi {
 	/**
 	 * Creates a new invoice message object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param int   $invoiceId The ID of the invoice.
 	 * @param array $parameters The parameters of the new invoice message object.

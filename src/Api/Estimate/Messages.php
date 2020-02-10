@@ -16,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimate-messages/
  */
-class Messages extends AbstractApi {
+class Messages extends AbstractApi implements MessagesInterface
+{
 
 	/**
 	 * Retrieves a list of estimate messages for a specific estimate.
@@ -25,7 +26,7 @@ class Messages extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate messages. Default empty array.
 	 *
-	 *     @type \DateTime|string $updated_since Only return estimate messages that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return estimate messages that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
@@ -57,8 +58,8 @@ class Messages extends AbstractApi {
 	/**
 	 * Creates a new estimate message object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param int   $estimateId The ID of the estimate.
 	 * @param array $parameters The parameters of the new estimate message object.

@@ -6,6 +6,8 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Required\Harvest\Api\Estimate\Messages;
+use Required\Harvest\Api\Estimate\MessagesInterface;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,21 +17,22 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimates/
  */
-class Estimates extends AbstractApi {
+class Estimates extends AbstractApi implements EstimatesInterface
+{
 
 	/**
 	 * Retrieves a list of estimates.
 	 *
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimates. Default empty array.
 	 *
 	 *     @type int              $client_id     Only return estimates belonging to the client with the given ID.
-	 *     @type \DateTime|string $updated_since Only return estimates that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return estimates that have been updated since the given
 	 *                                           date and time.
-	 *     @type \DateTime|string $from          Only return estimates with a `issue_date` on or after the given date.
-	 *     @type \DateTime|string $to            Only return estimates with a `issue_date` on or after the given date.
+	 *     @type DateTime|string $from          Only return estimates with a `issue_date` on or after the given date.
+	 *     @type DateTime|string $to            Only return estimates with a `issue_date` on or after the given date.
 	 *     @type string           $state         Only return estimates with a `state` matching the value provided.
 	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
@@ -79,8 +82,8 @@ class Estimates extends AbstractApi {
 	/**
 	 * Creates a new estimate object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new estimate object.
 	 * @return array|string
@@ -176,5 +179,14 @@ class Estimates extends AbstractApi {
 		];
 
 		return $this->post( '/estimates/' . rawurlencode( $estimateId ) . '/messages', $parameters );
+	}
+
+	/**
+	 * Gets a Estimate's messages.
+	 *
+	 * @return MessagesInterface
+	 */
+	public function messages(): MessagesInterface {
+		return new Messages( $this->client );
 	}
 }

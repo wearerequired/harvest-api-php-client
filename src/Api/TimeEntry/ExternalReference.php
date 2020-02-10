@@ -12,8 +12,8 @@ use Required\Harvest\Api\AbstractApi;
  *
  * @link https://help.getharvest.com/api-v2/timesheets-api/timesheets/time-entries/
  */
-class ExternalReference extends AbstractApi {
-
+class ExternalReference extends AbstractApi implements ExternalReferenceInterface
+{
 	/**
 	 * Deletes a time entry’s external reference.
 	 *

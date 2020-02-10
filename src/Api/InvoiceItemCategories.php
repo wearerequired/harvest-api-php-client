@@ -15,7 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/invoices-api/invoices/invoice-item-categories/
  */
-class InvoiceItemCategories extends AbstractApi {
+class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategoriesInterface
+{
 
 	/**
 	 * Retrieves a list of invoice item categories.
@@ -23,7 +24,7 @@ class InvoiceItemCategories extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice item categories. Default empty array.
 	 *
-	 *     @type \DateTime|string $updated_since Only return invoice item categories that have been updated since
+	 *     @type DateTime|string $updated_since Only return invoice item categories that have been updated since
 	 *                                           the given date and time.
 	 * }
 	 * @return array|string
@@ -54,8 +55,8 @@ class InvoiceItemCategories extends AbstractApi {
 	/**
 	 * Creates a new invoice item category object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new invoice item category object.
 	 * @return array|string

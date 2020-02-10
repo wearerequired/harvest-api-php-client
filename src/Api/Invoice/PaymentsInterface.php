@@ -1,0 +1,60 @@
+<?php
+
+namespace Required\Harvest\Api\Invoice;
+
+
+use DateTime;
+use Required\Harvest\Exception\InvalidArgumentException;
+use Required\Harvest\Exception\MissingArgumentException;
+
+/**
+ * API client for invoice payments endpoint.
+ *
+ * @link https://help.getharvest.com/api-v2/invoices-api/invoices/invoice-payments/
+ */
+interface PaymentsInterface
+{
+    /**
+     * Retrieves a list of invoice payments for a specific invoice.
+     *
+     * @param int $invoiceId The ID of the invoice.
+     * @param array $parameters {
+     *     Optional. Parameters for filtering the list of invoice payments. Default empty array.
+     *
+     * 		@type DateTime|string $updated_since Only return invoice payments that have been updated since the given
+     *                                           date and time.
+     * }
+     * @return array|string
+     */
+    public function all(int $invoiceId, array $parameters = []);
+
+    /**
+     * Retrieves the invoice message with the given ID.
+     *
+     * @param int $invoiceId The ID of the invoice.
+     * @param int $messageId The ID of the invoice message.
+     * @return array|string
+     */
+    public function show(int $invoiceId, int $messageId);
+
+    /**
+     * Creates a new invoice message object.
+     *
+     * @param int $invoiceId The ID of the invoice.
+     * @param array $parameters The parameters of the new invoice message object.
+     * @return array|string
+     * @throws InvalidArgumentException
+     *
+     * @throws MissingArgumentException
+     */
+    public function create(int $invoiceId, array $parameters);
+
+    /**
+     * Deletes an invoice message.
+     *
+     * @param int $invoiceId The ID of the invoice.
+     * @param int $messageId The ID of the invoice message.
+     * @return array|string
+     */
+    public function remove(int $invoiceId, int $messageId);
+}

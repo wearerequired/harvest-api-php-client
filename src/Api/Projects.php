@@ -15,7 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/projects/
  */
-class Projects extends AbstractApi {
+class Projects extends AbstractApi implements ProjectsInterface
+{
 
 	/**
 	 * Retrieves a list of projects.
@@ -26,7 +27,7 @@ class Projects extends AbstractApi {
 	 *     @type bool             $is_active     Pass `true` to only return active projects and `false` to return
 	 *                                           inactive projects.
 	 *     @type int              $client_id     Only return projects belonging to the client with the given ID.
-	 *     @type \DateTime|string $updated_since Only return projects that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return projects that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array
@@ -61,8 +62,8 @@ class Projects extends AbstractApi {
 	/**
 	 * Creates a new project object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new project object.
 	 * @return array|string
@@ -155,18 +156,18 @@ class Projects extends AbstractApi {
 	/**
 	 * Gets a projects's user assignments.
 	 *
-	 * @return \Required\Harvest\Api\Project\UserAssignments;
+	 * @return Project\UserAssignmentsInterface
 	 */
-	public function userAssignments() {
+	public function userAssignments(): Project\UserAssignmentsInterface {
 		return new Project\UserAssignments( $this->client );
 	}
 
 	/**
 	 * Gets a projects's task assignments.
 	 *
-	 * @return \Required\Harvest\Api\Project\TaskAssignments;
+	 * @return Project\TaskAssignmentsInterface
 	 */
-	public function taskAssignments() {
+	public function taskAssignments(): Project\TaskAssignmentsInterface {
 		return new Project\TaskAssignments( $this->client );
 	}
 }

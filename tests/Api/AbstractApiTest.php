@@ -6,7 +6,7 @@
 namespace Required\Harvest\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\HttpMethodsClientInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionMethod;
@@ -329,10 +329,15 @@ class AbstractApiTest extends TestCase {
 	 */
 	protected function getHttpMethodsMock( array $methods = [] ) {
 		$methods = array_merge( [ 'sendRequest' ], $methods );
-		$mock    = $this->getMockBuilder( HttpMethodsClient::class )
-			->disableOriginalConstructor()
-			->setMethods( $methods )
-			->getMock();
+		$mock    = $this->getMockForAbstractClass(
+			HttpMethodsClientInterface::class,
+			[],
+			'MockHttpMethodsClientInterface',
+			false,
+			true,
+			true,
+			$methods
+		);
 
 		$mock->expects( $this->any() )
 			->method( 'sendRequest' );

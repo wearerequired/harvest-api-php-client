@@ -15,7 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimate-item-categories/
  */
-class EstimateItemCategories extends AbstractApi {
+class EstimateItemCategories extends AbstractApi implements EstimateItemCategoriesInterface
+{
 
 	/**
 	 * Retrieves a list of estimate item categories.
@@ -23,7 +24,7 @@ class EstimateItemCategories extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate item categories. Default empty array.
 	 *
-	 *     @type \DateTime|string $updated_since Only return estimate item categories that have been updated since
+	 *     @type DateTime|string $updated_since  Only return estimate item categories that have been updated since
 	 *                                           the given date and time.
 	 * }
 	 * @return array|string
@@ -54,8 +55,8 @@ class EstimateItemCategories extends AbstractApi {
 	/**
 	 * Creates a new estimate item category object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new estimate item category object.
 	 * @return array|string

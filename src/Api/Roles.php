@@ -15,7 +15,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/roles-api/roles/roles/
  */
-class Roles extends AbstractApi {
+class Roles extends AbstractApi implements RolesInterface
+{
 
 	/**
 	 * Retrieves a list of roles.
@@ -44,8 +45,8 @@ class Roles extends AbstractApi {
 	/**
 	 * Creates a new role object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new role object.
 	 * @return array|string
@@ -67,12 +68,12 @@ class Roles extends AbstractApi {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
-	 *
 	 * @param int $roleId The ID of the role.
 	 * @param array $parameters
 	 * @return array|string
+	 *@throws InvalidArgumentException
+	 *
+	 * @throws MissingArgumentException
 	 */
 	public function update( int $roleId, array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
