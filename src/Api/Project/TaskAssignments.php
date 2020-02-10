@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\Project;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
@@ -32,6 +33,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -56,6 +58,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $projectId, int $taskAssignmentId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ) );
@@ -64,6 +67,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	/**
 	 * Creates a new task assignment object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -92,6 +96,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 * @param int   $taskAssignmentId The ID of the task assignment.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $projectId, int $taskAssignmentId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ), $parameters );
@@ -105,6 +110,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $projectId, int $taskAssignmentId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ) );

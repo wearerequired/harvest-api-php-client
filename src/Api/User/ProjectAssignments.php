@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\User;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\RuntimeException;
 
@@ -23,10 +24,11 @@ class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterf
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of project assignments. Default empty array.
 	 *
-	 * @type DateTime|string $updated_since Only return project assignments that have been updated since the given
+	 * 		@type DateTime|string $updated_since Only return project assignments that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $userId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {

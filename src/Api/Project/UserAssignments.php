@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\Project;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
@@ -32,6 +33,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -56,6 +58,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $projectId, int $userAssignmentId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ) );
@@ -64,6 +67,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	/**
 	 * Creates a new user assignment object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -92,6 +96,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $projectId, int $userAssignmentId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ), $parameters );
@@ -105,6 +110,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $projectId, int $userAssignmentId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ) );

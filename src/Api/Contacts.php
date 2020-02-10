@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -29,6 +30,7 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -48,6 +50,7 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $contactId ) {
 		return $this->get( '/contacts/' . rawurlencode( $contactId ) );
@@ -56,6 +59,7 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Creates a new contact object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -90,6 +94,7 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	 * @param int $contactId The ID of the contact.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $contactId, array $parameters ) {
 		return $this->patch( '/contacts/' . rawurlencode( $contactId ), $parameters );
@@ -100,6 +105,7 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $contactId ) {
 		return $this->delete( '/contacts/' . rawurlencode( $contactId ) );

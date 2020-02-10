@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -28,6 +29,7 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	 *                                           the given date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -47,6 +49,7 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $estimateItemCategoryId ) {
 		return $this->get( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ) );
@@ -55,6 +58,7 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	/**
 	 * Creates a new estimate item category object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -81,6 +85,7 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $estimateItemCategoryId, array $parameters ) {
 		return $this->patch( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ), $parameters );
@@ -91,6 +96,7 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $estimateItemCategoryId ) {
 		return $this->delete( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ) );

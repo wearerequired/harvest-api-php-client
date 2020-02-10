@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\Estimate;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
@@ -30,6 +31,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $estimateId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -50,6 +52,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @param int $messageId  The ID of the estimate message.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $estimateId, int $messageId ) {
 		return $this->get( '/estimates/' . rawurlencode( $estimateId ) . '/messages/' . rawurlencode( $messageId ) );
@@ -58,6 +61,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Creates a new estimate message object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -89,6 +93,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @param int $messageId  The ID of the estimate message.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $estimateId, int $messageId ) {
 		return $this->delete( '/estimates/' . rawurlencode( $estimateId ) . '/messages/' . rawurlencode( $messageId ) );

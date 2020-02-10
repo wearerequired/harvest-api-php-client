@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Lafiel\Required\Harvest\Api\Invoice\PaymentInterface;
 use Lafiel\Required\Harvest\Api\Invoice\Payments;
 use Required\Harvest\Api\Invoice\Messages;
@@ -39,6 +40,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -76,6 +78,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $invoiceId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) );
@@ -84,6 +87,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Creates a new invoice object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -112,6 +116,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $invoiceId, array $parameters ) {
 		return $this->patch( '/invoices/' . rawurlencode( $invoiceId ), $parameters );
@@ -122,6 +127,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $invoiceId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) );
@@ -132,6 +138,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function send( int $invoiceId ) {
 		$parameters = [
@@ -146,6 +153,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function close( int $invoiceId ) {
 		$parameters = [
@@ -160,6 +168,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function reopen( int $invoiceId ) {
 		$parameters = [
@@ -175,6 +184,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function draft( int $invoiceId ) {
 		$parameters = [

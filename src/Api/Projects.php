@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -31,6 +32,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -54,6 +56,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $projectId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) );
@@ -62,6 +65,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Creates a new project object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -132,6 +136,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 * @param int $projectId The ID of the project.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $projectId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ), $parameters );
@@ -148,6 +153,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $projectId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) );

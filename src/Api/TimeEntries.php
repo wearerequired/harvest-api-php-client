@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\TimeEntry\ExternalReference;
 use Required\Harvest\Api\TimeEntry\ExternalReferenceInterface;
 use Required\Harvest\Exception\InvalidArgumentException;
@@ -39,6 +40,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *     @type DateTime|string $to             Only return time entries with a `spent_date` on or after the given date.
 	 * }
 	 * @return array
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -74,6 +76,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $timeEntryId ) {
 		return $this->get( '/time_entries/' . rawurlencode( $timeEntryId ) );
@@ -82,6 +85,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	/**
 	 * Creates a new time entry object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -124,6 +128,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $timeEntryId, array $parameters ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ), $parameters );
@@ -137,6 +142,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $timeEntryId ) {
 		return $this->delete( '/time_entries/' . rawurlencode( $timeEntryId ) );
@@ -149,6 +155,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function restart( int $timeEntryId ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ) . '/restart' );
@@ -161,6 +168,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function stop( int $timeEntryId ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ) . '/stop' );

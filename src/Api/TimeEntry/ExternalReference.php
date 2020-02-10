@@ -5,6 +5,7 @@
 
 namespace Required\Harvest\Api\TimeEntry;
 
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 
 /**
@@ -19,6 +20,7 @@ class ExternalReference extends AbstractApi implements ExternalReferenceInterfac
 	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $timeEntryId ) {
 		return $this->delete( '/time_entries/' . rawurlencode( $timeEntryId ) . '/external_reference' );

@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\RuntimeException;
 
 /**
@@ -28,6 +29,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {

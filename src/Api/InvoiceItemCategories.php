@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -28,6 +29,7 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	 *                                           the given date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -47,6 +49,7 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	 *
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $invoiceItemCategoryId ) {
 		return $this->get( '/invoice_item_categories/' . rawurlencode( $invoiceItemCategoryId ) );
@@ -55,6 +58,7 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	/**
 	 * Creates a new invoice item category object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -81,6 +85,7 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $invoiceItemCategoryId, array $parameters ) {
 		return $this->patch( '/invoice_item_categories/' . rawurlencode( $invoiceItemCategoryId ), $parameters );
@@ -93,6 +98,7 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	 *
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $invoiceItemCategoryId ) {
 		return $this->delete( '/invoice_item_categories/' . rawurlencode( $invoiceItemCategoryId ) );

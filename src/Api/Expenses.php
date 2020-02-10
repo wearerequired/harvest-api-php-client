@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -35,6 +36,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	 *     @type DateTime|string $to             Only return expenses with a `spent_date` on or after the given date.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -66,6 +68,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $expenseId ) {
 		return $this->get( '/expenses/' . rawurlencode( $expenseId ) );
@@ -74,6 +77,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	/**
 	 * Creates a new expense object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -116,6 +120,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	 * @param int $expenseId The ID of the expense.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $expenseId, array $parameters ) {
 		return $this->patch( '/expenses/' . rawurlencode( $expenseId ), $parameters );
@@ -126,6 +131,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $expenseId ) {
 		return $this->delete( '/expenses/' . rawurlencode( $expenseId ) );

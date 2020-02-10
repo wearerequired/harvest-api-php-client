@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\Invoice;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
@@ -30,6 +31,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $invoiceId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -48,8 +50,9 @@ class Messages extends AbstractApi implements MessagesInterface {
 	 * Retrieves the invoice message with the given ID.
 	 *
 	 * @param int $invoiceId The ID of the invoice.
-	 * @param int $messageId  The ID of the invoice message.
+	 * @param int $messageId The ID of the invoice message.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $invoiceId, int $messageId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/messages/' . rawurlencode( $messageId ) );
@@ -58,6 +61,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Creates a new invoice message object.
 	 *
+	 * @throws Exception
 	 * @throws MissingArgumentException
 	 * @throws InvalidArgumentException
 	 *
@@ -89,6 +93,7 @@ class Messages extends AbstractApi implements MessagesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId  The ID of the invoice message.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $invoiceId, int $messageId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) . '/messages/' . rawurlencode( $messageId ) );

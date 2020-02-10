@@ -5,6 +5,8 @@
 
 namespace Required\Harvest\Api;
 
+use Http\Client\Exception;
+
 /**
  * API client for company endpoint.
  *
@@ -17,6 +19,7 @@ class CurrentCompany extends AbstractApi implements CurrentCompanyInterface {
 	 * Retrieves the company for the currently authenticated user.
 	 *
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show() {
 		return $this->get( '/company' );
