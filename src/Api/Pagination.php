@@ -148,7 +148,7 @@ class Pagination {
 	 * @return null|int
 	 */
 	public function getTotalEntries(): ?int {
-		return $this->totalPages;
+		return $this->totalEntries;
 	}
 
 	/**
