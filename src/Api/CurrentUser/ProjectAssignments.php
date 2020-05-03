@@ -32,7 +32,7 @@ class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterf
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
-			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
+			$parameters['updated_since'] = $parameters['updated_since']->format( DateTime::ATOM );
 		}
 
 		$result = $this->get( '/users/me/project_assignments', $parameters );

@@ -37,7 +37,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
-			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
+			$parameters['updated_since'] = $parameters['updated_since']->format( DateTime::ATOM );
 		}
 
 		if ( isset( $parameters['is_active'] ) ) {

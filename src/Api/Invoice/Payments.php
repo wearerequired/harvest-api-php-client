@@ -35,7 +35,7 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	 */
 	public function all( int $invoiceId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
-			$parameters['updated_since'] = $parameters['updated_since']->format( 'Y-m-d H:i' );
+			$parameters['updated_since'] = $parameters['updated_since']->format( DateTime::ATOM );
 		}
 
 		$result = $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/payments', $parameters );
