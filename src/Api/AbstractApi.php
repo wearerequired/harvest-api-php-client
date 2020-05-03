@@ -65,6 +65,15 @@ abstract class AbstractApi implements ApiInterface {
 	}
 
 	/**
+	 * Retrieves total entries number.
+	 *
+	 * @return null|int
+	 */
+	public function getTotalEntries(): ?int {
+		return $this->pagination->getTotalEntries();
+	}
+
+	/**
 	 * Sets requested page number.
 	 *
 	 * @param null|int $page The requested page.
