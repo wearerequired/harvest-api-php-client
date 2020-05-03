@@ -13,6 +13,7 @@ branches:
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.cache/composer
 
 _envs:
   - &stage_test

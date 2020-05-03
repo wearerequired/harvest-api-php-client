@@ -1,12 +1,19 @@
 <?xml version="1.0"?>
 <ruleset name="Coding standard for harvest-api-php-client">
 
+	<!-- Check all PHP files in directory tree by default. -->
 	<arg name="extensions" value="php"/>
+
 	<file>.</file>
 
+	<!-- Show progress and sniff codes in all reports -->
 	<arg value="ps"/>
 
-	<config name="encoding" value="utf-8"/>
+	<!-- Check up to 20 files simultaneously. -->
+	<arg name="parallel" value="20"/>
+
+	<!-- Whenever possible, cache the scan results and re-use those for unchanged files on the next scan. -->
+	<arg name="cache"/>
 
 	<arg name="tab-width" value="4"/>
 

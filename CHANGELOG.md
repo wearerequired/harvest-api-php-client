@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+* Add interface abstraction layer for dependency injection. Props @emkookmer.
+
 ### Fixed
 * Ensure `updated_since` is using ISO 8601 date format. Props @stewsnooze.
 * Fix and add pagination method to retrieve total entries count. Props @jkulak.
