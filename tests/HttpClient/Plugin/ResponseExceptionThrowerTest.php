@@ -6,8 +6,8 @@
 namespace Required\Harvest\Tests\HttpClient\Plugin;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Promise\Promise;
 use Http\Client\Promise\HttpFulfilledPromise;
+use Http\Promise\Promise;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -58,11 +58,19 @@ class ResponseExceptionThrowerTest extends TestCase {
 				'exception' => null,
 			],
 			'400 Response' => [
-				'response'  => new Response( 400, [ 'Content-Type' => 'application/json' ], '{"message":"Invalid updated_since datetime provided: \"2020-05-03T14:43:13B02:00\""}' ),
+				'response'  => new Response(
+					400,
+					[ 'Content-Type' => 'application/json' ],
+					'{"message":"Invalid updated_since datetime provided: \"2020-05-03T14:43:13B02:00\""}'
+				),
 				'exception' => new \Required\Harvest\Exception\ErrorException( 'Invalid updated_since datetime provided: "2020-05-03T14:43:13B02:00"', 400 ),
 			],
 			'401 Response' => [
-				'response'  => new Response( 401, [ 'Content-Type' => 'application/json' ], '{"error":"invalid_token","error_description":"The access token provided is expired, revoked, malformed or invalid for other reasons."}' ),
+				'response'  => new Response(
+					401,
+					[ 'Content-Type' => 'application/json' ],
+					'{"error":"invalid_token","error_description":"The access token provided is expired, revoked, malformed or invalid for other reasons."}'
+				),
 				'exception' => new \Required\Harvest\Exception\AuthenticationException( 'The access token provided is expired, revoked, malformed or invalid for other reasons.' ),
 			],
 			'403 Response' => [
@@ -70,11 +78,19 @@ class ResponseExceptionThrowerTest extends TestCase {
 				'exception' => new \Required\Harvest\Exception\AuthorizationException(),
 			],
 			'404 Response' => [
-				'response'  => new Response( 404, [ 'Content-Type' => 'application/json' ], '{"status":404,"error":"Not Found"}' ),
+				'response'  => new Response(
+					404,
+					[ 'Content-Type' => 'application/json' ],
+					'{"status":404,"error":"Not Found"}'
+				),
 				'exception' => new \Required\Harvest\Exception\NotFoundException(),
 			],
 			'422 Response' => [
-				'response'  => new Response( 422, [ 'Content-Type' => 'application/json' ], '{"message":"Foo"}' ),
+				'response'  => new Response(
+					422,
+					[ 'Content-Type' => 'application/json' ],
+					'{"message":"Foo"}'
+				),
 				'exception' => new \Required\Harvest\Exception\ValidationFailedException( 'Foo', 422 ),
 			],
 			'429 Response' => [
