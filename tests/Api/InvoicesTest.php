@@ -68,7 +68,7 @@ class InvoicesTest extends TestCase {
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
-			->with( '/invoices', [ 'updated_since' => $updatedSince->format( 'Y-m-d H:i' ) ] )
+			->with( '/invoices', [ 'updated_since' => $updatedSince->format( DateTime::ATOM ) ] )
 			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( [ 'updated_since' => $updatedSince ] ) );
