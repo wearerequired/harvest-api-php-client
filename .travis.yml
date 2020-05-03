@@ -29,11 +29,10 @@ jobs:
   include:
     - stage: lint
       before_script:
-        - export PATH="$HOME/.composer/vendor/bin:$PATH"
-        - composer global require "squizlabs/php_codesniffer:^3"
-      php: 7.2
+        - composer install
+      php: 7.4
       script:
-        - phpcs
+        - composer lint
 
     - stage: test
       php: 7.1
