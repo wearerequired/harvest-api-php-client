@@ -10,6 +10,7 @@ use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Required\Harvest\Exception\AuthorizationException;
+use Required\Harvest\Exception\ErrorException;
 use Required\Harvest\Exception\HarvestApiRateLimitExceedException;
 use Required\Harvest\Exception\AuthenticationException;
 use Required\Harvest\Exception\NotFoundException;
@@ -51,6 +52,10 @@ class ResponseExceptionThrower implements Plugin {
 				}
 
 				$content = ResponseMediator::getContent( $response );
+
+				if ( 400 === $statusCode ) {
+					throw new ErrorException( $content['message'] ?? json_encode( $content ), $statusCode );
+				}
 
 				if ( 401 === $statusCode ) {
 					throw new AuthenticationException( $content['error_description'] ?? $content );
