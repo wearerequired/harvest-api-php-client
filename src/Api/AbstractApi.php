@@ -65,7 +65,7 @@ abstract class AbstractApi implements ApiInterface {
 	}
 
 	/**
-	 * Retrieves total entries (estimated since last page does not have to be full).
+	 * Retrieves total entries number.
 	 *
 	 * @return null|int
 	 */
