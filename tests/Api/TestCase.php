@@ -6,7 +6,7 @@
 namespace Required\Harvest\Tests\Api;
 
 use Http\Client\HttpClient;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Required\Harvest\Client;
 
 /**
@@ -24,9 +24,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Returns a mock of the API class.
 	 *
-	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 * @return \MockObject
 	 */
-	protected function getApiMock(): PHPUnit_Framework_MockObject_MockObject {
+	protected function getApiMock(): MockObject {
 		$httpClient = $this->getMockBuilder( HttpClient::class )
 			->setMethods( [ 'sendRequest' ] )
 			->getMock();

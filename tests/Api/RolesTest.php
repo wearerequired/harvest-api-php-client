@@ -39,8 +39,6 @@ class RolesTest extends TestCase {
 
 	/**
 	 * Test retrieving all roles with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -51,6 +49,7 @@ class RolesTest extends TestCase {
 			->with( '/roles' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
@@ -73,8 +72,6 @@ class RolesTest extends TestCase {
 
 	/**
 	 * Test creating new role with no name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingName() {
 		$api = $this->getApiMock();
@@ -86,13 +83,12 @@ class RolesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new role with invalid name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidName() {
 		$api = $this->getApiMock();
@@ -105,6 +101,7 @@ class RolesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
@@ -151,8 +148,6 @@ class RolesTest extends TestCase {
 
 	/**
 	 * Test updating role with missing name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testUpdateRoleMissingName() {
 		$expectedArray = $this->getFixture( 'role-2-update' );
@@ -166,13 +161,12 @@ class RolesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'patch' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->update( $roleId, $data );
 	}
 
 	/**
 	 * Test updating role with invalid name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testUpdateRoleInvalidName() {
 		$expectedArray = $this->getFixture( 'role-2-update' );
@@ -187,6 +181,7 @@ class RolesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'patch' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->update( $roleId, $data );
 	}
 

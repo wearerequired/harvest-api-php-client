@@ -94,21 +94,19 @@ class ClientTest extends TestCase {
 
 	/**
 	 * Test throwing an exception for unavailable API interfaces.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testInvalidGetApiInstance() {
 		$client = new Client();
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$client->api( 'cookies' );
 	}
 
 	/**
 	 * Test throwing an exception for unavailable API interfaces via magic method.
-	 *
-	 * @expectedException \Required\Harvest\Exception\BadMethodCallException
 	 */
 	public function testInvalidGetMagicApiInstance() {
 		$client = new Client();
+		$this->expectException( \Required\Harvest\Exception\BadMethodCallException::class );
 		$client->cookies();
 	}
 

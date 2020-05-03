@@ -48,8 +48,6 @@ class UserAssignmentsTest extends TestCase {
 
 	/**
 	 * Test retrieving all project user assignments with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -60,6 +58,7 @@ class UserAssignmentsTest extends TestCase {
 			->with( "/projects/{$this->projectId}/user_assignments" )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all( $this->projectId );
 	}
 
@@ -134,8 +133,6 @@ class UserAssignmentsTest extends TestCase {
 
 	/**
 	 * Test creating new project user assignment with no user ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingUserId() {
 		$api = $this->getApiMock();
@@ -149,13 +146,12 @@ class UserAssignmentsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $this->projectId, $data );
 	}
 
 	/**
 	 * Test creating new project user assignment with invalid user ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidUserId() {
 		$api = $this->getApiMock();
@@ -170,6 +166,7 @@ class UserAssignmentsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $this->projectId, $data );
 	}
 

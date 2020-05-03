@@ -42,8 +42,6 @@ class UsersTest extends TestCase {
 
 	/**
 	 * Test retrieving all users.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -54,6 +52,7 @@ class UsersTest extends TestCase {
 			->with( '/users' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
@@ -160,8 +159,6 @@ class UsersTest extends TestCase {
 
 	/**
 	 * Test creating new user with no first name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingFirstName() {
 		$api = $this->getApiMock();
@@ -174,13 +171,12 @@ class UsersTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new user with no last name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingLasttName() {
 		$api = $this->getApiMock();
@@ -193,13 +189,12 @@ class UsersTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new user with no email.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingEmail() {
 		$api = $this->getApiMock();
@@ -212,13 +207,12 @@ class UsersTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new user with invalid first name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidFirstName() {
 		$api = $this->getApiMock();
@@ -232,13 +226,12 @@ class UsersTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new user with invalid last name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidLasttName() {
 		$api = $this->getApiMock();
@@ -252,13 +245,12 @@ class UsersTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new user with invalid email.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidEmail() {
 		$api = $this->getApiMock();
@@ -272,6 +264,7 @@ class UsersTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 

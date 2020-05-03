@@ -41,8 +41,6 @@ class ContactsTest extends TestCase {
 
 	/**
 	 * Test retrieving all contacts with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -53,6 +51,7 @@ class ContactsTest extends TestCase {
 			->with( '/contacts' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
@@ -111,8 +110,6 @@ class ContactsTest extends TestCase {
 
 	/**
 	 * Test creating new contact with no client ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingClientId() {
 		$api = $this->getApiMock();
@@ -126,13 +123,12 @@ class ContactsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new contact with invalid client ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidClientId() {
 		$api = $this->getApiMock();
@@ -147,13 +143,12 @@ class ContactsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new contact with no first name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingFirstName() {
 		$api = $this->getApiMock();
@@ -167,13 +162,12 @@ class ContactsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new contact with invalid first name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidFirstName() {
 		$api = $this->getApiMock();
@@ -188,6 +182,7 @@ class ContactsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 

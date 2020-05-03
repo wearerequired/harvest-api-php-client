@@ -42,8 +42,6 @@ class ClientsTest extends TestCase {
 
 	/**
 	 * Test retrieving all clients with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -54,6 +52,7 @@ class ClientsTest extends TestCase {
 			->with( '/clients' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
@@ -160,8 +159,6 @@ class ClientsTest extends TestCase {
 
 	/**
 	 * Test creating new client with no name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingName() {
 		$api = $this->getApiMock();
@@ -173,13 +170,12 @@ class ClientsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new client with invalid name.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidName() {
 		$api = $this->getApiMock();
@@ -192,6 +188,7 @@ class ClientsTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 

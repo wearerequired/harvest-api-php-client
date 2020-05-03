@@ -41,8 +41,6 @@ class TaskAssignmentsTest extends TestCase {
 
 	/**
 	 * Test retrieving all task assignments with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -53,6 +51,7 @@ class TaskAssignmentsTest extends TestCase {
 			->with( '/task_assignments' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 

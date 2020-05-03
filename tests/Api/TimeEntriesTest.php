@@ -45,8 +45,6 @@ class TimeEntriesTest extends TestCase {
 
 	/**
 	 * Test retrieving all time entries with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -57,6 +55,7 @@ class TimeEntriesTest extends TestCase {
 			->with( '/time_entries' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
@@ -183,8 +182,6 @@ class TimeEntriesTest extends TestCase {
 
 	/**
 	 * Test creating new time entry with no project ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingProjectId() {
 		$api = $this->getApiMock();
@@ -199,13 +196,12 @@ class TimeEntriesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new time entry with invalid project ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidProjectId() {
 		$api = $this->getApiMock();
@@ -221,13 +217,12 @@ class TimeEntriesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new time entry with no task ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingTaskId() {
 		$api = $this->getApiMock();
@@ -242,13 +237,12 @@ class TimeEntriesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new time entry with invalid task ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidTaskId() {
 		$api = $this->getApiMock();
@@ -264,13 +258,12 @@ class TimeEntriesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new time entry with no spent date.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingSpentDate() {
 		$api = $this->getApiMock();
@@ -284,13 +277,12 @@ class TimeEntriesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new time entry with invalid spent date.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidSpentDate() {
 		$api = $this->getApiMock();
@@ -306,6 +298,7 @@ class TimeEntriesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 

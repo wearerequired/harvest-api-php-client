@@ -41,8 +41,6 @@ class ExpensesTest extends TestCase {
 
 	/**
 	 * Test retrieving all expenses with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -52,6 +50,8 @@ class ExpensesTest extends TestCase {
 			->method( 'get' )
 			->with( '/expenses' )
 			->will( $this->returnValue( $response ) );
+
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 
 		$api->all();
 	}
@@ -147,8 +147,6 @@ class ExpensesTest extends TestCase {
 
 	/**
 	 * Test creating new expense with no project ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingProjectId() {
 		$api = $this->getApiMock();
@@ -163,13 +161,12 @@ class ExpensesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new expense with invalid client ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidProjectId() {
 		$api = $this->getApiMock();
@@ -185,13 +182,12 @@ class ExpensesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new expense with no expense category ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingExpenseCategoryId() {
 		$api = $this->getApiMock();
@@ -206,13 +202,12 @@ class ExpensesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new expense with invalid expense category ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidExpenseCategoryId() {
 		$api = $this->getApiMock();
@@ -228,13 +223,12 @@ class ExpensesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new expense with no spent date.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingSpentDate() {
 		$api = $this->getApiMock();
@@ -249,13 +243,12 @@ class ExpensesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new expense with invalid spent date.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidSpentDate() {
 		$api = $this->getApiMock();
@@ -271,6 +264,7 @@ class ExpensesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 

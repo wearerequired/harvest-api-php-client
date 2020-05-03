@@ -41,8 +41,6 @@ class InvoicesTest extends TestCase {
 
 	/**
 	 * Test retrieving all invoices with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -53,6 +51,7 @@ class InvoicesTest extends TestCase {
 			->with( '/invoices' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
@@ -130,14 +129,13 @@ class InvoicesTest extends TestCase {
 
 	/**
 	 * Test retrieving all invoices with `'state' => 'invalid`.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testAllStateInvalid() {
 		$api = $this->getApiMock();
 		$api->expects( $this->never() )
 			->method( 'get' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->all( [ 'state' => 'invalid' ] );
 	}
 
@@ -176,8 +174,6 @@ class InvoicesTest extends TestCase {
 
 	/**
 	 * Test creating new invoice with no client ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function testCreateMissingClientId() {
 		$api = $this->getApiMock();
@@ -197,13 +193,12 @@ class InvoicesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\MissingArgumentException::class );
 		$api->create( $data );
 	}
 
 	/**
 	 * Test creating new invoice with invalid client ID.
-	 *
-	 * @expectedException \Required\Harvest\Exception\InvalidArgumentException
 	 */
 	public function testCreateInvalidClientId() {
 		$api = $this->getApiMock();
@@ -224,6 +219,7 @@ class InvoicesTest extends TestCase {
 		$api->expects( $this->never() )
 			->method( 'post' );
 
+		$this->expectException( \Required\Harvest\Exception\InvalidArgumentException::class );
 		$api->create( $data );
 	}
 

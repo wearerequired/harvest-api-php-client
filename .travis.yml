@@ -20,11 +20,9 @@ _envs:
     before_install:
       - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
     before_script:
-      - export PATH="$HOME/.composer/vendor/bin:$PATH"
-      - composer global require "phpunit/phpunit:^7"
       - composer install
     script:
-      - phpunit
+      - composer test
 
 jobs:
   fast_finish: true

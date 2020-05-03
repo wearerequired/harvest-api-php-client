@@ -42,8 +42,6 @@ class ProjectAssignmentsTest extends TestCase {
 
 	/**
 	 * Test retrieving all project assignments with invalid response.
-	 *
-	 * @expectedException \Required\Harvest\Exception\RuntimeException
 	 */
 	public function testAllWithInvalidResponse() {
 		$response = [];
@@ -54,6 +52,7 @@ class ProjectAssignmentsTest extends TestCase {
 			->with( '/users/me/project_assignments' )
 			->will( $this->returnValue( $response ) );
 
+		$this->expectException( \Required\Harvest\Exception\RuntimeException::class );
 		$api->all();
 	}
 
