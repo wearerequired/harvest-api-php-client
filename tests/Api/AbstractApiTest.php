@@ -7,12 +7,13 @@ namespace Required\Harvest\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
 use Http\Client\Common\HttpMethodsClientInterface;
+use Http\Client\Common\HttpMethodsClient;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionMethod;
 use Required\Harvest\Api\AbstractApi;
-use function GuzzleHttp\Psr7\stream_for;
 use Required\Harvest\Client;
+use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * Tests for company endpoint.
@@ -323,7 +324,7 @@ class AbstractApiTest extends TestCase {
 					[
 						'header' => 'header-value',
 					],
-				 ]
+				]
 			);
 
 		$this->assertEquals( $expectedBody, $actual );
@@ -333,7 +334,7 @@ class AbstractApiTest extends TestCase {
 	 * Returns a mock of the API class.
 	 *
 	 * @param $client
-	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 * @return \PHPUnit\Framework\MockObject\MockObject
 	 */
 	protected function getAbstractApiObject( $client ) {
 		return $this->getMockBuilder( AbstractApi::class )
@@ -346,21 +347,21 @@ class AbstractApiTest extends TestCase {
 	 * Returns a HttpMethods client mock.
 	 *
 	 * @param array $methods
-	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 * @return \PHPUnit\Framework\MockObject\MockObject
 	 */
 	protected function getHttpMethodsMock( array $methods = [] ) {
-		$methods = array_merge( [ 'sendRequest' ], $methods );
-		$mock    = $this->getMockForAbstractClass(
-			HttpMethodsClientInterface::class,
-			[],
-			'MockHttpMethodsClientInterface',
-			false,
-			true,
-			true,
-			$methods
-		);
+		if ( interface_exists( HttpMethodsClientInterface::class ) ) {
+			$mock = $this->createMock( HttpMethodsClientInterface::class );
+		} else {
+			$methods = array_merge( [ 'sendRequest' ], $methods );
+			$mock    = $this->getMockBuilder( HttpMethodsClient::class )
+				->disableOriginalConstructor()
+				->setMethods( $methods )
+				->getMock();
+		}
 
-		$mock->expects( $this->any() )
+		$mock
+			->expects( $this->any() )
 			->method( 'sendRequest' );
 
 		return $mock;
@@ -388,7 +389,7 @@ class AbstractApiTest extends TestCase {
 	 *
 	 * @param object $object Instance.
 	 * @param string $methodName Method to make public.
-	 * @return ReflectionMethod
+	 * @return \ReflectionMethod
 	 */
 	protected function getMethod( $object, $methodName ): ReflectionMethod {
 		$method = new ReflectionMethod( $object, $methodName );
