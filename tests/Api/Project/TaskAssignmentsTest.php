@@ -75,7 +75,7 @@ class TaskAssignmentsTest extends TestCase {
 		$api = $this->getApiMock();
 		$api->expects( $this->once() )
 			->method( 'get' )
-			->with( "/projects/{$this->projectId}/task_assignments", [ 'updated_since' => $updatedSince->format( 'Y-m-d H:i' ) ] )
+			->with( "/projects/{$this->projectId}/task_assignments", [ 'updated_since' => $updatedSince->format( DateTime::ATOM ) ] )
 			->will( $this->returnValue( $response ) );
 
 		$this->assertEquals( $expectedArray, $api->all( $this->projectId, [ 'updated_since' => $updatedSince ] ) );
