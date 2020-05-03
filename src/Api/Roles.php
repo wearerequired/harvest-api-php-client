@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,12 +16,14 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/roles-api/roles/roles/
  */
-class Roles extends AbstractApi {
+class Roles extends AbstractApi implements RolesInterface {
+
 
 	/**
 	 * Retrieves a list of roles.
 	 *
 	 * @return array
+	 * @throws Exception
 	 */
 	public function all() {
 		$result = $this->get( '/roles' );
@@ -36,6 +39,7 @@ class Roles extends AbstractApi {
 	 *
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $roleId ) {
 		return $this->get( '/roles/' . rawurlencode( $roleId ) );
@@ -44,8 +48,9 @@ class Roles extends AbstractApi {
 	/**
 	 * Creates a new role object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new role object.
 	 * @return array|string
@@ -67,8 +72,9 @@ class Roles extends AbstractApi {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws InvalidArgumentException
+	 * @throws MissingArgumentException
 	 *
 	 * @param int $roleId The ID of the role.
 	 * @param array $parameters
@@ -93,6 +99,7 @@ class Roles extends AbstractApi {
 	 *
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $roleId ) {
 		return $this->delete( '/roles/' . rawurlencode( $roleId ) );

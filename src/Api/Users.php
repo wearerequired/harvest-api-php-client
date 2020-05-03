@@ -6,6 +6,8 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
+use Required\Harvest\Api\User;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +17,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/users-api/users/users/
  */
-class Users extends AbstractApi {
+class Users extends AbstractApi implements UsersInterface {
+
 
 	/**
 	 * Retrieves a list of users.
@@ -23,12 +26,13 @@ class Users extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of users. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active users and `false` to return
+	 * @type bool $is_active Pass `true` to only return active users and `false` to return
 	 *                                           inactive users.
-	 *     @type \DateTime|string $updated_since Only return users that have been updated since the given
+	 * @type DateTime|string $updated_since Only return users that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -52,6 +56,7 @@ class Users extends AbstractApi {
 	 *
 	 * @param int $userId The ID of the user.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $userId ) {
 		return $this->get( '/users/' . rawurlencode( $userId ) );
@@ -60,8 +65,9 @@ class Users extends AbstractApi {
 	/**
 	 * Creates a new user object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new user object.
 	 * @return array|string
@@ -102,6 +108,7 @@ class Users extends AbstractApi {
 	 * @param int $userId The ID of the user.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $userId, array $parameters ) {
 		return $this->patch( '/users/' . rawurlencode( $userId ), $parameters );
@@ -114,6 +121,7 @@ class Users extends AbstractApi {
 	 *
 	 * @param int $userId The ID of the user.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $userId ) {
 		return $this->delete( '/users/' . rawurlencode( $userId ) );
@@ -122,9 +130,9 @@ class Users extends AbstractApi {
 	/**
 	 * Gets a user's project assignments.
 	 *
-	 * @return \Required\Harvest\Api\User\ProjectAssignments;
+	 * @return User\ProjectAssignmentsInterface;
 	 */
-	public function projectAssignments() {
+	public function projectAssignments(): User\ProjectAssignmentsInterface {
 		return new User\ProjectAssignments( $this->client );
 	}
 }

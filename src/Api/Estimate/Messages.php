@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\Estimate;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
@@ -16,7 +17,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimate-messages/
  */
-class Messages extends AbstractApi {
+class Messages extends AbstractApi implements MessagesInterface {
+
 
 	/**
 	 * Retrieves a list of estimate messages for a specific estimate.
@@ -25,10 +27,11 @@ class Messages extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate messages. Default empty array.
 	 *
-	 *     @type \DateTime|string $updated_since Only return estimate messages that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return estimate messages that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $estimateId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -49,6 +52,7 @@ class Messages extends AbstractApi {
 	 * @param int $estimateId The ID of the estimate.
 	 * @param int $messageId  The ID of the estimate message.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $estimateId, int $messageId ) {
 		return $this->get( '/estimates/' . rawurlencode( $estimateId ) . '/messages/' . rawurlencode( $messageId ) );
@@ -57,8 +61,9 @@ class Messages extends AbstractApi {
 	/**
 	 * Creates a new estimate message object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param int   $estimateId The ID of the estimate.
 	 * @param array $parameters The parameters of the new estimate message object.
@@ -88,6 +93,7 @@ class Messages extends AbstractApi {
 	 * @param int $estimateId The ID of the estimate.
 	 * @param int $messageId  The ID of the estimate message.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $estimateId, int $messageId ) {
 		return $this->delete( '/estimates/' . rawurlencode( $estimateId ) . '/messages/' . rawurlencode( $messageId ) );

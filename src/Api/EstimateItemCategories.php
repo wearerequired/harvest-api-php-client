@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/estimates-api/estimates/estimate-item-categories/
  */
-class EstimateItemCategories extends AbstractApi {
+class EstimateItemCategories extends AbstractApi implements EstimateItemCategoriesInterface {
+
 
 	/**
 	 * Retrieves a list of estimate item categories.
@@ -23,10 +25,11 @@ class EstimateItemCategories extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate item categories. Default empty array.
 	 *
-	 *     @type \DateTime|string $updated_since Only return estimate item categories that have been updated since
+	 *     @type DateTime|string $updated_since  Only return estimate item categories that have been updated since
 	 *                                           the given date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -46,6 +49,7 @@ class EstimateItemCategories extends AbstractApi {
 	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $estimateItemCategoryId ) {
 		return $this->get( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ) );
@@ -54,8 +58,9 @@ class EstimateItemCategories extends AbstractApi {
 	/**
 	 * Creates a new estimate item category object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new estimate item category object.
 	 * @return array|string
@@ -80,6 +85,7 @@ class EstimateItemCategories extends AbstractApi {
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $estimateItemCategoryId, array $parameters ) {
 		return $this->patch( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ), $parameters );
@@ -90,6 +96,7 @@ class EstimateItemCategories extends AbstractApi {
 	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $estimateItemCategoryId ) {
 		return $this->delete( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ) );

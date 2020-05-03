@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api\Project;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
@@ -16,7 +17,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/user-assignments/
  */
-class UserAssignments extends AbstractApi {
+class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
+
 
 	/**
 	 * Retrieves a list of user assignments for a specific project.
@@ -27,10 +29,11 @@ class UserAssignments extends AbstractApi {
 	 *
 	 *     @type bool             $is_active     Pass `true` to only return active user assignments and `false` to
 	 *                                           return  inactive user assignments.
-	 *     @type \DateTime|string $updated_since Only return user assignments that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return user assignments that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -55,6 +58,7 @@ class UserAssignments extends AbstractApi {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $projectId, int $userAssignmentId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ) );
@@ -63,8 +67,9 @@ class UserAssignments extends AbstractApi {
 	/**
 	 * Creates a new user assignment object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters The parameters of the new user assignment object.
@@ -91,6 +96,7 @@ class UserAssignments extends AbstractApi {
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $projectId, int $userAssignmentId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ), $parameters );
@@ -104,6 +110,7 @@ class UserAssignments extends AbstractApi {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $projectId, int $userAssignmentId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ) );

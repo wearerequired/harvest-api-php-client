@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/tasks-api/tasks/tasks/
  */
-class Tasks extends AbstractApi {
+class Tasks extends AbstractApi implements TasksInterface {
+
 
 	/**
 	 * Retrieves a list of tasks.
@@ -25,10 +27,12 @@ class Tasks extends AbstractApi {
 	 *
 	 *     @type bool             $is_active     Pass `true` to only return active tasks and `false` to return
 	 *                                           inactive tasks.
-	 *     @type \DateTime|string $updated_since Only return tasks that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return tasks that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array
+	 * @throws Exception
+	 *
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -52,6 +56,7 @@ class Tasks extends AbstractApi {
 	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $taskId ) {
 		return $this->get( '/tasks/' . rawurlencode( $taskId ) );
@@ -60,8 +65,9 @@ class Tasks extends AbstractApi {
 	/**
 	 * Creates a new task object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new task object.
 	 * @return array|string
@@ -86,6 +92,7 @@ class Tasks extends AbstractApi {
 	 * @param int $taskId The ID of the task.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $taskId, array $parameters ) {
 		return $this->patch( '/tasks/' . rawurlencode( $taskId ), $parameters );
@@ -98,6 +105,7 @@ class Tasks extends AbstractApi {
 	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $taskId ) {
 		return $this->delete( '/tasks/' . rawurlencode( $taskId ) );

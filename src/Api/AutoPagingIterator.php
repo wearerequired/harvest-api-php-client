@@ -15,7 +15,7 @@ class AutoPagingIterator implements Iterator {
 	/**
 	 * Interface of the API endpoint.
 	 *
-	 * @var \Required\Harvest\Api\ApiInterface
+	 * @var ApiInterface
 	 */
 	protected $apiInterface;
 
@@ -43,8 +43,8 @@ class AutoPagingIterator implements Iterator {
 	/**
 	 * Constructor.
 	 *
-	 * @param \Required\Harvest\Api\ApiInterface $apiInterface The API interface.
-	 * @param array                              $parameters   Parameters for the all() method.
+	 * @param ApiInterface $apiInterface The API interface.
+	 * @param array        $parameters   Parameters for the all() method.
 	 */
 	public function __construct( ApiInterface $apiInterface, array $parameters = [] ) {
 		$this->apiInterface = $apiInterface;

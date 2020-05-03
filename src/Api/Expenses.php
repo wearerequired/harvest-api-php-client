@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/expenses-api/expenses/expenses/
  */
-class Expenses extends AbstractApi {
+class Expenses extends AbstractApi implements ExpensesInterface {
+
 
 	/**
 	 * Retrieves a list of expenses.
@@ -28,12 +30,13 @@ class Expenses extends AbstractApi {
 	 *     @type int              $project_id    Only return expenses belonging to the project with the given ID.
 	 *     @type bool             $is_billed     Pass `true` to only return expenses that have been invoiced and
 	 *                                           `false` to return expenses that have not been invoiced.
-	 *     @type \DateTime|string $updated_since Only return expenses that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return expenses that have been updated since the given
 	 *                                           date and time.
-	 *     @type \DateTime|string $from          Only return expenses with a `spent_date` on or after the given date.
-	 *     @type \DateTime|string $to            Only return expenses with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $from           Only return expenses with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $to             Only return expenses with a `spent_date` on or after the given date.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -65,6 +68,7 @@ class Expenses extends AbstractApi {
 	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $expenseId ) {
 		return $this->get( '/expenses/' . rawurlencode( $expenseId ) );
@@ -73,8 +77,9 @@ class Expenses extends AbstractApi {
 	/**
 	 * Creates a new expense object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new expense object.
 	 * @return array|string
@@ -115,6 +120,7 @@ class Expenses extends AbstractApi {
 	 * @param int $expenseId The ID of the expense.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $expenseId, array $parameters ) {
 		return $this->patch( '/expenses/' . rawurlencode( $expenseId ), $parameters );
@@ -125,6 +131,7 @@ class Expenses extends AbstractApi {
 	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $expenseId ) {
 		return $this->delete( '/expenses/' . rawurlencode( $expenseId ) );

@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/clients-api/clients/clients/
  */
-class Clients extends AbstractApi {
+class Clients extends AbstractApi implements ClientsInterface {
+
 
 	/**
 	 * Retrieves a list of clients.
@@ -23,12 +25,13 @@ class Clients extends AbstractApi {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of clients. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active clients and `false` to return
+	 *     @type bool            $is_active      Pass `true` to only return active clients and `false` to return
 	 *                                           inactive clients.
-	 *     @type \DateTime|string $updated_since Only return clients that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return clients that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -52,6 +55,7 @@ class Clients extends AbstractApi {
 	 *
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $clientId ) {
 		return $this->get( '/clients/' . rawurlencode( $clientId ) );
@@ -60,11 +64,12 @@ class Clients extends AbstractApi {
 	/**
 	 * Creates a new client object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new client object.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
@@ -86,6 +91,7 @@ class Clients extends AbstractApi {
 	 * @param int $clientId The ID of the client.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $clientId, array $parameters ) {
 		return $this->patch( '/clients/' . rawurlencode( $clientId ), $parameters );
@@ -98,6 +104,7 @@ class Clients extends AbstractApi {
 	 *
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $clientId ) {
 		return $this->delete( '/clients/' . rawurlencode( $clientId ) );

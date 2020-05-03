@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/clients-api/clients/contacts/
  */
-class Contacts extends AbstractApi {
+class Contacts extends AbstractApi implements ContactsInterface {
+
 
 	/**
 	 * Retrieves a list of contacts.
@@ -23,11 +25,12 @@ class Contacts extends AbstractApi {
 	 * @param array $parameters {
 	 *      Optional. Parameters for filtering the list of contacts. Default empty array.
 	 *
-	 *     @type int              $client_id     Only return contacts belonging to the client with the given ID.
-	 *     @type \DateTime|string $updated_since Only return contacts that have been updated since the given
+	 *     @type int             $client_id      Only return contacts belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since  Only return contacts that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -47,6 +50,7 @@ class Contacts extends AbstractApi {
 	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $contactId ) {
 		return $this->get( '/contacts/' . rawurlencode( $contactId ) );
@@ -55,8 +59,9 @@ class Contacts extends AbstractApi {
 	/**
 	 * Creates a new contact object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new contact object.
 	 * @return array|string
@@ -89,6 +94,7 @@ class Contacts extends AbstractApi {
 	 * @param int $contactId The ID of the contact.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $contactId, array $parameters ) {
 		return $this->patch( '/contacts/' . rawurlencode( $contactId ), $parameters );
@@ -99,6 +105,7 @@ class Contacts extends AbstractApi {
 	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $contactId ) {
 		return $this->delete( '/contacts/' . rawurlencode( $contactId ) );

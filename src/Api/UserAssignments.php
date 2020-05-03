@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\RuntimeException;
 
 /**
@@ -13,7 +14,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/projects-api/projects/user-assignments/
  */
-class UserAssignments extends AbstractApi {
+class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
+
 
 	/**
 	 * Retrieves a list of user assignments.
@@ -23,10 +25,11 @@ class UserAssignments extends AbstractApi {
 	 *
 	 *     @type bool             $is_active     Pass `true` to only return active user assignments and `false` to
 	 *                                           return  inactive user assignments.
-	 *     @type \DateTime|string $updated_since Only return user assignments that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return user assignments that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {

@@ -6,6 +6,7 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
+use Http\Client\Exception;
 use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\Exception\MissingArgumentException;
 use Required\Harvest\Exception\RuntimeException;
@@ -15,7 +16,8 @@ use Required\Harvest\Exception\RuntimeException;
  *
  * @link https://help.getharvest.com/api-v2/expenses-api/expenses/expense-categories/
  */
-class ExpenseCategories extends AbstractApi {
+class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterface {
+
 
 	/**
 	 * Retrieves a list of expense categories.
@@ -26,10 +28,11 @@ class ExpenseCategories extends AbstractApi {
 	 *     @type bool             $is_active     Pass `true` to only return active expense categories and `false`
 	 *                                           to return inactive expense categories.
 	 *     @type int              $client_id     Only return expense categories belonging to the client with the given ID.
-	 *     @type \DateTime|string $updated_since Only return expense categories that have been updated since the given
+	 *     @type DateTime|string $updated_since  Only return expense categories that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -53,6 +56,7 @@ class ExpenseCategories extends AbstractApi {
 	 *
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function show( int $expenseCategoryId ) {
 		return $this->get( '/expense_categories/' . rawurlencode( $expenseCategoryId ) );
@@ -61,8 +65,9 @@ class ExpenseCategories extends AbstractApi {
 	/**
 	 * Creates a new expense category object.
 	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws MissingArgumentException
+	 * @throws InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new expense category object.
 	 * @return array|string
@@ -87,6 +92,7 @@ class ExpenseCategories extends AbstractApi {
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @param array $parameters
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function update( int $expenseCategoryId, array $parameters ) {
 		return $this->patch( '/expense_categories/' . rawurlencode( $expenseCategoryId ), $parameters );
@@ -97,6 +103,7 @@ class ExpenseCategories extends AbstractApi {
 	 *
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
+	 * @throws Exception
 	 */
 	public function remove( int $expenseCategoryId ) {
 		return $this->delete( '/expense_categories/' . rawurlencode( $expenseCategoryId ) );
