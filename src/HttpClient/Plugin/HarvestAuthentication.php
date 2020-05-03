@@ -18,6 +18,8 @@ use Psr\Http\Message\RequestInterface;
  */
 class HarvestAuthentication implements Plugin {
 
+	use Plugin\VersionBridgePlugin;
+
 	/**
 	 * The Harvest account ID.
 	 *
@@ -56,7 +58,7 @@ class HarvestAuthentication implements Plugin {
 	 * @return \Http\Promise\Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as
 	 *                               HttpAsyncClient).
 	 */
-	public function handleRequest( RequestInterface $request, callable $next, callable $first ): Promise {
+	public function doHandleRequest( RequestInterface $request, callable $next, callable $first ): Promise {
 		$request = $request->withHeader( 'Authorization', sprintf( 'Bearer %s', $this->accessToken ) );
 		$request = $request->withHeader( 'Harvest-Account-Id', $this->accountId );
 

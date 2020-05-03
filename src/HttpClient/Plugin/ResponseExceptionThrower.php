@@ -22,6 +22,8 @@ use Required\Harvest\HttpClient\Message\ResponseMediator;
  */
 class ResponseExceptionThrower implements Plugin {
 
+	use Plugin\VersionBridgePlugin;
+
 	/**
 	 * Handles the request and returns the response coming from the next callable.
 	 *
@@ -35,7 +37,7 @@ class ResponseExceptionThrower implements Plugin {
 	 * @return \Http\Promise\Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as
 	 *                               HttpAsyncClient).
 	 */
-	public function handleRequest( RequestInterface $request, callable $next, callable $first ): Promise {
+	public function doHandleRequest( RequestInterface $request, callable $next, callable $first ): Promise {
 		return $next( $request )->then(
 			function ( ResponseInterface $response ) {
 				$statusCode = $response->getStatusCode();
