@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for projects endpoint.
  *
@@ -42,8 +38,8 @@ interface ProjectsInterface {
 	 *
 	 * @param array $parameters The parameters of the new project object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 */
 	public function create( array $parameters);
@@ -76,14 +72,14 @@ interface ProjectsInterface {
 	/**
 	 * Gets a projects's user assignments.
 	 *
-	 * @return Project\UserAssignmentsInterface
+	 * @return \Required\Harvest\Api\Project\UserAssignmentsInterface
 	 */
 	public function userAssignments(): Project\UserAssignmentsInterface;
 
 	/**
 	 * Gets a projects's task assignments.
 	 *
-	 * @return Project\TaskAssignmentsInterface
+	 * @return \Required\Harvest\Api\Project\TaskAssignmentsInterface
 	 */
 	public function taskAssignments(): Project\TaskAssignmentsInterface;
 }

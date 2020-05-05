@@ -2,8 +2,6 @@
 
 namespace Required\Harvest\Api\User;
 
-use DateTime;
-
 /**
  * API client for user project assignments endpoint.
  *

@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api\Invoice;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for invoice payments endpoint.
  *
@@ -42,9 +38,9 @@ interface PaymentsInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param array $parameters The parameters of the new invoice message object.
 	 * @return array|string
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
-	 * @throws MissingArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function create( int $invoiceId, array $parameters);
 

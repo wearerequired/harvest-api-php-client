@@ -15,7 +15,7 @@ class AutoPagingIterator implements Iterator {
 	/**
 	 * Interface of the API endpoint.
 	 *
-	 * @var ApiInterface
+	 * @var \Required\Harvest\Api\ApiInterface
 	 */
 	protected $apiInterface;
 
@@ -43,7 +43,7 @@ class AutoPagingIterator implements Iterator {
 	/**
 	 * Constructor.
 	 *
-	 * @param ApiInterface $apiInterface The API interface.
+	 * @param \Required\Harvest\Api\ApiInterface $apiInterface The API interface.
 	 * @param array        $parameters   Parameters for the all() method.
 	 */
 	public function __construct( ApiInterface $apiInterface, array $parameters = [] ) {
@@ -67,7 +67,7 @@ class AutoPagingIterator implements Iterator {
 		$item = next( $this->data );
 
 		if ( false === $item && $this->apiInterface->hasMore() ) {
-			$this->keyOffset += count( $this->data );
+			$this->keyOffset += \count( $this->data );
 			$this->apiInterface->setPage( $this->apiInterface->getNextPage() );
 			$this->data = $this->apiInterface->all( $this->parameters );
 		}

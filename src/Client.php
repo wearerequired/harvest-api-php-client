@@ -10,25 +10,6 @@ use Http\Client\Common\Plugin;
 use Http\Client\HttpClient;
 use Http\Discovery\UriFactoryDiscovery;
 use Required\Harvest\Api\ApiInterface;
-use Required\Harvest\Api\ClientsInterface;
-use Required\Harvest\Api\ContactsInterface;
-use Required\Harvest\Api\CurrentCompanyInterface;
-use Required\Harvest\Api\CurrentUserInterface;
-use Required\Harvest\Api\EstimateItemCategoriesInterface;
-use Required\Harvest\Api\EstimatesInterface;
-use Required\Harvest\Api\ExpenseCategoriesInterface;
-use Required\Harvest\Api\ExpensesInterface;
-use Required\Harvest\Api\InvoiceItemCategoriesInterface;
-use Required\Harvest\Api\InvoicesInterface;
-use Required\Harvest\Api\ProjectsInterface;
-use Required\Harvest\Api\RolesInterface;
-use Required\Harvest\Api\TaskAssignmentsInterface;
-use Required\Harvest\Api\TasksInterface;
-use Required\Harvest\Api\TimeEntriesInterface;
-use Required\Harvest\Api\UserAssignmentsInterface;
-use Required\Harvest\Api\UsersInterface;
-use Required\Harvest\Exception\BadMethodCallException;
-use Required\Harvest\Exception\InvalidArgumentException;
 use Required\Harvest\HttpClient\Builder;
 use Required\Harvest\HttpClient\Plugin\HarvestAuthentication;
 use Required\Harvest\HttpClient\Plugin\ResponseExceptionThrower;
@@ -36,37 +17,37 @@ use Required\Harvest\HttpClient\Plugin\ResponseExceptionThrower;
 /**
  * The PHP client for consuming the Harvest REST API.
  *
- * @method ClientsInterface clients()
- * @method ContactsInterface contacts()
- * @method CurrentUserInterface currentUser()
- * @method CurrentCompanyInterface currentCompany()
- * @method EstimateItemCategoriesInterface estimateItemCategories()
- * @method EstimatesInterface estimates()
- * @method ExpenseCategoriesInterface expenseCategories()
- * @method ExpensesInterface expenses()
- * @method InvoiceItemCategoriesInterface invoiceItemCategories()
- * @method InvoicesInterface invoices()
- * @method ProjectsInterface projects()
- * @method RolesInterface roles()
- * @method TaskAssignmentsInterface taskAssignments()
- * @method TasksInterface tasks()
- * @method TimeEntriesInterface timeEntries()
- * @method UserAssignmentsInterface userAssignments()
- * @method UsersInterface users()
+ * @method \Required\Harvest\Api\ClientsInterface clients()
+ * @method \Required\Harvest\Api\ContactsInterface contacts()
+ * @method \Required\Harvest\Api\CurrentUserInterface currentUser()
+ * @method \Required\Harvest\Api\CurrentCompanyInterface currentCompany()
+ * @method \Required\Harvest\Api\EstimateItemCategoriesInterface estimateItemCategories()
+ * @method \Required\Harvest\Api\EstimatesInterface estimates()
+ * @method \Required\Harvest\Api\ExpenseCategoriesInterface expenseCategories()
+ * @method \Required\Harvest\Api\ExpensesInterface expenses()
+ * @method \Required\Harvest\Api\InvoiceItemCategoriesInterface invoiceItemCategories()
+ * @method \Required\Harvest\Api\InvoicesInterface invoices()
+ * @method \Required\Harvest\Api\ProjectsInterface projects()
+ * @method \Required\Harvest\Api\RolesInterface roles()
+ * @method \Required\Harvest\Api\TaskAssignmentsInterface taskAssignments()
+ * @method \Required\Harvest\Api\TasksInterface tasks()
+ * @method \Required\Harvest\Api\TimeEntriesInterface timeEntries()
+ * @method \Required\Harvest\Api\UserAssignmentsInterface userAssignments()
+ * @method \Required\Harvest\Api\UsersInterface users()
  */
 class Client implements ClientInterface {
 
 	/**
 	 * The builder for HTTP clients.
 	 *
-	 * @var Builder
+	 * @var \Required\Harvest\HttpClient\Builder
 	 */
 	protected $httpClientBuilder;
 
 	/**
 	 * Instantiate a new Harvest API client.
 	 *
-	 * @param Builder|null $httpClientBuilder
+	 * @param \Required\Harvest\HttpClient\Builder|null $httpClientBuilder
 	 */
 	public function __construct( Builder $httpClientBuilder = null ) {
 		$this->httpClientBuilder = $httpClientBuilder ?: new Builder();
@@ -86,8 +67,8 @@ class Client implements ClientInterface {
 	/**
 	 * Creates a Harvest\Client using a HttpClient.
 	 *
-	 * @param HttpClient $httpClient The HttpClient.
-	 * @return Client Harvest API client.
+	 * @param \Http\Client\HttpClient $httpClient The HttpClient.
+	 * @return \Required\Harvest\Client Harvest API client.
 	 */
 	public static function createWithHttpClient( HttpClient $httpClient ): ClientInterface {
 		$builder = new Builder( $httpClient );
@@ -110,10 +91,10 @@ class Client implements ClientInterface {
 	/**
 	 * Retrieves the API interface for an endpoint name.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param string $name The endpoint name.
-	 * @return ApiInterface The API interface.
+	 * @return \Required\Harvest\Api\ApiInterface The API interface.
 	 */
 	public function api( $name ): ApiInterface {
 		switch ( $name ) {
@@ -153,31 +134,31 @@ class Client implements ClientInterface {
 			case 'users':
 				return new Api\Users( $this );
 			default:
-				throw new InvalidArgumentException( sprintf( 'Undefined api instance called: "%s"', $name ) );
+				throw new \Required\Harvest\Exception\InvalidArgumentException( sprintf( 'Undefined api instance called: "%s"', $name ) );
 		}
 	}
 
 	/**
 	 * Magic method to allow retrieving API interfaces by their name.
 	 *
-	 * @throws BadMethodCallException
+	 * @throws \Required\Harvest\Exception\BadMethodCallException
 	 *
 	 * @param string $name      The name of the method being called.
 	 * @param array  $arguments The arguments passed to the method.
-	 * @return ApiInterface The API interface.
+	 * @return \Required\Harvest\Api\ApiInterface The API interface.
 	 */
 	public function __call( string $name, array $arguments = [] ): ApiInterface {
 		try {
 			return $this->api( $name );
-		} catch ( InvalidArgumentException $e ) {
-			throw new BadMethodCallException( sprintf( 'Undefined method called: "%s"', $name ) );
+		} catch ( \Required\Harvest\Exception\InvalidArgumentException $e ) {
+			throw new \Required\Harvest\Exception\BadMethodCallException( sprintf( 'Undefined method called: "%s"', $name ) );
 		}
 	}
 
 	/**
 	 * Retrieves the HTTP client.
 	 *
-	 * @return HttpMethodsClientInterface
+	 * @return \Http\Client\Common\HttpMethodsClientInterface
 	 */
 	public function getHttpClient(): HttpMethodsClientInterface {
 		return $this->getHttpClientBuilder()->getHttpClient();
@@ -186,7 +167,7 @@ class Client implements ClientInterface {
 	/**
 	 * Retrieves the builder for HTTP clients.
 	 *
-	 * @return Builder
+	 * @return \Required\Harvest\HttpClient\Builder
 	 */
 	protected function getHttpClientBuilder(): Builder {
 		return $this->httpClientBuilder;

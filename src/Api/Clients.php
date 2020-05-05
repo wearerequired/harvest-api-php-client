@@ -6,10 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for clients endpoint.
@@ -31,7 +27,7 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -43,8 +39,8 @@ class Clients extends AbstractApi implements ClientsInterface {
 		}
 
 		$result = $this->get( '/clients', $parameters );
-		if ( ! isset( $result['clients'] ) || ! is_array( $result['clients'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['clients'] ) || ! \is_array( $result['clients'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['clients'];
@@ -55,7 +51,7 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $clientId ) {
 		return $this->get( '/clients/' . rawurlencode( $clientId ) );
@@ -64,20 +60,20 @@ class Clients extends AbstractApi implements ClientsInterface {
 	/**
 	 * Creates a new client object.
 	 *
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new client object.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
-			throw new MissingArgumentException( 'name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'name' );
 		}
 
-		if ( ! is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
 		return $this->post( '/clients', $parameters );
@@ -91,7 +87,7 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 * @param int $clientId The ID of the client.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $clientId, array $parameters ) {
 		return $this->patch( '/clients/' . rawurlencode( $clientId ), $parameters );
@@ -104,7 +100,7 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $clientId ) {
 		return $this->delete( '/clients/' . rawurlencode( $clientId ) );

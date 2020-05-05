@@ -42,7 +42,7 @@ class ResponseMediator {
 	 */
 	public static function getPagination( ResponseInterface $response ): array {
 		$content = self::getContent( $response );
-		if ( ! is_array( $content ) ) {
+		if ( ! \is_array( $content ) ) {
 			return [];
 		}
 

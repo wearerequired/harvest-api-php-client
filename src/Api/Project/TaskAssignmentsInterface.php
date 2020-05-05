@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api\Project;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for project task assignments endpoint.
  *
@@ -44,9 +40,9 @@ interface TaskAssignmentsInterface {
 	 * @param int $projectId The ID of the project.
 	 * @param array $parameters The parameters of the new task assignment object.
 	 * @return array|string
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
-	 * @throws MissingArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function create( int $projectId, array $parameters);
 

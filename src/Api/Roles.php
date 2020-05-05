@@ -5,12 +5,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
-
 /**
  * API client for roles endpoint.
  *
@@ -23,12 +17,12 @@ class Roles extends AbstractApi implements RolesInterface {
 	 * Retrieves a list of roles.
 	 *
 	 * @return array
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function all() {
 		$result = $this->get( '/roles' );
-		if ( ! isset( $result['roles'] ) || ! is_array( $result['roles'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['roles'] ) || ! \is_array( $result['roles'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['roles'];
@@ -39,7 +33,7 @@ class Roles extends AbstractApi implements RolesInterface {
 	 *
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $roleId ) {
 		return $this->get( '/roles/' . rawurlencode( $roleId ) );
@@ -48,20 +42,20 @@ class Roles extends AbstractApi implements RolesInterface {
 	/**
 	 * Creates a new role object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new role object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
-			throw new MissingArgumentException( 'name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'name' );
 		}
 
-		if ( ! is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
 		return $this->post( '/roles', $parameters );
@@ -72,9 +66,9 @@ class Roles extends AbstractApi implements RolesInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
-	 * @throws Exception
-	 * @throws InvalidArgumentException
-	 * @throws MissingArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 *
 	 * @param int $roleId The ID of the role.
 	 * @param array $parameters
@@ -82,11 +76,11 @@ class Roles extends AbstractApi implements RolesInterface {
 	 */
 	public function update( int $roleId, array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
-			throw new MissingArgumentException( 'name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'name' );
 		}
 
-		if ( ! is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
 		return $this->patch( '/roles/' . rawurlencode( $roleId ), $parameters );
@@ -99,7 +93,7 @@ class Roles extends AbstractApi implements RolesInterface {
 	 *
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $roleId ) {
 		return $this->delete( '/roles/' . rawurlencode( $roleId ) );

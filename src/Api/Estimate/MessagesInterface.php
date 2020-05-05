@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api\Estimate;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for estimate messages endpoint.
  *
@@ -42,9 +38,9 @@ interface MessagesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @param array $parameters The parameters of the new estimate message object.
 	 * @return array|string
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
-	 * @throws MissingArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function create( int $estimateId, array $parameters);
 

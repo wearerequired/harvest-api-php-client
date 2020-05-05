@@ -7,8 +7,8 @@ namespace Required\Harvest\Tests\Api;
 
 use DateTime;
 use DateTimeZone;
-use Required\Harvest\Api\Users;
 use Required\Harvest\Api\User\ProjectAssignments;
+use Required\Harvest\Api\Users;
 
 /**
  * Tests for users endpoint.

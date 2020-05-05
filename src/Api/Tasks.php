@@ -6,10 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for tasks endpoint.
@@ -31,7 +27,7 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 *
 	 */
 	public function all( array $parameters = [] ) {
@@ -44,8 +40,8 @@ class Tasks extends AbstractApi implements TasksInterface {
 		}
 
 		$result = $this->get( '/tasks', $parameters );
-		if ( ! isset( $result['tasks'] ) || ! is_array( $result['tasks'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['tasks'] ) || ! \is_array( $result['tasks'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['tasks'];
@@ -56,7 +52,7 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $taskId ) {
 		return $this->get( '/tasks/' . rawurlencode( $taskId ) );
@@ -65,20 +61,20 @@ class Tasks extends AbstractApi implements TasksInterface {
 	/**
 	 * Creates a new task object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new task object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
-			throw new MissingArgumentException( 'name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'name' );
 		}
 
-		if ( ! is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
 		return $this->post( '/tasks', $parameters );
@@ -92,7 +88,7 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 * @param int $taskId The ID of the task.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $taskId, array $parameters ) {
 		return $this->patch( '/tasks/' . rawurlencode( $taskId ), $parameters );
@@ -105,7 +101,7 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $taskId ) {
 		return $this->delete( '/tasks/' . rawurlencode( $taskId ) );

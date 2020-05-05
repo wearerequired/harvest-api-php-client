@@ -2,12 +2,8 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
 use Lafiel\Required\Harvest\Api\Invoice\PaymentInterface;
-use Required\Harvest\Api\Invoice\Messages;
 use Required\Harvest\Api\Invoice\MessagesInterface;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
 
 /**
  * API client for invoices endpoint.
@@ -31,7 +27,7 @@ interface InvoicesInterface {
 	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
 	 * @return array|string
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 */
 	public function all( array $parameters = []);
@@ -49,8 +45,8 @@ interface InvoicesInterface {
 	 *
 	 * @param array $parameters The parameters of the new invoice object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 */
 	public function create( array $parameters);
@@ -111,14 +107,14 @@ interface InvoicesInterface {
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return PaymentInterface;
+	 * @return \Lafiel\Required\Harvest\Api\Invoice\PaymentInterface ;
 	 */
 	public function payments(): PaymentInterface;
 
 	/**
 	 * Gets a Estimate's messages.
 	 *
-	 * @return MessagesInterface
+	 * @return \Required\Harvest\Api\Invoice\MessagesInterface
 	 */
 	public function messages(): MessagesInterface;
 }

@@ -6,11 +6,7 @@
 namespace Required\Harvest\Api\Project;
 
 use DateTime;
-use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for project task assignments endpoint.
@@ -33,7 +29,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -45,8 +41,8 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 		}
 
 		$result = $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments', $parameters );
-		if ( ! isset( $result['task_assignments'] ) || ! is_array( $result['task_assignments'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['task_assignments'] ) || ! \is_array( $result['task_assignments'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['task_assignments'];
@@ -58,7 +54,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $projectId, int $taskAssignmentId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ) );
@@ -67,9 +63,9 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	/**
 	 * Creates a new task assignment object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters The parameters of the new task assignment object.
@@ -77,11 +73,11 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 */
 	public function create( int $projectId, array $parameters ) {
 		if ( ! isset( $parameters['task_id'] ) ) {
-			throw new MissingArgumentException( 'task_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'task_id' );
 		}
 
-		if ( ! is_int( $parameters['task_id'] ) || empty( $parameters['task_id'] ) ) {
-			throw new InvalidArgumentException( 'The "task_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['task_id'] ) || empty( $parameters['task_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "task_id" parameter must be a non-empty integer.' );
 		}
 
 		return $this->post( '/projects/' . rawurlencode( $projectId ) . '/task_assignments', $parameters );
@@ -96,7 +92,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 * @param int   $taskAssignmentId The ID of the task assignment.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $projectId, int $taskAssignmentId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ), $parameters );
@@ -110,7 +106,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $projectId, int $taskAssignmentId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ) );

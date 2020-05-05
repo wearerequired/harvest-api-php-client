@@ -2,10 +2,7 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
 use Required\Harvest\Api\TimeEntry\ExternalReferenceInterface;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
 
 /**
  * API client for time entries endpoint.
@@ -49,8 +46,8 @@ interface TimeEntriesInterface {
 	 *
 	 * @param array $parameters The parameters of the new time entry object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 */
 	public function create( array $parameters);
@@ -102,7 +99,7 @@ interface TimeEntriesInterface {
 	 *
 	 * This only supports removing an external reference.
 	 *
-	 * @return ExternalReferenceInterface
+	 * @return \Required\Harvest\Api\TimeEntry\ExternalReferenceInterface
 	 */
 	public function externalReference(): ExternalReferenceInterface;
 }

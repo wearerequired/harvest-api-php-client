@@ -6,8 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for task assignments endpoint.
@@ -29,7 +27,7 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -41,8 +39,8 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 		}
 
 		$result = $this->get( '/task_assignments', $parameters );
-		if ( ! isset( $result['task_assignments'] ) || ! is_array( $result['task_assignments'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['task_assignments'] ) || ! \is_array( $result['task_assignments'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['task_assignments'];

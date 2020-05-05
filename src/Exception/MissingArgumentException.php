@@ -8,7 +8,7 @@ namespace Required\Harvest\Exception;
 /**
  * Exception thrown if a required parameter is missing.
  */
-class MissingArgumentException extends ErrorException {
+class MissingArgumentException extends \Required\Harvest\Exception\ErrorException {
 
 	/**
 	 * Constructor.

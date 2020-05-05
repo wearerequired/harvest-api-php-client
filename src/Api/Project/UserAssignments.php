@@ -6,11 +6,7 @@
 namespace Required\Harvest\Api\Project;
 
 use DateTime;
-use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for project user assignments endpoint.
@@ -33,7 +29,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -45,8 +41,8 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 		}
 
 		$result = $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments', $parameters );
-		if ( ! isset( $result['user_assignments'] ) || ! is_array( $result['user_assignments'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['user_assignments'] ) || ! \is_array( $result['user_assignments'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['user_assignments'];
@@ -58,7 +54,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $projectId, int $userAssignmentId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ) );
@@ -67,9 +63,9 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	/**
 	 * Creates a new user assignment object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters The parameters of the new user assignment object.
@@ -77,11 +73,11 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 */
 	public function create( int $projectId, array $parameters ) {
 		if ( ! isset( $parameters['user_id'] ) ) {
-			throw new MissingArgumentException( 'user_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'user_id' );
 		}
 
-		if ( ! is_int( $parameters['user_id'] ) || empty( $parameters['user_id'] ) ) {
-			throw new InvalidArgumentException( 'The "user_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['user_id'] ) || empty( $parameters['user_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "user_id" parameter must be a non-empty integer.' );
 		}
 
 		return $this->post( '/projects/' . rawurlencode( $projectId ) . '/user_assignments', $parameters );
@@ -96,7 +92,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $projectId, int $userAssignmentId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ), $parameters );
@@ -110,7 +106,7 @@ class UserAssignments extends AbstractApi implements UserAssignmentsInterface {
 	 * @param int $projectId        The ID of the project.
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $projectId, int $userAssignmentId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) . '/user_assignments/' . rawurlencode( $userAssignmentId ) );

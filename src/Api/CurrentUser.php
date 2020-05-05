@@ -5,7 +5,6 @@
 
 namespace Required\Harvest\Api;
 
-use Http\Client\Exception;
 use Required\Harvest\Api\CurrentUser\ProjectAssignments;
 use Required\Harvest\Api\CurrentUser\ProjectAssignmentsInterface;
 
@@ -21,7 +20,7 @@ class CurrentUser extends AbstractApi implements CurrentUserInterface {
 	 * Retrieves the authenticated user.
 	 *
 	 * @return array|string
-	 * @throws Exception
+	 * @throws \Http\Client\Exception
 	 */
 	public function show() {
 		return $this->get( '/users/me' );
@@ -30,7 +29,7 @@ class CurrentUser extends AbstractApi implements CurrentUserInterface {
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return ProjectAssignmentsInterface
+	 * @return \Required\Harvest\Api\CurrentUser\ProjectAssignmentsInterface
 	 */
 	public function projectAssignments(): ProjectAssignmentsInterface {
 		return new ProjectAssignments( $this->client );

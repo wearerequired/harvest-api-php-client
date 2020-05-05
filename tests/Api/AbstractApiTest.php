@@ -6,8 +6,8 @@
 namespace Required\Harvest\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Client\Common\HttpMethodsClientInterface;
 use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\HttpMethodsClientInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionMethod;
