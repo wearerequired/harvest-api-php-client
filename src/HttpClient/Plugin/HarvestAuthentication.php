@@ -13,8 +13,6 @@ use Psr\Http\Message\RequestInterface;
  * A plugin to provide Harvest authentication headers.
  *
  * @link https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/
- *
- * @package Required\Harvest\HttpClient\Plugin
  */
 class HarvestAuthentication implements Plugin {
 
