@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for invoice item categories endpoint.
  *
@@ -19,12 +15,12 @@ interface InvoiceItemCategoriesInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice item categories. Default empty array.
 	 *
-	 * @type DateTime|string $updated_since Only return invoice item categories that have been updated since
-	 *                                           the given date and time.
+	 *     @type DateTime|string $updated_since Only return invoice item categories that have been updated since
+	 *                                          the given date and time.
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the invoice item category with the given ID.
@@ -32,18 +28,18 @@ interface InvoiceItemCategoriesInterface {
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @return array|string
 	 */
-	public function show( int $invoiceItemCategoryId);
+	public function show( int $invoiceItemCategoryId );
 
 	/**
 	 * Creates a new invoice item category object.
 	 *
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters The parameters of the new invoice item category object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific invoice item category by setting the values of the parameters passed.
@@ -54,7 +50,7 @@ interface InvoiceItemCategoriesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $invoiceItemCategoryId, array $parameters);
+	public function update( int $invoiceItemCategoryId, array $parameters );
 
 	/**
 	 * Deletes an invoice item category.
@@ -64,5 +60,5 @@ interface InvoiceItemCategoriesInterface {
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @return array|string
 	 */
-	public function remove( int $invoiceItemCategoryId);
+	public function remove( int $invoiceItemCategoryId );
 }

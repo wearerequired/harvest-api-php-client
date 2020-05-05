@@ -21,7 +21,7 @@ interface CurrentUserInterface {
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return ProjectAssignmentsInterface;
+	 * @return \Required\Harvest\Api\CurrentUser\ProjectAssignmentsInterface ;
 	 */
 	public function projectAssignments(): ProjectAssignmentsInterface;
 }

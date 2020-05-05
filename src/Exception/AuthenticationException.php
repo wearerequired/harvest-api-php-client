@@ -2,12 +2,13 @@
 /**
  * AuthenticationException class.
  */
+
 namespace Required\Harvest\Exception;
 
 /**
  * Exception thrown if an authentication has failed.
  */
-class AuthenticationException extends RuntimeException {
+class AuthenticationException extends \Required\Harvest\Exception\RuntimeException {
 
 	/**
 	 * Constructor.

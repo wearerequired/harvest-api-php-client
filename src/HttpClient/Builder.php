@@ -75,14 +75,14 @@ class Builder {
 	/**
 	 * Constructor.
 	 *
-	 * @param HttpClient $httpClient
-	 * @param RequestFactory $requestFactory
-	 * @param StreamFactory  $streamFactory
+	 * @param \Http\Client\HttpClient $httpClient
+	 * @param \Http\Message\RequestFactory $requestFactory
+	 * @param \Http\Message\StreamFactory $streamFactory
 	 */
 	public function __construct(
-		HttpClient $httpClient = null,
-		RequestFactory $requestFactory = null,
-		StreamFactory $streamFactory = null
+		?HttpClient $httpClient = null,
+		?RequestFactory $requestFactory = null,
+		?StreamFactory $streamFactory = null
 	) {
 		$this->httpClient     = $httpClient ?: HttpClientDiscovery::find();
 		$this->requestFactory = $requestFactory ?: MessageFactoryDiscovery::find();
@@ -178,7 +178,7 @@ class Builder {
 	/**
 	 * Adds a cache plugin to cache responses locally.
 	 *
-	 * @param CacheItemPoolInterface $cachePool A cache item object.
+	 * @param \Psr\Cache\CacheItemPoolInterface $cachePool A cache item object.
 	 * @param array                  $config    Config options passed to the cache plugin.
 	 */
 	public function addCache( CacheItemPoolInterface $cachePool, array $config = [] ): void {

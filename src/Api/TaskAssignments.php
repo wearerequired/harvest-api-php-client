@@ -6,8 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for task assignments endpoint.
@@ -16,20 +14,20 @@ use Required\Harvest\Exception\RuntimeException;
  */
 class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 
-
 	/**
 	 * Retrieves a list of task assignments.
+	 *
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of task assignments. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active task assignments and `false` to
-	 *                                           return  inactive task assignments.
+	 *     @type bool             $is_active    Pass `true` to only return active task assignments and `false` to
+	 *                                          return  inactive task assignments.
 	 *     @type DateTime|string $updated_since Only return user assignments that have been updated since the given
-	 *                                           date and time.
+	 *                                          date and time.
 	 * }
 	 * @return array
-	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -41,8 +39,8 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 		}
 
 		$result = $this->get( '/task_assignments', $parameters );
-		if ( ! isset( $result['task_assignments'] ) || ! is_array( $result['task_assignments'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['task_assignments'] ) || ! \is_array( $result['task_assignments'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['task_assignments'];

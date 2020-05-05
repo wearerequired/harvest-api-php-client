@@ -6,9 +6,7 @@
 namespace Required\Harvest\Api\CurrentUser;
 
 use DateTime;
-use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for current user project assignments endpoint.
@@ -17,9 +15,10 @@ use Required\Harvest\Exception\RuntimeException;
  */
 class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterface {
 
-
 	/**
 	 * Retrieves a list of project assignments for the current user.
+	 *
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of project assignments. Default empty array.
@@ -28,7 +27,6 @@ class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterf
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -36,8 +34,8 @@ class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterf
 		}
 
 		$result = $this->get( '/users/me/project_assignments', $parameters );
-		if ( ! isset( $result['project_assignments'] ) || ! is_array( $result['project_assignments'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['project_assignments'] ) || ! \is_array( $result['project_assignments'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['project_assignments'];

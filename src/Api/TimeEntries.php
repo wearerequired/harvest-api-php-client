@@ -6,12 +6,8 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
 use Required\Harvest\Api\TimeEntry\ExternalReference;
 use Required\Harvest\Api\TimeEntry\ExternalReferenceInterface;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for time entries endpoint.
@@ -23,6 +19,8 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 
 	/**
 	 * Retrieves a list of time entries.
+	 *
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of time entries. Default empty array.
@@ -39,8 +37,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *     @type DateTime|string $from           Only return time entries with a `spent_date` on or after the given date.
 	 *     @type DateTime|string $to             Only return time entries with a `spent_date` on or after the given date.
 	 * }
-	 * @return array
-	 * @throws Exception
+	  * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -64,8 +61,8 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 		}
 
 		$result = $this->get( '/time_entries', $parameters );
-		if ( ! isset( $result['time_entries'] ) || ! is_array( $result['time_entries'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['time_entries'] ) || ! \is_array( $result['time_entries'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['time_entries'];
@@ -74,9 +71,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	/**
 	 * Retrieves the time entry with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $timeEntryId ) {
 		return $this->get( '/time_entries/' . rawurlencode( $timeEntryId ) );
@@ -85,36 +83,36 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	/**
 	 * Creates a new time entry object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new time entry object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['project_id'] ) ) {
-			throw new MissingArgumentException( 'project_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'project_id' );
 		}
 
 		if ( ! isset( $parameters['task_id'] ) ) {
-			throw new MissingArgumentException( 'task_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'task_id' );
 		}
 
 		if ( ! isset( $parameters['spent_date'] ) ) {
-			throw new MissingArgumentException( 'spent_date' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'spent_date' );
 		}
 
-		if ( ! is_int( $parameters['project_id'] ) || empty( $parameters['project_id'] ) ) {
-			throw new InvalidArgumentException( 'The "project_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['project_id'] ) || empty( $parameters['project_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "project_id" parameter must be a non-empty integer.' );
 		}
 
-		if ( ! is_int( $parameters['task_id'] ) || empty( $parameters['task_id'] ) ) {
-			throw new InvalidArgumentException( 'The "task_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['task_id'] ) || empty( $parameters['task_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "task_id" parameter must be a non-empty integer.' );
 		}
 
-		if ( ! is_string( $parameters['spent_date'] ) || $parameters['spent_date'] instanceof DateTime ) {
-			throw new InvalidArgumentException( 'The "spent_date" parameter must be DateTime instance or an ISO 8601 formatted date string.' );
+		if ( ! \is_string( $parameters['spent_date'] ) || $parameters['spent_date'] instanceof DateTime ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "spent_date" parameter must be DateTime instance or an ISO 8601 formatted date string.' );
 		}
 
 		return $this->post( '/time_entries', $parameters );
@@ -125,10 +123,11 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function update( int $timeEntryId, array $parameters ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ), $parameters );
@@ -140,9 +139,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 * Deleting a time entry is only possible if it’s not closed and the associated project and task haven’t been
 	 * archived. However, Admins can delete closed entries.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $timeEntryId ) {
 		return $this->delete( '/time_entries/' . rawurlencode( $timeEntryId ) );
@@ -153,9 +153,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * Restarting a time entry is only possible if it isn’t currently running.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function restart( int $timeEntryId ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ) . '/restart' );
@@ -166,9 +167,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * Stopping a time entry is only possible if it’s currently running.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function stop( int $timeEntryId ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ) . '/stop' );
@@ -179,7 +181,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * This only supports removing an external reference.
 	 *
-	 * @return ExternalReferenceInterface
+	 * @return \Required\Harvest\Api\TimeEntry\ExternalReferenceInterface
 	 */
 	public function externalReference(): ExternalReferenceInterface {
 		return new ExternalReference( $this->client );

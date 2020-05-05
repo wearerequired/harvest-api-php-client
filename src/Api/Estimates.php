@@ -6,12 +6,8 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
 use Required\Harvest\Api\Estimate\Messages;
 use Required\Harvest\Api\Estimate\MessagesInterface;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for estimates endpoint.
@@ -24,21 +20,21 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Retrieves a list of estimates.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimates. Default empty array.
 	 *
-	 *     @type int              $client_id     Only return estimates belonging to the client with the given ID.
+	 *     @type int             $client_id     Only return estimates belonging to the client with the given ID.
 	 *     @type DateTime|string $updated_since Only return estimates that have been updated since the given
-	 *                                           date and time.
+	 *                                          date and time.
 	 *     @type DateTime|string $from          Only return estimates with a `issue_date` on or after the given date.
 	 *     @type DateTime|string $to            Only return estimates with a `issue_date` on or after the given date.
-	 *     @type string           $state         Only return estimates with a `state` matching the value provided.
-	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
+	 *     @type string          $state         Only return estimates with a `state` matching the value provided.
+	 *                                          Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
-	 * @return array|string
-	 * @throws Exception
+	  * @return array|string
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -54,8 +50,8 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 		}
 
 		$state_options = [ 'draft', 'sent', 'accepted', 'declined' ];
-		if ( isset( $parameters['state'] ) && ! in_array( $parameters['state'], $state_options, true ) ) {
-			throw new InvalidArgumentException(
+		if ( isset( $parameters['state'] ) && ! \in_array( $parameters['state'], $state_options, true ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException(
 				sprintf(
 					'The "state" parameter must be one out of: %s.',
 					implode( ', ', $state_options )
@@ -64,8 +60,8 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 		}
 
 		$result = $this->get( '/estimates', $parameters );
-		if ( ! isset( $result['estimates'] ) || ! is_array( $result['estimates'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['estimates'] ) || ! \is_array( $result['estimates'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['estimates'];
@@ -74,9 +70,10 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Retrieves the estimate with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $estimateId ) {
 		return $this->get( '/estimates/' . rawurlencode( $estimateId ) );
@@ -85,20 +82,20 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Creates a new estimate object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new estimate object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['client_id'] ) ) {
-			throw new MissingArgumentException( 'project_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'project_id' );
 		}
 
-		if ( ! is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
-			throw new InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
 		}
 
 		return $this->post( '/estimates', $parameters );
@@ -111,10 +108,11 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	 *
 	 * TODO: Consider creating an interface for managing estimate line items, see https://help.getharvest.com/api-v2/estimates-api/estimates/estimates/#create-an-estimate-line-item
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function update( int $estimateId, array $parameters ) {
 		return $this->patch( '/estimates/' . rawurlencode( $estimateId ), $parameters );
@@ -123,9 +121,10 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Deletes an estimate.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $estimateId ) {
 		return $this->delete( '/estimates/' . rawurlencode( $estimateId ) );
@@ -134,9 +133,10 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Marks a draft estimate as sent.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function send( int $estimateId ) {
 		$parameters = [
@@ -149,9 +149,10 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Marks an open estimate as accepted.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function accept( int $estimateId ) {
 		$parameters = [
@@ -164,9 +165,10 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Marks an open estimate as declined.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function decline( int $estimateId ) {
 		$parameters = [
@@ -179,9 +181,10 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Re-opens a closed estimate
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function reopen( int $estimateId ) {
 		$parameters = [
@@ -194,7 +197,7 @@ class Estimates extends AbstractApi implements EstimatesInterface {
 	/**
 	 * Gets a Estimate's messages.
 	 *
-	 * @return MessagesInterface
+	 * @return \Required\Harvest\Api\Estimate\MessagesInterface
 	 */
 	public function messages(): MessagesInterface {
 		return new Messages( $this->client );

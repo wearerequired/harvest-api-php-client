@@ -69,10 +69,10 @@ class ClientTest extends TestCase {
 	/**
 	 * Test retrieving the API interface for an endpoint name.
 	 *
-	 * @dataProvider getApiClassesProvider
-	 *
 	 * @param string $name Endpoint name.
 	 * @param string $class Class name.
+	 *
+	 * @dataProvider getApiClassesProvider
 	 */
 	public function testReturnOfGetApiInstance( $name, $class ) {
 		$client = new Client();
@@ -82,10 +82,10 @@ class ClientTest extends TestCase {
 	/**
 	 * Test retrieving the API interface for an endpoint name via magic method.
 	 *
-	 * @dataProvider getApiClassesProvider
-	 *
 	 * @param string $name Endpoint name.
 	 * @param string $class Class name.
+	 *
+	 * @dataProvider getApiClassesProvider
 	 */
 	public function testReturnOfGetMagicApiInstance( $name, $class ) {
 		$client = new Client();

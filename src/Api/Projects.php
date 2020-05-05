@@ -6,10 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for projects endpoint.
@@ -22,17 +18,18 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Retrieves a list of projects.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of projects. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active projects and `false` to return
-	 *                                           inactive projects.
-	 *     @type int              $client_id     Only return projects belonging to the client with the given ID.
-	 *     @type DateTime|string $updated_since  Only return projects that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool             $is_active    Pass `true` to only return active projects and `false` to return
+	 *                                          inactive projects.
+	 *     @type int              $client_id    Only return projects belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return projects that have been updated since the given
+	 *                                          date and time.
 	 * }
-	 * @return array
-	 * @throws Exception
+	  * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -44,8 +41,8 @@ class Projects extends AbstractApi implements ProjectsInterface {
 		}
 
 		$result = $this->get( '/projects', $parameters );
-		if ( ! isset( $result['projects'] ) || ! is_array( $result['projects'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['projects'] ) || ! \is_array( $result['projects'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['projects'];
@@ -54,9 +51,10 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Retrieves the project with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $projectId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) );
@@ -65,49 +63,49 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Creates a new project object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new project object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['client_id'] ) ) {
-			throw new MissingArgumentException( 'client_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'client_id' );
 		}
 
 		if ( ! isset( $parameters['name'] ) ) {
-			throw new MissingArgumentException( 'name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'name' );
 		}
 
 		if ( ! isset( $parameters['is_billable'] ) ) {
-			throw new MissingArgumentException( 'is_billable' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'is_billable' );
 		}
 
 		if ( ! isset( $parameters['bill_by'] ) ) {
-			throw new MissingArgumentException( 'bill_by' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'bill_by' );
 		}
 
 		if ( ! isset( $parameters['budget_by'] ) ) {
-			throw new MissingArgumentException( 'bill_by' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'bill_by' );
 		}
 
-		if ( ! is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
-			throw new InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
 		}
 
-		if ( ! is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
-		if ( ! is_bool( $parameters['is_billable'] ) ) {
-			throw new InvalidArgumentException( 'The "is_billable" parameter must be a boolean.' );
+		if ( ! \is_bool( $parameters['is_billable'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "is_billable" parameter must be a boolean.' );
 		}
 
 		$bill_by_options = [ 'Project', 'Tasks', 'People', 'None' ];
-		if ( ! is_string( $parameters['bill_by'] ) || ! in_array( $parameters['bill_by'], $bill_by_options, true ) ) {
-			throw new InvalidArgumentException(
+		if ( ! \is_string( $parameters['bill_by'] ) || ! \in_array( $parameters['bill_by'], $bill_by_options, true ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException(
 				sprintf(
 					'The "bill_by" parameter must be one out of: %s.',
 					implode( ', ', $bill_by_options )
@@ -116,8 +114,8 @@ class Projects extends AbstractApi implements ProjectsInterface {
 		}
 
 		$budget_by_options = [ 'project', 'project_cost', 'task', 'task_fees', 'person', 'none' ];
-		if ( ! is_string( $parameters['budget_by'] ) || ! in_array( $parameters['budget_by'], $budget_by_options, true ) ) {
-			throw new InvalidArgumentException(
+		if ( ! \is_string( $parameters['budget_by'] ) || ! \in_array( $parameters['budget_by'], $budget_by_options, true ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException(
 				sprintf(
 					'The "budget_by" parameter must be one out of: %s.',
 					implode( ', ', $budget_by_options )
@@ -133,10 +131,11 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function update( int $projectId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ), $parameters );
@@ -151,9 +150,10 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *
 	 *     $client->projects()->update( $projectId, [ 'is_active' => false ];
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $projectId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) );
@@ -162,7 +162,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Gets a projects's user assignments.
 	 *
-	 * @return Project\UserAssignmentsInterface
+	 * @return \Required\Harvest\Api\Project\UserAssignmentsInterface
 	 */
 	public function userAssignments(): Project\UserAssignmentsInterface {
 		return new Project\UserAssignments( $this->client );
@@ -171,7 +171,7 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Gets a projects's task assignments.
 	 *
-	 * @return Project\TaskAssignmentsInterface
+	 * @return \Required\Harvest\Api\Project\TaskAssignmentsInterface
 	 */
 	public function taskAssignments(): Project\TaskAssignmentsInterface {
 		return new Project\TaskAssignments( $this->client );

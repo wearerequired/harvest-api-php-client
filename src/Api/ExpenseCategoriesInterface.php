@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for expense categories endpoint.
  *
@@ -19,15 +15,15 @@ interface ExpenseCategoriesInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of expense categories. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active expense categories and `false`
-	 *                                           to return inactive expense categories.
-	 * 		@type int $client_id 				 Only return expense categories belonging to the client with the given ID.
-	 * 		@type DateTime|string $updated_since Only return expense categories that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active expense categories and `false`
+	 *                                          to return inactive expense categories.
+	 *     @type int $client_id                 Only return expense categories belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return expense categories that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the expense category with the given ID.
@@ -35,18 +31,18 @@ interface ExpenseCategoriesInterface {
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
 	 */
-	public function show( int $expenseCategoryId);
+	public function show( int $expenseCategoryId );
 
 	/**
 	 * Creates a new expense category object.
 	 *
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters The parameters of the new expense category object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific expense category by setting the values of the parameters passed.
@@ -57,7 +53,7 @@ interface ExpenseCategoriesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $expenseCategoryId, array $parameters);
+	public function update( int $expenseCategoryId, array $parameters );
 
 	/**
 	 * Deletes an expense category.
@@ -65,5 +61,5 @@ interface ExpenseCategoriesInterface {
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
 	 */
-	public function remove( int $expenseCategoryId);
+	public function remove( int $expenseCategoryId );
 }

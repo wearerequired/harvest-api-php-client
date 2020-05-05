@@ -6,10 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for tasks endpoint.
@@ -18,21 +14,20 @@ use Required\Harvest\Exception\RuntimeException;
  */
 class Tasks extends AbstractApi implements TasksInterface {
 
-
 	/**
 	 * Retrieves a list of tasks.
+	 *
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of tasks. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active tasks and `false` to return
-	 *                                           inactive tasks.
+	 *     @type bool             $is_active    Pass `true` to only return active tasks and `false` to return
+	 *                                          inactive tasks.
 	 *     @type DateTime|string $updated_since Only return tasks that have been updated since the given
-	 *                                           date and time.
+	 *                                          date and time.
 	 * }
 	 * @return array
-	 * @throws Exception
-	 *
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -44,8 +39,8 @@ class Tasks extends AbstractApi implements TasksInterface {
 		}
 
 		$result = $this->get( '/tasks', $parameters );
-		if ( ! isset( $result['tasks'] ) || ! is_array( $result['tasks'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['tasks'] ) || ! \is_array( $result['tasks'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['tasks'];
@@ -54,9 +49,10 @@ class Tasks extends AbstractApi implements TasksInterface {
 	/**
 	 * Retrieves the task with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $taskId ) {
 		return $this->get( '/tasks/' . rawurlencode( $taskId ) );
@@ -65,20 +61,20 @@ class Tasks extends AbstractApi implements TasksInterface {
 	/**
 	 * Creates a new task object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new task object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
-			throw new MissingArgumentException( 'name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'name' );
 		}
 
-		if ( ! is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['name'] ) || empty( trim( $parameters['name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "name" parameter must be a non-empty string.' );
 		}
 
 		return $this->post( '/tasks', $parameters );
@@ -89,10 +85,11 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $taskId The ID of the task.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function update( int $taskId, array $parameters ) {
 		return $this->patch( '/tasks/' . rawurlencode( $taskId ), $parameters );
@@ -103,9 +100,10 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *
 	 * Deleting a task is only possible if it has no time entries associated with it.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $taskId ) {
 		return $this->delete( '/tasks/' . rawurlencode( $taskId ) );

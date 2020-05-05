@@ -2,12 +2,8 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
 use Lafiel\Required\Harvest\Api\Invoice\PaymentInterface;
-use Required\Harvest\Api\Invoice\Messages;
 use Required\Harvest\Api\Invoice\MessagesInterface;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
 
 /**
  * API client for invoices endpoint.
@@ -19,22 +15,22 @@ interface InvoicesInterface {
 	/**
 	 * Retrieves a list of invoices.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoices. Default empty array.
 	 *
-	 * 		@type int $client_id 				 Only return invoices belonging to the client with the given ID.
-	 * 		@type DateTime|string $updated_since Only return invoices that have been updated since the given
-	 *                                           date and time.
-	 * 		@type DateTime|string $from 		 Only return invoices with a `issue_date` on or after the given date.
-	 * 		@type DateTime|string $to 			 Only return invoices with a `issue_date` on or after the given date.
-	 * 		@type string $state 				 Only return invoices with a `state` matching the value provided.
-	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
+	 *     @type int $client_id                 Only return invoices belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return invoices that have been updated since the given
+	 *                                          date and time.
+	 *     @type DateTime|string $from          Only return invoices with a `issue_date` on or after the given date.
+	 *     @type DateTime|string $to            Only return invoices with a `issue_date` on or after the given date.
+	 *     @type string $state                  Only return invoices with a `state` matching the value provided.
+	 *                                          Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
 	 * @return array|string
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the invoice with the given ID.
@@ -42,18 +38,18 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function show( int $invoiceId);
+	public function show( int $invoiceId );
 
 	/**
 	 * Creates a new invoice object.
 	 *
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters The parameters of the new invoice object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific invoice by setting the values of the parameters passed.
@@ -66,7 +62,7 @@ interface InvoicesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $invoiceId, array $parameters);
+	public function update( int $invoiceId, array $parameters );
 
 	/**
 	 * Deletes an invoice.
@@ -74,7 +70,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function remove( int $invoiceId);
+	public function remove( int $invoiceId );
 
 	/**
 	 * Marks a draft invoice as sent.
@@ -82,7 +78,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function send( int $invoiceId);
+	public function send( int $invoiceId );
 
 	/**
 	 * Marks an open invoice as closed.
@@ -90,7 +86,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function close( int $invoiceId);
+	public function close( int $invoiceId );
 
 	/**
 	 * Re-opens a closed invoice.
@@ -98,7 +94,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function reopen( int $invoiceId);
+	public function reopen( int $invoiceId );
 
 	/**
 	 * Marks an open invoice as a draft.
@@ -106,19 +102,19 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function draft( int $invoiceId);
+	public function draft( int $invoiceId );
 
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return PaymentInterface;
+	 * @return \Lafiel\Required\Harvest\Api\Invoice\PaymentInterface ;
 	 */
 	public function payments(): PaymentInterface;
 
 	/**
 	 * Gets a Estimate's messages.
 	 *
-	 * @return MessagesInterface
+	 * @return \Required\Harvest\Api\Invoice\MessagesInterface
 	 */
 	public function messages(): MessagesInterface;
 }

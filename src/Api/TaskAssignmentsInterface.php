@@ -2,8 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-
 /**
  * API client for task assignments endpoint.
  *
@@ -17,12 +15,12 @@ interface TaskAssignmentsInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of task assignments. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active task assignments and `false` to
-	 *                                           return  inactive task assignments.
-	 * 		@type DateTime|string $updated_since Only return user assignments that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active task assignments and `false` to
+	 *                                          return  inactive task assignments.
+	 *     @type DateTime|string $updated_since Only return user assignments that have been updated since the given
+	 *                                          date and time.
 	 * }
-	 * @return array
+	  * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 }

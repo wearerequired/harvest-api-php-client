@@ -8,7 +8,7 @@ namespace Required\Harvest\Exception;
 /**
  * Exception thrown if the Harvest API rate limit limit has been exceeded.
  */
-class HarvestApiRateLimitExceedException extends RuntimeException {
+class HarvestApiRateLimitExceedException extends \Required\Harvest\Exception\RuntimeException {
 
 	/**
 	 * Constructor.

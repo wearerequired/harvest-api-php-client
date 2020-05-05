@@ -7,9 +7,6 @@ namespace Required\Harvest\Tests\Api;
 
 use DateTime;
 use DateTimeZone;
-use Required\Harvest\Api\Project\TaskAssignments;
-use Required\Harvest\Api\Project\UserAssignments;
-use Required\Harvest\Api\Projects;
 use Required\Harvest\Api\TimeEntries;
 use Required\Harvest\Api\TimeEntry\ExternalReference;
 

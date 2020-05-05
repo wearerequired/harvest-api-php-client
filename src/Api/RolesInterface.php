@@ -2,9 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for roles endpoint.
  *
@@ -25,32 +22,32 @@ interface RolesInterface {
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
 	 */
-	public function show( int $roleId);
+	public function show( int $roleId );
 
 	/**
 	 * Creates a new role object.
 	 *
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters The parameters of the new role object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific role by setting the values of the parameters passed.
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 *
 	 * @param int $roleId The ID of the role.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws InvalidArgumentException
-	 *
-	 * @throws MissingArgumentException
 	 */
-	public function update( int $roleId, array $parameters);
+	public function update( int $roleId, array $parameters );
 
 	/**
 	 * Deletes a role.
@@ -60,5 +57,5 @@ interface RolesInterface {
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
 	 */
-	public function remove( int $roleId);
+	public function remove( int $roleId );
 }

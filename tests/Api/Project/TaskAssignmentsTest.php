@@ -17,6 +17,7 @@ class TaskAssignmentsTest extends TestCase {
 
 	/**
 	 * Project ID for testing.
+	 *
 	 * @var int
 	 */
 	protected $projectId = 14308069;

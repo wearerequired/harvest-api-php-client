@@ -15,5 +15,5 @@ interface ExternalReferenceInterface {
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
 	 */
-	public function remove( int $timeEntryId);
+	public function remove( int $timeEntryId );
 }

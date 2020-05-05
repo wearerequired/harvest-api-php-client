@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for tasks endpoint.
  *
@@ -19,14 +15,14 @@ interface TasksInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of tasks. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active tasks and `false` to return
+	 *      @type bool $is_active                Pass `true` to only return active tasks and `false` to return
 	 *                                           inactive tasks.
-	 * 		@type DateTime|string $updated_since Only return tasks that have been updated since the given
+	 *      @type DateTime|string $updated_since Only return tasks that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the task with the given ID.
@@ -34,18 +30,18 @@ interface TasksInterface {
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
 	 */
-	public function show( int $taskId);
+	public function show( int $taskId );
 
 	/**
 	 * Creates a new task object.
 	 *
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters The parameters of the new task object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific task by setting the values of the parameters passed.
@@ -56,7 +52,7 @@ interface TasksInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $taskId, array $parameters);
+	public function update( int $taskId, array $parameters );
 
 	/**
 	 * Deletes a task.
@@ -66,5 +62,5 @@ interface TasksInterface {
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
 	 */
-	public function remove( int $taskId);
+	public function remove( int $taskId );
 }

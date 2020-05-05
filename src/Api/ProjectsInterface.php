@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for projects endpoint.
  *
@@ -19,15 +15,15 @@ interface ProjectsInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of projects. Default empty array.
 	 *
-	 * @type bool $is_active Pass `true` to only return active projects and `false` to return
-	 *                                           inactive projects.
-	 * @type int $client_id Only return projects belonging to the client with the given ID.
-	 * @type DateTime|string $updated_since Only return projects that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active projects and `false` to return
+	 *                                          inactive projects.
+	 *     @type int $client_id                 Only return projects belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return projects that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the project with the given ID.
@@ -35,18 +31,18 @@ interface ProjectsInterface {
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
 	 */
-	public function show( int $projectId);
+	public function show( int $projectId );
 
 	/**
 	 * Creates a new project object.
 	 *
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters The parameters of the new project object.
 	 * @return array|string
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
-	 *
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific project by setting the values of the parameters passed.
@@ -57,7 +53,7 @@ interface ProjectsInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $projectId, array $parameters);
+	public function update( int $projectId, array $parameters );
 
 	/**
 	 * Deletes a project.
@@ -71,19 +67,19 @@ interface ProjectsInterface {
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
 	 */
-	public function remove( int $projectId);
+	public function remove( int $projectId );
 
 	/**
 	 * Gets a projects's user assignments.
 	 *
-	 * @return Project\UserAssignmentsInterface
+	 * @return \Required\Harvest\Api\Project\UserAssignmentsInterface
 	 */
 	public function userAssignments(): Project\UserAssignmentsInterface;
 
 	/**
 	 * Gets a projects's task assignments.
 	 *
-	 * @return Project\TaskAssignmentsInterface
+	 * @return \Required\Harvest\Api\Project\TaskAssignmentsInterface
 	 */
 	public function taskAssignments(): Project\TaskAssignmentsInterface;
 }

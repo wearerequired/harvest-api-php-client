@@ -6,14 +6,10 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
 use Lafiel\Required\Harvest\Api\Invoice\PaymentInterface;
 use Lafiel\Required\Harvest\Api\Invoice\Payments;
 use Required\Harvest\Api\Invoice\Messages;
 use Required\Harvest\Api\Invoice\MessagesInterface;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for invoices endpoint.
@@ -26,21 +22,21 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Retrieves a list of invoices.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoices. Default empty array.
 	 *
-	 *     @type int              $client_id     Only return invoices belonging to the client with the given ID.
-	 *     @type DateTime|string $updated_since  Only return invoices that have been updated since the given
-	 *                                           date and time.
-	 *     @type DateTime|string $from           Only return invoices with a `issue_date` on or after the given date.
-	 *     @type DateTime|string $to             Only return invoices with a `issue_date` on or after the given date.
-	 *     @type string           $state         Only return invoices with a `state` matching the value provided.
-	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
+	 *     @type int              $client_id    Only return invoices belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return invoices that have been updated since the given
+	 *                                          date and time.
+	 *     @type DateTime|string $from          Only return invoices with a `issue_date` on or after the given date.
+	 *     @type DateTime|string $to            Only return invoices with a `issue_date` on or after the given date.
+	 *     @type string           $state        Only return invoices with a `state` matching the value provided.
+	 *                                          Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
-	 * @return array|string
-	 * @throws Exception
+	  * @return array|string
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -56,8 +52,8 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 		}
 
 		$state_options = [ 'draft', 'sent', 'accepted', 'declined' ];
-		if ( isset( $parameters['state'] ) && ! in_array( $parameters['state'], $state_options, true ) ) {
-			throw new InvalidArgumentException(
+		if ( isset( $parameters['state'] ) && ! \in_array( $parameters['state'], $state_options, true ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException(
 				sprintf(
 					'The "state" parameter must be one out of: %s.',
 					implode( ', ', $state_options )
@@ -66,8 +62,8 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 		}
 
 		$result = $this->get( '/invoices', $parameters );
-		if ( ! isset( $result['invoices'] ) || ! is_array( $result['invoices'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['invoices'] ) || ! \is_array( $result['invoices'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['invoices'];
@@ -76,9 +72,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Retrieves the invoice with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $invoiceId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) );
@@ -87,20 +84,20 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Creates a new invoice object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new invoice object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['client_id'] ) ) {
-			throw new MissingArgumentException( 'project_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'project_id' );
 		}
 
-		if ( ! is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
-			throw new InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
 		}
 
 		return $this->post( '/invoices', $parameters );
@@ -113,10 +110,11 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * TODO: Consider creating an interface for managing invoice line items, see https://help.getharvest.com/api-v2/invoices-api/invoices/invoices/#create-an-invoice-line-item
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function update( int $invoiceId, array $parameters ) {
 		return $this->patch( '/invoices/' . rawurlencode( $invoiceId ), $parameters );
@@ -125,9 +123,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Deletes an invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $invoiceId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) );
@@ -136,9 +135,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Marks a draft invoice as sent.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function send( int $invoiceId ) {
 		$parameters = [
@@ -151,9 +151,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Marks an open invoice as closed.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function close( int $invoiceId ) {
 		$parameters = [
@@ -166,9 +167,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Re-opens a closed invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function reopen( int $invoiceId ) {
 		$parameters = [
@@ -182,9 +184,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Marks an open invoice as a draft.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function draft( int $invoiceId ) {
 		$parameters = [
@@ -197,7 +200,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return PaymentInterface;
+	 * @return \Lafiel\Required\Harvest\Api\Invoice\PaymentInterface ;
 	 */
 	public function payments(): PaymentInterface {
 		return new Payments( $this->client );
@@ -206,7 +209,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Gets a Estimate's messages.
 	 *
-	 * @return MessagesInterface
+	 * @return \Required\Harvest\Api\Invoice\MessagesInterface
 	 */
 	public function messages(): MessagesInterface {
 		return new Messages( $this->client );

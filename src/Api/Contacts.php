@@ -6,10 +6,6 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Http\Client\Exception;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for contacts endpoint.
@@ -22,15 +18,16 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Retrieves a list of contacts.
 	 *
-	 * @param array $parameters {
-	 *      Optional. Parameters for filtering the list of contacts. Default empty array.
+	 * @throws \Http\Client\Exception
 	 *
-	 *     @type int             $client_id      Only return contacts belonging to the client with the given ID.
-	 *     @type DateTime|string $updated_since  Only return contacts that have been updated since the given
-	 *                                           date and time.
+	 * @param array $parameters {
+	 *     Optional. Parameters for filtering the list of contacts. Default empty array.
+	 *
+	 *     @type int             $client_id     Only return contacts belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return contacts that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -38,8 +35,8 @@ class Contacts extends AbstractApi implements ContactsInterface {
 		}
 
 		$result = $this->get( '/contacts', $parameters );
-		if ( ! isset( $result['contacts'] ) || ! is_array( $result['contacts'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['contacts'] ) || ! \is_array( $result['contacts'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['contacts'];
@@ -48,9 +45,10 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Retrieves the contact with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $contactId ) {
 		return $this->get( '/contacts/' . rawurlencode( $contactId ) );
@@ -59,28 +57,28 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Creates a new contact object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param array $parameters The parameters of the new contact object.
 	 * @return array|string
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['client_id'] ) ) {
-			throw new MissingArgumentException( 'client_id' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'client_id' );
 		}
 
 		if ( ! isset( $parameters['first_name'] ) ) {
-			throw new MissingArgumentException( 'first_name' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'first_name' );
 		}
 
-		if ( ! is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
-			throw new InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
+		if ( ! \is_int( $parameters['client_id'] ) || empty( $parameters['client_id'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "client_id" parameter must be a non-empty integer.' );
 		}
 
-		if ( ! is_string( $parameters['first_name'] ) || empty( trim( $parameters['first_name'] ) ) ) {
-			throw new InvalidArgumentException( 'The "first_name" parameter must be a non-empty string.' );
+		if ( ! \is_string( $parameters['first_name'] ) || empty( trim( $parameters['first_name'] ) ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "first_name" parameter must be a non-empty string.' );
 		}
 
 		return $this->post( '/contacts', $parameters );
@@ -91,10 +89,11 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $contactId The ID of the contact.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function update( int $contactId, array $parameters ) {
 		return $this->patch( '/contacts/' . rawurlencode( $contactId ), $parameters );
@@ -103,9 +102,10 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Deletes a contact.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $contactId ) {
 		return $this->delete( '/contacts/' . rawurlencode( $contactId ) );

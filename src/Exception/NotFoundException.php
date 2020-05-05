@@ -2,12 +2,13 @@
 /**
  * NotFoundException class.
  */
+
 namespace Required\Harvest\Exception;
 
 /**
  * Exception thrown if a requested resource doesn't exist.
  */
-class NotFoundException extends RuntimeException {
+class NotFoundException extends \Required\Harvest\Exception\RuntimeException {
 
 	/**
 	 * Constructor.

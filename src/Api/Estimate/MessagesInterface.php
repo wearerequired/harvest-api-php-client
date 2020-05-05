@@ -2,10 +2,6 @@
 
 namespace Required\Harvest\Api\Estimate;
 
-use DateTime;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-
 /**
  * API client for estimate messages endpoint.
  *
@@ -16,16 +12,16 @@ interface MessagesInterface {
 	/**
 	 * Retrieves a list of estimate messages for a specific estimate.
 	 *
-	 * @param int $estimateId The ID of the estimate.
+	 * @param int   $estimateId The ID of the estimate.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate messages. Default empty array.
 	 *
-	 * 		@type DateTime|string $updated_since Only return estimate messages that have been updated since the given
-	 *                                           date and time.
+	 *     @type DateTime|string $updated_since Only return estimate messages that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */
-	public function all( int $estimateId, array $parameters = []);
+	public function all( int $estimateId, array $parameters = [] );
 
 	/**
 	 * Retrieves the estimate message with the given ID.
@@ -34,19 +30,19 @@ interface MessagesInterface {
 	 * @param int $messageId The ID of the estimate message.
 	 * @return array|string
 	 */
-	public function show( int $estimateId, int $messageId);
+	public function show( int $estimateId, int $messageId );
 
 	/**
 	 * Creates a new estimate message object.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @param array $parameters The parameters of the new estimate message object.
 	 * @return array|string
-	 * @throws InvalidArgumentException
-	 *
-	 * @throws MissingArgumentException
 	 */
-	public function create( int $estimateId, array $parameters);
+	public function create( int $estimateId, array $parameters );
 
 	/**
 	 * Deletes an estimate message.
@@ -55,5 +51,5 @@ interface MessagesInterface {
 	 * @param int $messageId The ID of the estimate message.
 	 * @return array|string
 	 */
-	public function remove( int $estimateId, int $messageId);
+	public function remove( int $estimateId, int $messageId );
 }

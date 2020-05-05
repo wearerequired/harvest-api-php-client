@@ -2,12 +2,13 @@
 /**
  * AuthorizationException class.
  */
+
 namespace Required\Harvest\Exception;
 
 /**
  * Exception thrown if a user do not have authorization to perform a request.
  */
-class AuthorizationException extends RuntimeException {
+class AuthorizationException extends \Required\Harvest\Exception\RuntimeException {
 
 	/**
 	 * Constructor.

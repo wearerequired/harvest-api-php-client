@@ -6,11 +6,7 @@
 namespace Required\Harvest\Api\Invoice;
 
 use DateTime;
-use Http\Client\Exception;
 use Required\Harvest\Api\AbstractApi;
-use Required\Harvest\Exception\InvalidArgumentException;
-use Required\Harvest\Exception\MissingArgumentException;
-use Required\Harvest\Exception\RuntimeException;
 
 /**
  * API client for invoice payments endpoint.
@@ -23,6 +19,8 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Retrieves a list of invoice payments for a specific invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int   $invoiceId  The ID of the invoice.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice payments. Default empty array.
@@ -31,7 +29,6 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function all( int $invoiceId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -39,8 +36,8 @@ class Payments extends AbstractApi implements PaymentsInterface {
 		}
 
 		$result = $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/payments', $parameters );
-		if ( ! isset( $result['payments'] ) || ! is_array( $result['payments'] ) ) {
-			throw new RuntimeException( 'Unexpected result.' );
+		if ( ! isset( $result['payments'] ) || ! \is_array( $result['payments'] ) ) {
+			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
 		return $result['payments'];
@@ -49,10 +46,11 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Retrieves the invoice message with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId The ID of the invoice message.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function show( int $invoiceId, int $messageId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/payments/' . rawurlencode( $messageId ) );
@@ -61,9 +59,9 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Creates a new invoice message object.
 	 *
-	 * @throws Exception
-	 * @throws MissingArgumentException
-	 * @throws InvalidArgumentException
+	 * @throws \Http\Client\Exception
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
 	 * @param int   $invoiceId The ID of the invoice.
 	 * @param array $parameters The parameters of the new invoice message object.
@@ -71,11 +69,11 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	 */
 	public function create( int $invoiceId, array $parameters ) {
 		if ( ! isset( $parameters['amount'] ) ) {
-			throw new MissingArgumentException( 'amount' );
+			throw new \Required\Harvest\Exception\MissingArgumentException( 'amount' );
 		}
 
-		if ( ! is_float( $parameters['amount'] ) || empty( $parameters['amount'] ) ) {
-			throw new InvalidArgumentException( 'The "amount" parameter must be a non-empty decimal.' );
+		if ( ! \is_float( $parameters['amount'] ) || empty( $parameters['amount'] ) ) {
+			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "amount" parameter must be a non-empty decimal.' );
 		}
 
 		return $this->post( '/invoices/' . rawurlencode( $invoiceId ) . '/payments', $parameters );
@@ -84,10 +82,11 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Deletes an invoice message.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId  The ID of the invoice message.
 	 * @return array|string
-	 * @throws Exception
 	 */
 	public function remove( int $invoiceId, int $messageId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) . '/payments/' . rawurlencode( $messageId ) );
