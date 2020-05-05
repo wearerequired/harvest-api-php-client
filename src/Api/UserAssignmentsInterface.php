@@ -22,5 +22,5 @@ interface UserAssignmentsInterface {
 	 * }
 	 * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 }

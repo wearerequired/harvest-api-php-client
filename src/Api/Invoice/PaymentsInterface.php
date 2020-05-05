@@ -21,7 +21,7 @@ interface PaymentsInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( int $invoiceId, array $parameters = []);
+	public function all( int $invoiceId, array $parameters = [] );
 
 	/**
 	 * Retrieves the invoice message with the given ID.
@@ -30,7 +30,7 @@ interface PaymentsInterface {
 	 * @param int $messageId The ID of the invoice message.
 	 * @return array|string
 	 */
-	public function show( int $invoiceId, int $messageId);
+	public function show( int $invoiceId, int $messageId );
 
 	/**
 	 * Creates a new invoice message object.
@@ -42,7 +42,7 @@ interface PaymentsInterface {
 	 * @param array $parameters The parameters of the new invoice message object.
 	 * @return array|string
 	 */
-	public function create( int $invoiceId, array $parameters);
+	public function create( int $invoiceId, array $parameters );
 
 	/**
 	 * Deletes an invoice message.
@@ -51,5 +51,5 @@ interface PaymentsInterface {
 	 * @param int $messageId The ID of the invoice message.
 	 * @return array|string
 	 */
-	public function remove( int $invoiceId, int $messageId);
+	public function remove( int $invoiceId, int $messageId );
 }

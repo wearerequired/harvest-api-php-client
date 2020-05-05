@@ -20,7 +20,7 @@ interface EstimateItemCategoriesInterface {
 	 * }
 	  * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the estimate item category with the given ID.
@@ -28,7 +28,7 @@ interface EstimateItemCategoriesInterface {
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
 	 */
-	public function show( int $estimateItemCategoryId);
+	public function show( int $estimateItemCategoryId );
 
 	/**
 	 * Creates a new estimate item category object.
@@ -39,7 +39,7 @@ interface EstimateItemCategoriesInterface {
 	 * @param array $parameters The parameters of the new estimate item category object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific estimate item category by setting the values of the parameters passed.
@@ -50,7 +50,7 @@ interface EstimateItemCategoriesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $estimateItemCategoryId, array $parameters);
+	public function update( int $estimateItemCategoryId, array $parameters );
 
 	/**
 	 * Deletes an estimate item category.
@@ -58,5 +58,5 @@ interface EstimateItemCategoriesInterface {
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
 	 */
-	public function remove( int $estimateItemCategoryId);
+	public function remove( int $estimateItemCategoryId );
 }

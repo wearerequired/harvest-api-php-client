@@ -23,7 +23,7 @@ interface TaskAssignmentsInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( int $projectId, array $parameters = []);
+	public function all( int $projectId, array $parameters = [] );
 
 	/**
 	 * Retrieves the task assignment with the given ID.
@@ -32,7 +32,7 @@ interface TaskAssignmentsInterface {
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
 	 */
-	public function show( int $projectId, int $taskAssignmentId);
+	public function show( int $projectId, int $taskAssignmentId );
 
 	/**
 	 * Creates a new task assignment object.
@@ -44,7 +44,7 @@ interface TaskAssignmentsInterface {
 	 * @param array $parameters The parameters of the new task assignment object.
 	 * @return array|string
 	 */
-	public function create( int $projectId, array $parameters);
+	public function create( int $projectId, array $parameters );
 
 	/**
 	 * Updates the specific task assignment by setting the values of the parameters passed.
@@ -56,7 +56,7 @@ interface TaskAssignmentsInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $projectId, int $taskAssignmentId, array $parameters);
+	public function update( int $projectId, int $taskAssignmentId, array $parameters );
 
 	/**
 	 * Deletes a task assignment.
@@ -67,5 +67,5 @@ interface TaskAssignmentsInterface {
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
 	 */
-	public function remove( int $projectId, int $taskAssignmentId);
+	public function remove( int $projectId, int $taskAssignmentId );
 }

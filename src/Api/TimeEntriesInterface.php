@@ -31,7 +31,7 @@ interface TimeEntriesInterface {
 	 * }
 	 * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the time entry with the given ID.
@@ -39,7 +39,7 @@ interface TimeEntriesInterface {
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
 	 */
-	public function show( int $timeEntryId);
+	public function show( int $timeEntryId );
 
 	/**
 	 * Creates a new time entry object.
@@ -50,7 +50,7 @@ interface TimeEntriesInterface {
 	 * @param array $parameters The parameters of the new time entry object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific time entry by setting the values of the parameters passed.
@@ -61,7 +61,7 @@ interface TimeEntriesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $timeEntryId, array $parameters);
+	public function update( int $timeEntryId, array $parameters );
 
 	/**
 	 * Deletes a time entry.
@@ -72,7 +72,7 @@ interface TimeEntriesInterface {
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
 	 */
-	public function remove( int $timeEntryId);
+	public function remove( int $timeEntryId );
 
 	/**
 	 * Restarts a time entry.
@@ -82,7 +82,7 @@ interface TimeEntriesInterface {
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
 	 */
-	public function restart( int $timeEntryId);
+	public function restart( int $timeEntryId );
 
 	/**
 	 * Stops a time entry.
@@ -92,7 +92,7 @@ interface TimeEntriesInterface {
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
 	 */
-	public function stop( int $timeEntryId);
+	public function stop( int $timeEntryId );
 
 	/**
 	 * Gets a time entry's external reference.

@@ -21,7 +21,7 @@ interface ContactsInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the contact with the given ID.
@@ -29,7 +29,7 @@ interface ContactsInterface {
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
 	 */
-	public function show( int $contactId);
+	public function show( int $contactId );
 
 	/**
 	 * Creates a new contact object.
@@ -40,7 +40,7 @@ interface ContactsInterface {
 	 * @param array $parameters The parameters of the new contact object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific contact by setting the values of the parameters passed.
@@ -51,7 +51,7 @@ interface ContactsInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $contactId, array $parameters);
+	public function update( int $contactId, array $parameters );
 
 	/**
 	 * Deletes a contact.
@@ -59,5 +59,5 @@ interface ContactsInterface {
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
 	 */
-	public function remove( int $contactId);
+	public function remove( int $contactId );
 }

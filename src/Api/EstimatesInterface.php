@@ -29,7 +29,7 @@ interface EstimatesInterface {
 	 * }
 	  * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the estimate with the given ID.
@@ -37,7 +37,7 @@ interface EstimatesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
 	 */
-	public function show( int $estimateId);
+	public function show( int $estimateId );
 
 	/**
 	 * Creates a new estimate object.
@@ -48,7 +48,7 @@ interface EstimatesInterface {
 	 * @param array $parameters The parameters of the new estimate object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific estimate by setting the values of the parameters passed.
@@ -61,7 +61,7 @@ interface EstimatesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $estimateId, array $parameters);
+	public function update( int $estimateId, array $parameters );
 
 	/**
 	 * Deletes an estimate.
@@ -69,7 +69,7 @@ interface EstimatesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
 	 */
-	public function remove( int $estimateId);
+	public function remove( int $estimateId );
 
 	/**
 	 * Marks a draft estimate as sent.
@@ -77,7 +77,7 @@ interface EstimatesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
 	 */
-	public function send( int $estimateId);
+	public function send( int $estimateId );
 
 	/**
 	 * Marks an open estimate as accepted.
@@ -85,7 +85,7 @@ interface EstimatesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
 	 */
-	public function accept( int $estimateId);
+	public function accept( int $estimateId );
 
 	/**
 	 * Marks an open estimate as declined.
@@ -93,7 +93,7 @@ interface EstimatesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
 	 */
-	public function decline( int $estimateId);
+	public function decline( int $estimateId );
 
 	/**
 	 * Re-opens a closed estimate
@@ -101,7 +101,7 @@ interface EstimatesInterface {
 	 * @param int $estimateId The ID of the estimate.
 	 * @return array|string
 	 */
-	public function reopen( int $estimateId);
+	public function reopen( int $estimateId );
 
 	/**
 	 * Gets a Estimate's messages.

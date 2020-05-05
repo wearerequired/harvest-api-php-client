@@ -22,7 +22,7 @@ interface RolesInterface {
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
 	 */
-	public function show( int $roleId);
+	public function show( int $roleId );
 
 	/**
 	 * Creates a new role object.
@@ -33,7 +33,7 @@ interface RolesInterface {
 	 * @param array $parameters The parameters of the new role object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific role by setting the values of the parameters passed.
@@ -47,7 +47,7 @@ interface RolesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $roleId, array $parameters);
+	public function update( int $roleId, array $parameters );
 
 	/**
 	 * Deletes a role.
@@ -57,5 +57,5 @@ interface RolesInterface {
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
 	 */
-	public function remove( int $roleId);
+	public function remove( int $roleId );
 }

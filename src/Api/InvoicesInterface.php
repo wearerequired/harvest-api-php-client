@@ -30,7 +30,7 @@ interface InvoicesInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the invoice with the given ID.
@@ -38,7 +38,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function show( int $invoiceId);
+	public function show( int $invoiceId );
 
 	/**
 	 * Creates a new invoice object.
@@ -49,7 +49,7 @@ interface InvoicesInterface {
 	 * @param array $parameters The parameters of the new invoice object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific invoice by setting the values of the parameters passed.
@@ -62,7 +62,7 @@ interface InvoicesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $invoiceId, array $parameters);
+	public function update( int $invoiceId, array $parameters );
 
 	/**
 	 * Deletes an invoice.
@@ -70,7 +70,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function remove( int $invoiceId);
+	public function remove( int $invoiceId );
 
 	/**
 	 * Marks a draft invoice as sent.
@@ -78,7 +78,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function send( int $invoiceId);
+	public function send( int $invoiceId );
 
 	/**
 	 * Marks an open invoice as closed.
@@ -86,7 +86,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function close( int $invoiceId);
+	public function close( int $invoiceId );
 
 	/**
 	 * Re-opens a closed invoice.
@@ -94,7 +94,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function reopen( int $invoiceId);
+	public function reopen( int $invoiceId );
 
 	/**
 	 * Marks an open invoice as a draft.
@@ -102,7 +102,7 @@ interface InvoicesInterface {
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
 	 */
-	public function draft( int $invoiceId);
+	public function draft( int $invoiceId );
 
 	/**
 	 * Gets the authenticated user's project assignments.

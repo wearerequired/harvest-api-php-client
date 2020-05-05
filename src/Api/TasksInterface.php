@@ -22,7 +22,7 @@ interface TasksInterface {
 	 * }
 	 * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the task with the given ID.
@@ -30,7 +30,7 @@ interface TasksInterface {
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
 	 */
-	public function show( int $taskId);
+	public function show( int $taskId );
 
 	/**
 	 * Creates a new task object.
@@ -41,7 +41,7 @@ interface TasksInterface {
 	 * @param array $parameters The parameters of the new task object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific task by setting the values of the parameters passed.
@@ -52,7 +52,7 @@ interface TasksInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $taskId, array $parameters);
+	public function update( int $taskId, array $parameters );
 
 	/**
 	 * Deletes a task.
@@ -62,5 +62,5 @@ interface TasksInterface {
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
 	 */
-	public function remove( int $taskId);
+	public function remove( int $taskId );
 }

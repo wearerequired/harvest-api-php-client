@@ -23,7 +23,7 @@ interface ExpenseCategoriesInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the expense category with the given ID.
@@ -31,7 +31,7 @@ interface ExpenseCategoriesInterface {
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
 	 */
-	public function show( int $expenseCategoryId);
+	public function show( int $expenseCategoryId );
 
 	/**
 	 * Creates a new expense category object.
@@ -42,7 +42,7 @@ interface ExpenseCategoriesInterface {
 	 * @param array $parameters The parameters of the new expense category object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific expense category by setting the values of the parameters passed.
@@ -53,7 +53,7 @@ interface ExpenseCategoriesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $expenseCategoryId, array $parameters);
+	public function update( int $expenseCategoryId, array $parameters );
 
 	/**
 	 * Deletes an expense category.
@@ -61,5 +61,5 @@ interface ExpenseCategoriesInterface {
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
 	 */
-	public function remove( int $expenseCategoryId);
+	public function remove( int $expenseCategoryId );
 }

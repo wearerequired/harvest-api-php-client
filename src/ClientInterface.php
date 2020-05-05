@@ -36,7 +36,7 @@ interface ClientInterface {
 	 * @param string $accountId The Harvest account ID.
 	 * @param string $accessToken The personal access token.
 	 */
-	public function authenticate( string $accountId, string $accessToken): void;
+	public function authenticate( string $accountId, string $accessToken ): void;
 
 	/**
 	 * Retrieves the API interface for an endpoint name.
@@ -46,7 +46,7 @@ interface ClientInterface {
 	 * @param string $name The endpoint name.
 	 * @return \Required\Harvest\Api\ApiInterface The API interface.
 	 */
-	public function api( $name): ApiInterface;
+	public function api( $name ): ApiInterface;
 
 	/**
 	 * Retrieves the HTTP client.

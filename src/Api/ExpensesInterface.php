@@ -27,7 +27,7 @@ interface ExpensesInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the expense with the given ID.
@@ -35,7 +35,7 @@ interface ExpensesInterface {
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
 	 */
-	public function show( int $expenseId);
+	public function show( int $expenseId );
 
 	/**
 	 * Creates a new expense object.
@@ -46,7 +46,7 @@ interface ExpensesInterface {
 	 * @param array $parameters The parameters of the new expense object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific expense by setting the values of the parameters passed.
@@ -57,7 +57,7 @@ interface ExpensesInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $expenseId, array $parameters);
+	public function update( int $expenseId, array $parameters );
 
 	/**
 	 * Deletes an expense.
@@ -65,5 +65,5 @@ interface ExpensesInterface {
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
 	 */
-	public function remove( int $expenseId);
+	public function remove( int $expenseId );
 }

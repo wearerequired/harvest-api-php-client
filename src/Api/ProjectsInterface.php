@@ -23,7 +23,7 @@ interface ProjectsInterface {
 	 * }
 	 * @return array
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the project with the given ID.
@@ -31,7 +31,7 @@ interface ProjectsInterface {
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
 	 */
-	public function show( int $projectId);
+	public function show( int $projectId );
 
 	/**
 	 * Creates a new project object.
@@ -42,7 +42,7 @@ interface ProjectsInterface {
 	 * @param array $parameters The parameters of the new project object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific project by setting the values of the parameters passed.
@@ -53,7 +53,7 @@ interface ProjectsInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $projectId, array $parameters);
+	public function update( int $projectId, array $parameters );
 
 	/**
 	 * Deletes a project.
@@ -67,7 +67,7 @@ interface ProjectsInterface {
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
 	 */
-	public function remove( int $projectId);
+	public function remove( int $projectId );
 
 	/**
 	 * Gets a projects's user assignments.

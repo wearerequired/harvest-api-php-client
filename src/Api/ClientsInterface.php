@@ -22,7 +22,7 @@ interface ClientsInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( array $parameters = []);
+	public function all( array $parameters = [] );
 
 	/**
 	 * Retrieves the client with the given ID.
@@ -30,7 +30,7 @@ interface ClientsInterface {
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
 	 */
-	public function show( int $clientId);
+	public function show( int $clientId );
 
 	/**
 	 * Creates a new client object.
@@ -41,7 +41,7 @@ interface ClientsInterface {
 	 * @param array $parameters The parameters of the new client object.
 	 * @return array|string
 	 */
-	public function create( array $parameters);
+	public function create( array $parameters );
 
 	/**
 	 * Updates the specific client by setting the values of the parameters passed.
@@ -52,7 +52,7 @@ interface ClientsInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $clientId, array $parameters);
+	public function update( int $clientId, array $parameters );
 
 	/**
 	 * Deletes a client.
@@ -62,5 +62,5 @@ interface ClientsInterface {
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
 	 */
-	public function remove( int $clientId);
+	public function remove( int $clientId );
 }

@@ -32,7 +32,7 @@ interface UserAssignmentsInterface {
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
 	 */
-	public function show( int $projectId, int $userAssignmentId);
+	public function show( int $projectId, int $userAssignmentId );
 
 	/**
 	 * Creates a new user assignment object.
@@ -44,7 +44,7 @@ interface UserAssignmentsInterface {
 	 * @param array $parameters The parameters of the new user assignment object.
 	 * @return array|string
 	 */
-	public function create( int $projectId, array $parameters);
+	public function create( int $projectId, array $parameters );
 
 	/**
 	 * Updates the specific user assignment by setting the values of the parameters passed.
@@ -56,7 +56,7 @@ interface UserAssignmentsInterface {
 	 * @param array $parameters
 	 * @return array|string
 	 */
-	public function update( int $projectId, int $userAssignmentId, array $parameters);
+	public function update( int $projectId, int $userAssignmentId, array $parameters );
 
 	/**
 	 * Deletes a user assignment.
@@ -67,5 +67,5 @@ interface UserAssignmentsInterface {
 	 * @param int $userAssignmentId The ID of the user assignment.
 	 * @return array|string
 	 */
-	public function remove( int $projectId, int $userAssignmentId);
+	public function remove( int $projectId, int $userAssignmentId );
 }

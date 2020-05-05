@@ -21,7 +21,7 @@ interface MessagesInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( int $estimateId, array $parameters = []);
+	public function all( int $estimateId, array $parameters = [] );
 
 	/**
 	 * Retrieves the estimate message with the given ID.
@@ -30,7 +30,7 @@ interface MessagesInterface {
 	 * @param int $messageId The ID of the estimate message.
 	 * @return array|string
 	 */
-	public function show( int $estimateId, int $messageId);
+	public function show( int $estimateId, int $messageId );
 
 	/**
 	 * Creates a new estimate message object.
@@ -42,7 +42,7 @@ interface MessagesInterface {
 	 * @param array $parameters The parameters of the new estimate message object.
 	 * @return array|string
 	 */
-	public function create( int $estimateId, array $parameters);
+	public function create( int $estimateId, array $parameters );
 
 	/**
 	 * Deletes an estimate message.
@@ -51,5 +51,5 @@ interface MessagesInterface {
 	 * @param int $messageId The ID of the estimate message.
 	 * @return array|string
 	 */
-	public function remove( int $estimateId, int $messageId);
+	public function remove( int $estimateId, int $messageId );
 }

@@ -21,5 +21,5 @@ interface ProjectAssignmentsInterface {
 	 * }
 	 * @return array|string
 	 */
-	public function all( int $userId, array $parameters = []);
+	public function all( int $userId, array $parameters = [] );
 }
