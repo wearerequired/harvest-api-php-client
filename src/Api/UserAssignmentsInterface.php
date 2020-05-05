@@ -15,10 +15,10 @@ interface UserAssignmentsInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of user assignments. Default empty array.
 	 *
-	 * 		@type bool $is_active                Pass `true` to only return active user assignments and `false` to
-	 *                                           return  inactive user assignments.
-	 * 		@type DateTime|string $updated_since Only return user assignments that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active user assignments and `false` to
+	 *                                          return  inactive user assignments.
+	 *     @type DateTime|string $updated_since Only return user assignments that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array
 	 */

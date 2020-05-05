@@ -18,14 +18,15 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	/**
 	 * Retrieves a list of estimate item categories.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate item categories. Default empty array.
 	 *
 	 *     @type DateTime|string $updated_since  Only return estimate item categories that have been updated since
 	 *                                           the given date and time.
+	  * @return array|string
 	 * }
-	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -43,9 +44,10 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	/**
 	 * Retrieves the estimate item category with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $estimateItemCategoryId ) {
 		return $this->get( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ) );
@@ -78,10 +80,11 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $estimateItemCategoryId, array $parameters ) {
 		return $this->patch( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ), $parameters );
@@ -90,9 +93,10 @@ class EstimateItemCategories extends AbstractApi implements EstimateItemCategori
 	/**
 	 * Deletes an estimate item category.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateItemCategoryId The ID of the estimate item category.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $estimateItemCategoryId ) {
 		return $this->delete( '/estimate_item_categories/' . rawurlencode( $estimateItemCategoryId ) );

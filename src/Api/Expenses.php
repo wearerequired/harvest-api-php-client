@@ -18,6 +18,8 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	/**
 	 * Retrieves a list of expenses.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of expenses. Default empty array.
 	 *
@@ -31,8 +33,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	 *     @type DateTime|string $from           Only return expenses with a `spent_date` on or after the given date.
 	 *     @type DateTime|string $to             Only return expenses with a `spent_date` on or after the given date.
 	 * }
-	 * @return array|string
-	 * @throws \Http\Client\Exception
+	  * @return array|string
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -62,9 +63,10 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	/**
 	 * Retrieves the expense with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $expenseId ) {
 		return $this->get( '/expenses/' . rawurlencode( $expenseId ) );
@@ -113,10 +115,11 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $expenseId, array $parameters ) {
 		return $this->patch( '/expenses/' . rawurlencode( $expenseId ), $parameters );
@@ -125,9 +128,10 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 	/**
 	 * Deletes an expense.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $expenseId The ID of the expense.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $expenseId ) {
 		return $this->delete( '/expenses/' . rawurlencode( $expenseId ) );

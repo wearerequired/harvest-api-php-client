@@ -19,8 +19,9 @@ class CurrentUser extends AbstractApi implements CurrentUserInterface {
 	/**
 	 * Retrieves the authenticated user.
 	 *
-	 * @return array|string
 	 * @throws \Http\Client\Exception
+	 *
+	 * @return array|string
 	 */
 	public function show() {
 		return $this->get( '/users/me' );

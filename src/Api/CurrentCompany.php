@@ -16,8 +16,9 @@ class CurrentCompany extends AbstractApi implements CurrentCompanyInterface {
 	/**
 	 * Retrieves the company for the currently authenticated user.
 	 *
-	 * @return array|string
 	 * @throws \Http\Client\Exception
+	 *
+	 * @return array|string
 	 */
 	public function show() {
 		return $this->get( '/company' );

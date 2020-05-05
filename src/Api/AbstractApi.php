@@ -142,11 +142,12 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Sends a GET request with query parameters.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param string $path           Request path.
 	 * @param array  $parameters     GET parameters.
 	 * @param array  $requestHeaders Request Headers.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	protected function get( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$page = $this->pagination->getPage();
@@ -178,11 +179,12 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Sends a HEAD request with query parameters.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param string $path           Request path.
 	 * @param array  $parameters     HEAD parameters.
 	 * @param array  $requestHeaders Request headers.
 	 * @return \Psr\Http\Message\ResponseInterface
-	 * @throws \Http\Client\Exception
 	 */
 	protected function head( $path, array $parameters = [], array $requestHeaders = [] ): ResponseInterface {
 		return $this->client->getHttpClient()->head(
@@ -194,11 +196,12 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Sends a POST request with JSON-encoded parameters.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param string $path           Request path.
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	protected function post( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
@@ -215,11 +218,12 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Sends a PATCH request with JSON-encoded parameters.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param string $path           Request path.
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	protected function patch( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
@@ -236,11 +240,12 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Sends a PUT request with JSON-encoded parameters.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param string $path           Request path.
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	protected function put( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );
@@ -257,11 +262,12 @@ abstract class AbstractApi implements ApiInterface {
 	/**
 	 * Sends a DELETE request with JSON-encoded parameters.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param string $path           Request path.
 	 * @param array  $parameters     POST parameters to be JSON encoded.
 	 * @param array  $requestHeaders Request headers.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	protected function delete( $path, array $parameters = [], array $requestHeaders = [] ) {
 		$requestHeaders = array_merge( [ 'Content-Type' => 'application/json' ], $requestHeaders );

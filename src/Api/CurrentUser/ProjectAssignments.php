@@ -15,9 +15,10 @@ use Required\Harvest\Api\AbstractApi;
  */
 class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterface {
 
-
 	/**
 	 * Retrieves a list of project assignments for the current user.
+	 *
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of project assignments. Default empty array.
@@ -26,7 +27,6 @@ class ProjectAssignments extends AbstractApi implements ProjectAssignmentsInterf
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {

@@ -17,9 +17,10 @@ class ExternalReference extends AbstractApi implements ExternalReferenceInterfac
 	/**
 	 * Deletes a time entry’s external reference.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $timeEntryId ) {
 		return $this->delete( '/time_entries/' . rawurlencode( $timeEntryId ) . '/external_reference' );

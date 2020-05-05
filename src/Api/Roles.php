@@ -16,8 +16,9 @@ class Roles extends AbstractApi implements RolesInterface {
 	/**
 	 * Retrieves a list of roles.
 	 *
-	 * @return array
 	 * @throws \Http\Client\Exception
+	 *
+	 * @return array
 	 */
 	public function all() {
 		$result = $this->get( '/roles' );
@@ -31,9 +32,10 @@ class Roles extends AbstractApi implements RolesInterface {
 	/**
 	 * Retrieves the role with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $roleId ) {
 		return $this->get( '/roles/' . rawurlencode( $roleId ) );
@@ -91,9 +93,10 @@ class Roles extends AbstractApi implements RolesInterface {
 	 *
 	 * Deleting a role will unlink it from any users it was assigned to.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $roleId The ID of the role.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $roleId ) {
 		return $this->delete( '/roles/' . rawurlencode( $roleId ) );

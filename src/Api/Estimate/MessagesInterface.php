@@ -12,12 +12,12 @@ interface MessagesInterface {
 	/**
 	 * Retrieves a list of estimate messages for a specific estimate.
 	 *
-	 * @param int $estimateId The ID of the estimate.
+	 * @param int   $estimateId The ID of the estimate.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate messages. Default empty array.
 	 *
-	 * 		@type DateTime|string $updated_since Only return estimate messages that have been updated since the given
-	 *                                           date and time.
+	 *     @type DateTime|string $updated_since Only return estimate messages that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */
@@ -35,12 +35,12 @@ interface MessagesInterface {
 	/**
 	 * Creates a new estimate message object.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @param array $parameters The parameters of the new estimate message object.
 	 * @return array|string
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
-	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function create( int $estimateId, array $parameters);
 

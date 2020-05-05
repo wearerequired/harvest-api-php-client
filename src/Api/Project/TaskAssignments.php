@@ -19,6 +19,8 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	/**
 	 * Retrieves a list of task assignments for a specific project.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of task assignments. Default empty array.
@@ -29,7 +31,6 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( int $projectId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -51,10 +52,11 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	/**
 	 * Retrieves the task assignment with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $projectId, int $taskAssignmentId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ) );
@@ -88,11 +90,12 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int   $projectId        The ID of the project.
 	 * @param int   $taskAssignmentId The ID of the task assignment.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $projectId, int $taskAssignmentId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ), $parameters );
@@ -103,10 +106,11 @@ class TaskAssignments extends AbstractApi implements TaskAssignmentsInterface {
 	 *
 	 * Deleting a task assignment is only possible if it has no time entries associated with it.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId        The ID of the project.
 	 * @param int $taskAssignmentId The ID of the task assignment.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $projectId, int $taskAssignmentId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) . '/task_assignments/' . rawurlencode( $taskAssignmentId ) );

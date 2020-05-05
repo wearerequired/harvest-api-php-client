@@ -27,7 +27,6 @@ class ResponseExceptionThrower implements Plugin {
 	 * @param callable                           $next    Next middleware in the chain, the request is passed as the
 	 *                                                    first argument
 	 * @param callable                           $first   First middleware in the chain, used to to restart a request
-	 *
 	 * @return \Http\Promise\Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as
 	 *                               HttpAsyncClient).
 	 */

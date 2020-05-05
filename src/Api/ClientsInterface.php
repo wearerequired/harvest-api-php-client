@@ -15,9 +15,9 @@ interface ClientsInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of clients. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active clients and `false` to return
+	 *     @type bool $is_active                Pass `true` to only return active clients and `false` to return
 	 *                                           inactive clients.
-	 * 		@type DateTime|string $updated_since Only return clients that have been updated since the given
+	 *     @type DateTime|string $updated_since Only return clients that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
@@ -35,11 +35,11 @@ interface ClientsInterface {
 	/**
 	 * Creates a new client object.
 	 *
-	 * @param array $parameters The parameters of the new client object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new client object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

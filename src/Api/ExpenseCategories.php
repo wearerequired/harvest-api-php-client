@@ -18,6 +18,8 @@ class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterfac
 	/**
 	 * Retrieves a list of expense categories.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of expense categories. Default empty array.
 	 *
@@ -28,7 +30,6 @@ class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterfac
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -50,9 +51,10 @@ class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterfac
 	/**
 	 * Retrieves the expense category with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $expenseCategoryId ) {
 		return $this->get( '/expense_categories/' . rawurlencode( $expenseCategoryId ) );
@@ -85,10 +87,11 @@ class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterfac
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $expenseCategoryId, array $parameters ) {
 		return $this->patch( '/expense_categories/' . rawurlencode( $expenseCategoryId ), $parameters );
@@ -97,9 +100,10 @@ class ExpenseCategories extends AbstractApi implements ExpenseCategoriesInterfac
 	/**
 	 * Deletes an expense category.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $expenseCategoryId The ID of the expense category.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $expenseCategoryId ) {
 		return $this->delete( '/expense_categories/' . rawurlencode( $expenseCategoryId ) );

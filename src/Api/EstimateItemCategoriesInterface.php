@@ -15,10 +15,10 @@ interface EstimateItemCategoriesInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate item categories. Default empty array.
 	 *
-	 * 		@type DateTime|string $updated_since Only return estimate item categories that have been updated since
-	 *                                           the given date and time.
+	 *     @type DateTime|string $updated_since Only return estimate item categories that have been updated since
+	 *                                          the given date and time.
 	 * }
-	 * @return array|string
+	  * @return array|string
 	 */
 	public function all( array $parameters = []);
 
@@ -33,11 +33,11 @@ interface EstimateItemCategoriesInterface {
 	/**
 	 * Creates a new estimate item category object.
 	 *
-	 * @param array $parameters The parameters of the new estimate item category object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new estimate item category object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

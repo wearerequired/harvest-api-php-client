@@ -15,15 +15,15 @@ interface ExpensesInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of expenses. Default empty array.
 	 *
-	 * 		@type int $user_id 					 Only return expenses belonging to the user with the given ID.
-	 * 		@type int $client_id 				 Only return expenses belonging to the client with the given ID.
-	 * 		@type int $project_id 				 Only return expenses belonging to the project with the given ID.
-	 * 		@type bool $is_billed 				 Pass `true` to only return expenses that have been invoiced and
-	 *                                           `false` to return expenses that have not been invoiced.
-	 * 		@type DateTime|string $updated_since Only return expenses that have been updated since the given
-	 *                                           date and time.
-	 * 		@type DateTime|string $from 		 Only return expenses with a `spent_date` on or after the given date.
-	 * 		@type DateTime|string $to 			 Only return expenses with a `spent_date` on or after the given date.
+	 *     @type int $user_id                   Only return expenses belonging to the user with the given ID.
+	 *     @type int $client_id                 Only return expenses belonging to the client with the given ID.
+	 *     @type int $project_id                Only return expenses belonging to the project with the given ID.
+	 *     @type bool $is_billed                Pass `true` to only return expenses that have been invoiced and
+	 *                                          `false` to return expenses that have not been invoiced.
+	 *     @type DateTime|string $updated_since Only return expenses that have been updated since the given
+	 *                                          date and time.
+	 *     @type DateTime|string $from          Only return expenses with a `spent_date` on or after the given date.
+	 *     @type DateTime|string $to            Only return expenses with a `spent_date` on or after the given date.
 	 * }
 	 * @return array|string
 	 */
@@ -40,11 +40,11 @@ interface ExpensesInterface {
 	/**
 	 * Creates a new expense object.
 	 *
-	 * @param array $parameters The parameters of the new expense object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new expense object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

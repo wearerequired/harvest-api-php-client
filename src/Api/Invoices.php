@@ -23,20 +23,20 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 * Retrieves a list of invoices.
 	 *
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoices. Default empty array.
 	 *
-	 *     @type int              $client_id     Only return invoices belonging to the client with the given ID.
-	 *     @type DateTime|string $updated_since  Only return invoices that have been updated since the given
-	 *                                           date and time.
-	 *     @type DateTime|string $from           Only return invoices with a `issue_date` on or after the given date.
-	 *     @type DateTime|string $to             Only return invoices with a `issue_date` on or after the given date.
-	 *     @type string           $state         Only return invoices with a `state` matching the value provided.
-	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
+	 *     @type int              $client_id    Only return invoices belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return invoices that have been updated since the given
+	 *                                          date and time.
+	 *     @type DateTime|string $from          Only return invoices with a `issue_date` on or after the given date.
+	 *     @type DateTime|string $to            Only return invoices with a `issue_date` on or after the given date.
+	 *     @type string           $state        Only return invoices with a `state` matching the value provided.
+	 *                                          Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
-	 * @return array|string
-	 * @throws \Http\Client\Exception
+	  * @return array|string
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -72,9 +72,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Retrieves the invoice with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $invoiceId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) );
@@ -109,10 +110,11 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *
 	 * TODO: Consider creating an interface for managing invoice line items, see https://help.getharvest.com/api-v2/invoices-api/invoices/invoices/#create-an-invoice-line-item
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $invoiceId, array $parameters ) {
 		return $this->patch( '/invoices/' . rawurlencode( $invoiceId ), $parameters );
@@ -121,9 +123,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Deletes an invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $invoiceId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) );
@@ -132,9 +135,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Marks a draft invoice as sent.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function send( int $invoiceId ) {
 		$parameters = [
@@ -147,9 +151,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Marks an open invoice as closed.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function close( int $invoiceId ) {
 		$parameters = [
@@ -162,9 +167,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Re-opens a closed invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function reopen( int $invoiceId ) {
 		$parameters = [
@@ -178,9 +184,10 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Marks an open invoice as a draft.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function draft( int $invoiceId ) {
 		$parameters = [

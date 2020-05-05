@@ -12,12 +12,12 @@ interface PaymentsInterface {
 	/**
 	 * Retrieves a list of invoice payments for a specific invoice.
 	 *
-	 * @param int $invoiceId The ID of the invoice.
+	 * @param int   $invoiceId  The ID of the invoice.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice payments. Default empty array.
 	 *
-	 * 		@type DateTime|string $updated_since Only return invoice payments that have been updated since the given
-	 *                                           date and time.
+	 *     @type DateTime|string $updated_since Only return invoice payments that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */
@@ -35,12 +35,12 @@ interface PaymentsInterface {
 	/**
 	 * Creates a new invoice message object.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param array $parameters The parameters of the new invoice message object.
 	 * @return array|string
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
-	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function create( int $invoiceId, array $parameters);
 

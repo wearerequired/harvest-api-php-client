@@ -15,9 +15,9 @@ interface TasksInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of tasks. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active tasks and `false` to return
+	 *      @type bool $is_active                Pass `true` to only return active tasks and `false` to return
 	 *                                           inactive tasks.
-	 * 		@type DateTime|string $updated_since Only return tasks that have been updated since the given
+	 *      @type DateTime|string $updated_since Only return tasks that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array
@@ -35,11 +35,11 @@ interface TasksInterface {
 	/**
 	 * Creates a new task object.
 	 *
-	 * @param array $parameters The parameters of the new task object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new task object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

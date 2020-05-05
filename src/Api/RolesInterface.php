@@ -27,11 +27,11 @@ interface RolesInterface {
 	/**
 	 * Creates a new role object.
 	 *
-	 * @param array $parameters The parameters of the new role object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new role object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 
@@ -40,12 +40,12 @@ interface RolesInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 *
 	 * @param int $roleId The ID of the role.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
-	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function update( int $roleId, array $parameters);
 

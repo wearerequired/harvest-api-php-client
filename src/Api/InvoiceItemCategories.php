@@ -18,14 +18,15 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	/**
 	 * Retrieves a list of invoice item categories.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice item categories. Default empty array.
 	 *
 	 *     @type DateTime|string $updated_since Only return invoice item categories that have been updated since
-	 *                                           the given date and time.
+	 *                                          the given date and time.
 	 * }
-	 * @return array|string
-	 * @throws \Http\Client\Exception
+	  * @return array|string
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -43,9 +44,10 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	/**
 	 * Retrieves the invoice item category with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $invoiceItemCategoryId ) {
 		return $this->get( '/invoice_item_categories/' . rawurlencode( $invoiceItemCategoryId ) );
@@ -78,10 +80,11 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $invoiceItemCategoryId, array $parameters ) {
 		return $this->patch( '/invoice_item_categories/' . rawurlencode( $invoiceItemCategoryId ), $parameters );
@@ -92,9 +95,10 @@ class InvoiceItemCategories extends AbstractApi implements InvoiceItemCategories
 	 *
 	 * Deleting an invoice item category is only possible if `use_as_service` and `use_as_expense` are both false.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceItemCategoryId The ID of the invoice item category.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $invoiceItemCategoryId ) {
 		return $this->delete( '/invoice_item_categories/' . rawurlencode( $invoiceItemCategoryId ) );

@@ -19,15 +19,16 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Retrieves a list of estimate messages for a specific estimate.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int   $estimateId  The ID of the estimate.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimate messages. Default empty array.
 	 *
-	 *     @type DateTime|string $updated_since  Only return estimate messages that have been updated since the given
-	 *                                           date and time.
+	 *     @type DateTime|string $updated_since Only return estimate messages that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( int $estimateId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -45,10 +46,11 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Retrieves the estimate message with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @param int $messageId  The ID of the estimate message.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $estimateId, int $messageId ) {
 		return $this->get( '/estimates/' . rawurlencode( $estimateId ) . '/messages/' . rawurlencode( $messageId ) );
@@ -86,10 +88,11 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Deletes an estimate message.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $estimateId The ID of the estimate.
 	 * @param int $messageId  The ID of the estimate message.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $estimateId, int $messageId ) {
 		return $this->delete( '/estimates/' . rawurlencode( $estimateId ) . '/messages/' . rawurlencode( $messageId ) );

@@ -15,8 +15,8 @@ interface ProjectAssignmentsInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of project assignments. Default empty array.
 	 *
-	 * 		@type DateTime|string $updated_since Only return project assignments that have been updated since the given
-	 *                                           date and time.
+	 *     @type DateTime|string $updated_since Only return project assignments that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */

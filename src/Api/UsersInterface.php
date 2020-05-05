@@ -15,9 +15,9 @@ interface UsersInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of users. Default empty array.
 	 *
-	 * 		@type bool $is_active                Pass `true` to only return active users and `false` to return
+	 *      @type bool $is_active                Pass `true` to only return active users and `false` to return
 	 *                                           inactive users.
-	 * 		@type DateTime|string $updated_since Only return users that have been updated since the given
+	 *      @type DateTime|string $updated_since Only return users that have been updated since the given
 	 *                                           date and time.
 	 * }
 	 * @return array|string
@@ -35,11 +35,11 @@ interface UsersInterface {
 	/**
 	 * Creates a new user object.
 	 *
-	 * @param array $parameters The parameters of the new user object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new user object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

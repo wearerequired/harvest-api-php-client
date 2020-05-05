@@ -20,6 +20,8 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	/**
 	 * Retrieves a list of time entries.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of time entries. Default empty array.
 	 *
@@ -35,8 +37,7 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *     @type DateTime|string $from           Only return time entries with a `spent_date` on or after the given date.
 	 *     @type DateTime|string $to             Only return time entries with a `spent_date` on or after the given date.
 	 * }
-	 * @return array
-	 * @throws \Http\Client\Exception
+	  * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -70,9 +71,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	/**
 	 * Retrieves the time entry with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $timeEntryId ) {
 		return $this->get( '/time_entries/' . rawurlencode( $timeEntryId ) );
@@ -121,10 +123,11 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $timeEntryId, array $parameters ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ), $parameters );
@@ -136,9 +139,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 * Deleting a time entry is only possible if it’s not closed and the associated project and task haven’t been
 	 * archived. However, Admins can delete closed entries.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $timeEntryId ) {
 		return $this->delete( '/time_entries/' . rawurlencode( $timeEntryId ) );
@@ -149,9 +153,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * Restarting a time entry is only possible if it isn’t currently running.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function restart( int $timeEntryId ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ) . '/restart' );
@@ -162,9 +167,10 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 	 *
 	 * Stopping a time entry is only possible if it’s currently running.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $timeEntryId The ID of the time entry.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function stop( int $timeEntryId ) {
 		return $this->patch( '/time_entries/' . rawurlencode( $timeEntryId ) . '/stop' );

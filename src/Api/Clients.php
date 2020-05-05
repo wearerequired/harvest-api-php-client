@@ -18,6 +18,8 @@ class Clients extends AbstractApi implements ClientsInterface {
 	/**
 	 * Retrieves a list of clients.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of clients. Default empty array.
 	 *
@@ -27,7 +29,6 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -49,9 +50,10 @@ class Clients extends AbstractApi implements ClientsInterface {
 	/**
 	 * Retrieves the client with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $clientId ) {
 		return $this->get( '/clients/' . rawurlencode( $clientId ) );
@@ -62,10 +64,10 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters The parameters of the new client object.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function create( array $parameters ) {
 		if ( ! isset( $parameters['name'] ) ) {
@@ -84,10 +86,11 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $clientId The ID of the client.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $clientId, array $parameters ) {
 		return $this->patch( '/clients/' . rawurlencode( $clientId ), $parameters );
@@ -98,9 +101,10 @@ class Clients extends AbstractApi implements ClientsInterface {
 	 *
 	 * Deleting a client is only possible if it has no projects, invoices, or estimates associated with it.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $clientId The ID of the client.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $clientId ) {
 		return $this->delete( '/clients/' . rawurlencode( $clientId ) );

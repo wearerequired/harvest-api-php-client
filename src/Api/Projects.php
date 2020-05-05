@@ -18,17 +18,18 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Retrieves a list of projects.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of projects. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active projects and `false` to return
-	 *                                           inactive projects.
-	 *     @type int              $client_id     Only return projects belonging to the client with the given ID.
-	 *     @type DateTime|string $updated_since  Only return projects that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool             $is_active    Pass `true` to only return active projects and `false` to return
+	 *                                          inactive projects.
+	 *     @type int              $client_id    Only return projects belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return projects that have been updated since the given
+	 *                                          date and time.
 	 * }
-	 * @return array
-	 * @throws \Http\Client\Exception
+	  * @return array
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -50,9 +51,10 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	/**
 	 * Retrieves the project with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $projectId ) {
 		return $this->get( '/projects/' . rawurlencode( $projectId ) );
@@ -129,10 +131,11 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $projectId, array $parameters ) {
 		return $this->patch( '/projects/' . rawurlencode( $projectId ), $parameters );
@@ -147,9 +150,10 @@ class Projects extends AbstractApi implements ProjectsInterface {
 	 *
 	 *     $client->projects()->update( $projectId, [ 'is_active' => false ];
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $projectId ) {
 		return $this->delete( '/projects/' . rawurlencode( $projectId ) );

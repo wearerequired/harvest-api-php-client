@@ -41,10 +41,10 @@ interface ClientInterface {
 	/**
 	 * Retrieves the API interface for an endpoint name.
 	 *
-	 * @param string $name The endpoint name.
-	 * @return \Required\Harvest\Api\ApiInterface The API interface.
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param string $name The endpoint name.
+	 * @return \Required\Harvest\Api\ApiInterface The API interface.
 	 */
 	public function api( $name): ApiInterface;
 

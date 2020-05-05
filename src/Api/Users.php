@@ -18,16 +18,17 @@ class Users extends AbstractApi implements UsersInterface {
 	/**
 	 * Retrieves a list of users.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of users. Default empty array.
 	 *
-	 * @type bool $is_active Pass `true` to only return active users and `false` to return
-	 *                                           inactive users.
-	 * @type DateTime|string $updated_since Only return users that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active users and `false` to return
+	 *                                          inactive users.
+	 *     @type DateTime|string $updated_since Only return users that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -49,9 +50,10 @@ class Users extends AbstractApi implements UsersInterface {
 	/**
 	 * Retrieves the user with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $userId The ID of the user.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $userId ) {
 		return $this->get( '/users/' . rawurlencode( $userId ) );
@@ -100,10 +102,11 @@ class Users extends AbstractApi implements UsersInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $userId The ID of the user.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $userId, array $parameters ) {
 		return $this->patch( '/users/' . rawurlencode( $userId ), $parameters );
@@ -114,9 +117,10 @@ class Users extends AbstractApi implements UsersInterface {
 	 *
 	 * Deleting a user is only possible if they have no time entries or expenses associated with them.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $userId The ID of the user.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $userId ) {
 		return $this->delete( '/users/' . rawurlencode( $userId ) );

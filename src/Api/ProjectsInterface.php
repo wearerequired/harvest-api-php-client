@@ -15,11 +15,11 @@ interface ProjectsInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of projects. Default empty array.
 	 *
-	 * @type bool $is_active Pass `true` to only return active projects and `false` to return
-	 *                                           inactive projects.
-	 * @type int $client_id Only return projects belonging to the client with the given ID.
-	 * @type DateTime|string $updated_since Only return projects that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active projects and `false` to return
+	 *                                          inactive projects.
+	 *     @type int $client_id                 Only return projects belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return projects that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array
 	 */
@@ -36,11 +36,11 @@ interface ProjectsInterface {
 	/**
 	 * Creates a new project object.
 	 *
-	 * @param array $parameters The parameters of the new project object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new project object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

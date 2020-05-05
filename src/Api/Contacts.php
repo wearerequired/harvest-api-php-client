@@ -18,15 +18,16 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Retrieves a list of contacts.
 	 *
-	 * @param array $parameters {
-	 *      Optional. Parameters for filtering the list of contacts. Default empty array.
+	 * @throws \Http\Client\Exception
 	 *
-	 *     @type int             $client_id      Only return contacts belonging to the client with the given ID.
-	 *     @type DateTime|string $updated_since  Only return contacts that have been updated since the given
-	 *                                           date and time.
+	 * @param array $parameters {
+	 *     Optional. Parameters for filtering the list of contacts. Default empty array.
+	 *
+	 *     @type int             $client_id     Only return contacts belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return contacts that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -44,9 +45,10 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Retrieves the contact with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $contactId ) {
 		return $this->get( '/contacts/' . rawurlencode( $contactId ) );
@@ -87,10 +89,11 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $contactId The ID of the contact.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $contactId, array $parameters ) {
 		return $this->patch( '/contacts/' . rawurlencode( $contactId ), $parameters );
@@ -99,9 +102,10 @@ class Contacts extends AbstractApi implements ContactsInterface {
 	/**
 	 * Deletes a contact.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $contactId The ID of the contact.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $contactId ) {
 		return $this->delete( '/contacts/' . rawurlencode( $contactId ) );

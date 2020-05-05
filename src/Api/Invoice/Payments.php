@@ -19,6 +19,8 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Retrieves a list of invoice payments for a specific invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int   $invoiceId  The ID of the invoice.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice payments. Default empty array.
@@ -27,7 +29,6 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	 *                                           date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( int $invoiceId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -45,10 +46,11 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Retrieves the invoice message with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId The ID of the invoice message.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $invoiceId, int $messageId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/payments/' . rawurlencode( $messageId ) );
@@ -80,10 +82,11 @@ class Payments extends AbstractApi implements PaymentsInterface {
 	/**
 	 * Deletes an invoice message.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId  The ID of the invoice message.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $invoiceId, int $messageId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) . '/payments/' . rawurlencode( $messageId ) );

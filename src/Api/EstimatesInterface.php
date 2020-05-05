@@ -14,20 +14,20 @@ interface EstimatesInterface {
 	/**
 	 * Retrieves a list of estimates.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of estimates. Default empty array.
 	 *
-	 * 		@type int $client_id 				 Only return estimates belonging to the client with the given ID.
-	 * 		@type DateTime|string $updated_since Only return estimates that have been updated since the given
-	 *                                           date and time.
-	 * 		@type DateTime|string $from 		 Only return estimates with a `issue_date` on or after the given date.
-	 * 		@type DateTime|string $to 			 Only return estimates with a `issue_date` on or after the given date.
-	 * 		@type string $state 				 Only return estimates with a `state` matching the value provided.
-	 *                                           Options: 'draft', 'sent', 'accepted', or 'declined'.
+	 *     @type int $client_id                 Only return estimates belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return estimates that have been updated since the given
+	 *                                          date and time.
+	 *     @type DateTime|string $from          Only return estimates with a `issue_date` on or after the given date.
+	 *     @type DateTime|string $to            Only return estimates with a `issue_date` on or after the given date.
+	 *     @type string $state                  Only return estimates with a `state` matching the value provided.
+	 *                                          Options: 'draft', 'sent', 'accepted', or 'declined'.
 	 * }
-	 * @return array|string
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
-	 *
+	  * @return array|string
 	 */
 	public function all( array $parameters = []);
 
@@ -42,11 +42,11 @@ interface EstimatesInterface {
 	/**
 	 * Creates a new estimate object.
 	 *
-	 * @param array $parameters The parameters of the new estimate object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new estimate object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

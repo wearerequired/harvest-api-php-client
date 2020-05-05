@@ -12,14 +12,14 @@ interface TaskAssignmentsInterface {
 	/**
 	 * Retrieves a list of task assignments for a specific project.
 	 *
-	 * @param int $projectId The ID of the project.
+	 * @param int   $projectId  The ID of the project.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of task assignments. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active task assignments and `false` to
-	 *                                           return  inactive task assignments.
-	 * 		@type DateTime|string $updated_since Only return task assignments that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active task assignments and `false` to
+	 *                                          return  inactive task assignments.
+	 *     @type DateTime|string $updated_since Only return task assignments that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */
@@ -37,12 +37,12 @@ interface TaskAssignmentsInterface {
 	/**
 	 * Creates a new task assignment object.
 	 *
+	 * @throws \Required\Harvest\Exception\InvalidArgumentException
+	 * @throws \Required\Harvest\Exception\MissingArgumentException
+	 *
 	 * @param int $projectId The ID of the project.
 	 * @param array $parameters The parameters of the new task assignment object.
 	 * @return array|string
-	 * @throws \Required\Harvest\Exception\InvalidArgumentException
-	 *
-	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 */
 	public function create( int $projectId, array $parameters);
 

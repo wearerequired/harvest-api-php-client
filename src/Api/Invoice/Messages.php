@@ -19,15 +19,16 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Retrieves a list of invoice messages for a specific invoice.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int   $invoiceId  The ID of the invoice.
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of invoice messages. Default empty array.
 	 *
 	 *     @type DateTime|string $updated_since Only return invoice messages that have been updated since the given
-	 *                                           date and time.
+	 *                                          date and time.
 	 * }
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function all( int $invoiceId, array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -45,10 +46,11 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Retrieves the invoice message with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId The ID of the invoice message.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $invoiceId, int $messageId ) {
 		return $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/messages/' . rawurlencode( $messageId ) );
@@ -86,10 +88,11 @@ class Messages extends AbstractApi implements MessagesInterface {
 	/**
 	 * Deletes an invoice message.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $invoiceId The ID of the invoice.
 	 * @param int $messageId  The ID of the invoice message.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $invoiceId, int $messageId ) {
 		return $this->delete( '/invoices/' . rawurlencode( $invoiceId ) . '/messages/' . rawurlencode( $messageId ) );

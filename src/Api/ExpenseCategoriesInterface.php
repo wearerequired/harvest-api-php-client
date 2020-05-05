@@ -15,11 +15,11 @@ interface ExpenseCategoriesInterface {
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of expense categories. Default empty array.
 	 *
-	 * 		@type bool $is_active 				 Pass `true` to only return active expense categories and `false`
-	 *                                           to return inactive expense categories.
-	 * 		@type int $client_id 				 Only return expense categories belonging to the client with the given ID.
-	 * 		@type DateTime|string $updated_since Only return expense categories that have been updated since the given
-	 *                                           date and time.
+	 *     @type bool $is_active                Pass `true` to only return active expense categories and `false`
+	 *                                          to return inactive expense categories.
+	 *     @type int $client_id                 Only return expense categories belonging to the client with the given ID.
+	 *     @type DateTime|string $updated_since Only return expense categories that have been updated since the given
+	 *                                          date and time.
 	 * }
 	 * @return array|string
 	 */
@@ -36,11 +36,11 @@ interface ExpenseCategoriesInterface {
 	/**
 	 * Creates a new expense category object.
 	 *
-	 * @param array $parameters The parameters of the new expense category object.
-	 * @return array|string
 	 * @throws \Required\Harvest\Exception\MissingArgumentException
 	 * @throws \Required\Harvest\Exception\InvalidArgumentException
 	 *
+	 * @param array $parameters The parameters of the new expense category object.
+	 * @return array|string
 	 */
 	public function create( array $parameters);
 

@@ -14,21 +14,20 @@ use DateTime;
  */
 class Tasks extends AbstractApi implements TasksInterface {
 
-
 	/**
 	 * Retrieves a list of tasks.
+	 *
+	 * @throws \Http\Client\Exception
 	 *
 	 * @param array $parameters {
 	 *     Optional. Parameters for filtering the list of tasks. Default empty array.
 	 *
-	 *     @type bool             $is_active     Pass `true` to only return active tasks and `false` to return
-	 *                                           inactive tasks.
+	 *     @type bool             $is_active    Pass `true` to only return active tasks and `false` to return
+	 *                                          inactive tasks.
 	 *     @type DateTime|string $updated_since Only return tasks that have been updated since the given
-	 *                                           date and time.
+	 *                                          date and time.
 	 * }
 	 * @return array
-	 * @throws \Http\Client\Exception
-	 *
 	 */
 	public function all( array $parameters = [] ) {
 		if ( isset( $parameters['updated_since'] ) && $parameters['updated_since'] instanceof DateTime ) {
@@ -50,9 +49,10 @@ class Tasks extends AbstractApi implements TasksInterface {
 	/**
 	 * Retrieves the task with the given ID.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function show( int $taskId ) {
 		return $this->get( '/tasks/' . rawurlencode( $taskId ) );
@@ -85,10 +85,11 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *
 	 * Any parameters not provided will be left unchanged.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $taskId The ID of the task.
 	 * @param array $parameters
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function update( int $taskId, array $parameters ) {
 		return $this->patch( '/tasks/' . rawurlencode( $taskId ), $parameters );
@@ -99,9 +100,10 @@ class Tasks extends AbstractApi implements TasksInterface {
 	 *
 	 * Deleting a task is only possible if it has no time entries associated with it.
 	 *
+	 * @throws \Http\Client\Exception
+	 *
 	 * @param int $taskId The ID of the task.
 	 * @return array|string
-	 * @throws \Http\Client\Exception
 	 */
 	public function remove( int $taskId ) {
 		return $this->delete( '/tasks/' . rawurlencode( $taskId ) );
