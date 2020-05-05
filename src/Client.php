@@ -49,7 +49,7 @@ class Client implements ClientInterface {
 	 *
 	 * @param \Required\Harvest\HttpClient\Builder|null $httpClientBuilder
 	 */
-	public function __construct( Builder $httpClientBuilder = null ) {
+	public function __construct( ?Builder $httpClientBuilder = null ) {
 		$this->httpClientBuilder = $httpClientBuilder ?: new Builder();
 
 		$this->httpClientBuilder->addPlugin( new ResponseExceptionThrower() );
