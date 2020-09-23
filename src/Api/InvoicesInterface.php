@@ -2,7 +2,7 @@
 
 namespace Required\Harvest\Api;
 
-use Lafiel\Required\Harvest\Api\Invoice\PaymentInterface;
+use Required\Harvest\Api\Invoice\PaymentsInterface;
 use Required\Harvest\Api\Invoice\MessagesInterface;
 
 /**
@@ -107,9 +107,9 @@ interface InvoicesInterface {
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return \Lafiel\Required\Harvest\Api\Invoice\PaymentInterface ;
+	 * @return \Required\Harvest\Api\Invoice\PaymentsInterface ;
 	 */
-	public function payments(): PaymentInterface;
+	public function payments(): PaymentsInterface;
 
 	/**
 	 * Gets a Estimate's messages.

@@ -6,8 +6,8 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Lafiel\Required\Harvest\Api\Invoice\PaymentInterface;
-use Lafiel\Required\Harvest\Api\Invoice\Payments;
+use Required\Harvest\Api\Invoice\PaymentsInterface;
+use Required\Harvest\Api\Invoice\Payments;
 use Required\Harvest\Api\Invoice\Messages;
 use Required\Harvest\Api\Invoice\MessagesInterface;
 
@@ -200,9 +200,9 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	/**
 	 * Gets the authenticated user's project assignments.
 	 *
-	 * @return \Lafiel\Required\Harvest\Api\Invoice\PaymentInterface ;
+	 * @return \Required\Harvest\Api\Invoice\PaymentsInterface ;
 	 */
-	public function payments(): PaymentInterface {
+	public function payments(): PaymentsInterface {
 		return new Payments( $this->client );
 	}
 
