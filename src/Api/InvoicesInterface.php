@@ -2,8 +2,8 @@
 
 namespace Required\Harvest\Api;
 
-use Required\Harvest\Api\Invoice\PaymentsInterface;
 use Required\Harvest\Api\Invoice\MessagesInterface;
+use Required\Harvest\Api\Invoice\PaymentsInterface;
 
 /**
  * API client for invoices endpoint.

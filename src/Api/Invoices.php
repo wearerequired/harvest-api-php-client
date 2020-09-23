@@ -6,10 +6,10 @@
 namespace Required\Harvest\Api;
 
 use DateTime;
-use Required\Harvest\Api\Invoice\PaymentsInterface;
-use Required\Harvest\Api\Invoice\Payments;
 use Required\Harvest\Api\Invoice\Messages;
 use Required\Harvest\Api\Invoice\MessagesInterface;
+use Required\Harvest\Api\Invoice\Payments;
+use Required\Harvest\Api\Invoice\PaymentsInterface;
 
 /**
  * API client for invoices endpoint.
