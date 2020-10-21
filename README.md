@@ -43,3 +43,7 @@ This library does not include an OAuth 2.0 Client. We suggest to use the [PHP Le
 ## License
 
 The MIT License (MIT). Please see [license file](https://github.com/wearerequired/harvest-api-php-client/blob/master/LICENSE) for more information.
+
+<br>
+
+[![a required open source product - let's get in touch](https://media.required.com/images/open-source-banner.png)](https://required.com/en/lets-get-in-touch/)
