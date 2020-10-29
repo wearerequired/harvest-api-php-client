@@ -36,11 +36,11 @@ class Payments extends AbstractApi implements PaymentsInterface {
 		}
 
 		$result = $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/payments', $parameters );
-		if ( ! isset( $result['payments'] ) || ! \is_array( $result['payments'] ) ) {
+		if ( ! isset( $result['invoice_payments'] ) || ! \is_array( $result['invoice_payments'] ) ) {
 			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
-		return $result['payments'];
+		return $result['invoice_payments'];
 	}
 
 	/**
