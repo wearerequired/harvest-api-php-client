@@ -34,7 +34,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 	 *     @type DateTime|string $from          Only return invoices with a `issue_date` on or after the given date.
 	 *     @type DateTime|string $to            Only return invoices with a `issue_date` on or after the given date.
 	 *     @type string           $state        Only return invoices with a `state` matching the value provided.
-	 *                                          Options: 'draft', 'sent', 'accepted', or 'declined'.
+	 *                                          Options: 'draft', 'open', 'paid', or 'closed'.
 	 * }
 	  * @return array|string
 	 */
@@ -51,7 +51,7 @@ class Invoices extends AbstractApi implements InvoicesInterface {
 			$parameters['to'] = $parameters['to']->format( 'Y-m-d' );
 		}
 
-		$state_options = [ 'draft', 'sent', 'accepted', 'declined' ];
+		$state_options = [ 'draft', 'open', 'paid', 'closed' ];
 		if ( isset( $parameters['state'] ) && ! \in_array( $parameters['state'], $state_options, true ) ) {
 			throw new \Required\Harvest\Exception\InvalidArgumentException(
 				sprintf(
