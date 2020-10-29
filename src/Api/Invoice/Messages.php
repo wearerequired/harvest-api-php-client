@@ -36,11 +36,11 @@ class Messages extends AbstractApi implements MessagesInterface {
 		}
 
 		$result = $this->get( '/invoices/' . rawurlencode( $invoiceId ) . '/messages', $parameters );
-		if ( ! isset( $result['messages'] ) || ! \is_array( $result['messages'] ) ) {
+		if ( ! isset( $result['invoice_messages'] ) || ! \is_array( $result['invoice_messages'] ) ) {
 			throw new \Required\Harvest\Exception\RuntimeException( 'Unexpected result.' );
 		}
 
-		return $result['messages'];
+		return $result['invoice_messages'];
 	}
 
 	/**
