@@ -37,7 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * API v2 support for Client Contacts, Clients, Company, Invoice Messages, Invoice Payments, Invoices, Invoice Item Categories, Estimate Messages, Estimates, Estimate Item Categories, Expenses, Expense Categories, Tasks, Time Entries, Project User Assignments, Project Task Assignments, Projects, Roles, User Project Assignments, and Users.
 * `AutoPagingIterator` to be used for list requests with automatic pagination.
 
-[Unreleased]: https://github.com/wearerequired/harvest-api-php-client/compare/0.2.1...HEAD
+[Unreleased]: https://github.com/wearerequired/harvest-api-php-client/compare/0.2.2...HEAD
+[0.2.2]: https://github.com/wearerequired/harvest-api-php-client/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/wearerequired/harvest-api-php-client/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/wearerequired/harvest-api-php-client/compare/0.1.1...0.2.0
 [0.1.1]: https://github.com/wearerequired/harvest-api-php-client/compare/0.1.0...0.1.1
