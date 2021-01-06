@@ -6,7 +6,7 @@
 
 	<file>.</file>
 
-	<!-- Show progress and sniff codes in all reports -->
+	<!-- Show progress and sniff codes in all reports. -->
 	<arg value="ps"/>
 
 	<!-- Check up to 20 files simultaneously. -->
@@ -24,7 +24,7 @@
 		<exclude name="PSR2.ControlStructures.ControlStructureSpacing"/>
 		<exclude name="Squiz.ControlStructures.ForEachLoopDeclaration"/>
 
-		<!-- Allow opening and closing braces for functions and classes to be on the same line -->
+		<!-- Allow opening and closing braces for functions and classes to be on the same line. -->
 		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
 		<exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
 		<exclude name="Squiz.WhiteSpace.ScopeClosingBrace"/>
@@ -154,8 +154,7 @@
 	</rule>
 
 	<!-- Require specific order of PHPDoc annotations with empty newline between specific groups. -->
-	<!-- Currently disabled due to https://github.com/slevomat/coding-standard/issues/995. -->
-	<!--<rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+	<rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
 		<properties>
 			<property name="linesCountBeforeFirstContent" value="0"/>
 			<property name="linesCountAfterLastContent" value="0"/>
@@ -183,11 +182,14 @@
 					@type,
 					@return,
 				"/>
-			</property
+			</property>
 		</properties>
-	</rule>>-->
+	</rule>
 
-	<!-- Directories and third party library exclusions -->
-	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<!-- Checks for PHP cross-version compatibility. -->
+	<rule ref="PHPCompatibility"/>
+	<config name="testVersion" value="7.2-"/>
+
+	<!-- Directories and third party library exclusions. -->
 	<exclude-pattern>/vendor/*</exclude-pattern>
 </ruleset>
