@@ -9,10 +9,10 @@ An awesome object oriented wrapper for the Harvest REST API v2, written with and
 Via Composer:
 
 ```
-composer require wearerequired/harvest-api-php-client php-http/guzzle6-adapter "^2.0"
+composer require wearerequired/harvest-api-php-client php-http/guzzle7-adapter "^2.0"
 ```
 
-Why `php-http/guzzle6-adapter`? The library is decoupled from any HTTP messaging client with the help by [HTTPlug](http://httplug.io/).
+Why `php-http/guzzle7-adapter`? The library is decoupled from any HTTP messaging client with the help by [HTTPlug](http://httplug.io/).
 
 
 ## Basic Usage
