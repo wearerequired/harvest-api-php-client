@@ -24,6 +24,7 @@
 	"require": {
 		"php": ">=7.2",
 		"ext-json": "*",
+		"php-http/cache-plugin": "^1.7",
 		"php-http/client-common": "^1.6 || ^2.0",
 		"php-http/client-implementation": "^1.0",
 		"php-http/discovery": "^1.0",
