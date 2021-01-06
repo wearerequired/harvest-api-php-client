@@ -48,13 +48,10 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        php: [ '7.4', '7.3', '7.2' ]
+        php: [ '8.0', '7.4', '7.3', '7.2' ]
         os: [ ubuntu-latest ]
         experimental: [ false ]
         include:
-          - php: '8.0'
-            os: ubuntu-latest
-            experimental: true
           - php: '7.4'
             os: ubuntu-latest
             experimental: false
