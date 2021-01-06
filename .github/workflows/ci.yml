@@ -52,9 +52,9 @@ jobs:
         os: [ ubuntu-latest ]
         experimental: [ false ]
         include:
-        # - php: '8.0'
-        #   os: ubuntu-latest
-        #   experimental: true
+          - php: '8.0'
+            os: ubuntu-latest
+            experimental: true
           - php: '7.4'
             os: ubuntu-latest
             experimental: false
