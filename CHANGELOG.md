@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+* Add PHP 8 support.
+
+### Changed
+* Replace `php-http/guzzle6-adapter` with `php-http/guzzle7-adapter` in install instructions for PHP 8 support.
+
+### Removed
+* Drop PHP 7.1 support.
+
 ## [0.2.2] - 2020-11-02
 
 ### Fixed
