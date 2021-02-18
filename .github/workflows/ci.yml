@@ -28,16 +28,8 @@ jobs:
         run: |
           echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Cache PHP dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Install PHP dependencies
-        run: composer i
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
 
       - name: Lint files
         run: composer run-script lint
