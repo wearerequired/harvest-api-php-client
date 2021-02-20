@@ -1,6 +1,10 @@
 # PHP client library for the Harvest REST API
 
-[![CI](https://github.com/wearerequired/harvest-api-php-client/workflows/CI/badge.svg)](https://github.com/wearerequired/harvest-api-php-client/actions?query=workflow%3ACI) [![codecov](https://codecov.io/gh/wearerequired/harvest-api-php-client/branch/master/graph/badge.svg?token=W9R3VjbmRL)](https://codecov.io/gh/wearerequired/harvest-api-php-client)
+[![Latest Stable Version](https://poser.pugx.org/wearerequired/harvest-api-php-client/v)](//packagist.org/packages/wearerequired/harvest-api-php-client)
+[![Latest Unstable Version](https://poser.pugx.org/wearerequired/harvest-api-php-client/v/unstable)](//packagist.org/packages/wearerequired/harvest-api-php-client)
+[![Total Downloads](https://poser.pugx.org/wearerequired/harvest-api-php-client/downloads)](//packagist.org/packages/wearerequired/harvest-api-php-client)
+[![CI](https://github.com/wearerequired/harvest-api-php-client/workflows/CI/badge.svg)](https://github.com/wearerequired/harvest-api-php-client/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/wearerequired/harvest-api-php-client/branch/master/graph/badge.svg?token=W9R3VjbmRL)](https://codecov.io/gh/wearerequired/harvest-api-php-client)
 
 An awesome object oriented wrapper for the Harvest REST API v2, written with and for modern PHP.
 
