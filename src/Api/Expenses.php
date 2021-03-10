@@ -103,7 +103,7 @@ class Expenses extends AbstractApi implements ExpensesInterface {
 			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "expense_category_id" parameter must be a non-empty integer.' );
 		}
 
-		if ( ! \is_string( $parameters['spent_date'] ) || $parameters['spent_date'] instanceof DateTime ) {
+		if ( ! \is_string( $parameters['spent_date'] ) || ! $parameters['spent_date'] instanceof DateTime ) {
 			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "spent_date" parameter must be DateTime instance or an ISO 8601 formatted date string.' );
 		}
 
