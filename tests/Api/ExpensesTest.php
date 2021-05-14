@@ -292,6 +292,37 @@ class ExpensesTest extends TestCase {
 	}
 
 	/**
+	 * Test creating new expense with date time object.
+	 */
+	public function testCreateNewWithDateTime() {
+		$expectedArray = $this->getFixture( 'expense-15297032' );
+
+		$data_input = [
+			'user_id'             => 1782959,
+			'project_id'          => 14308069,
+			'expense_category_id' => 4195926,
+			'spent_date'          => date_create( '2017-03-01' ),
+			'total_cost'          => 13.59,
+		];
+
+		$data_response = [
+			'user_id'             => 1782959,
+			'project_id'          => 14308069,
+			'expense_category_id' => 4195926,
+			'spent_date'          => '2017-03-01T00:00:00+00:00',
+			'total_cost'          => 13.59,
+		];
+
+		$api = $this->getApiMock();
+		$api->expects( $this->once() )
+			->method( 'post' )
+			->with( '/expenses', $data_response )
+			->will( $this->returnValue( $expectedArray ) );
+
+		$this->assertEquals( $expectedArray, $api->create( $data_input ) );
+	}
+
+	/**
 	 * Test updating expense.
 	 */
 	public function testUpdate() {
