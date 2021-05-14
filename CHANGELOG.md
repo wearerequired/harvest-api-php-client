@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
 
 ### Added
 * Add PHP 8 support.
+
+### Fixed
+* Allow DateTime instance for `spent_date` parameter when creating time entries or expenses. ([#34], [#42]) Props @crichardson9.
 
 ### Changed
 * Replace `php-http/guzzle6-adapter` with `php-http/guzzle7-adapter` in install instructions for PHP 8 support.
@@ -60,3 +63,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#20]: https://github.com/wearerequired/harvest-api-php-client/pull/20
 [#25]: https://github.com/wearerequired/harvest-api-php-client/pull/25
 [#26]: https://github.com/wearerequired/harvest-api-php-client/pull/26
+[#34]: https://github.com/wearerequired/harvest-api-php-client/pull/34
+[#42]: https://github.com/wearerequired/harvest-api-php-client/pull/42
