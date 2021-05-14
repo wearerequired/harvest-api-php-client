@@ -323,6 +323,37 @@ class TimeEntriesTest extends TestCase {
 	}
 
 	/**
+	 * Test creating new time entry with date time object.
+	 */
+	public function testCreateNewWithDateTimeAsSpentDate() {
+		$expectedArray = $this->getFixture( 'time-entry-636718192' );
+
+		$data_input = [
+			'user_id'    => 1782959,
+			'project_id' => 14307913,
+			'task_id'    => 8083365,
+			'spent_date' => date_create( '2017-03-01' ),
+			'hours'      => 1.0,
+		];
+
+		$data_response = [
+			'user_id'    => 1782959,
+			'project_id' => 14307913,
+			'task_id'    => 8083365,
+			'spent_date' => '2017-03-01T00:00:00+00:00',
+			'hours'      => 1.0,
+		];
+
+		$api = $this->getApiMock();
+		$api->expects( $this->once() )
+			->method( 'post' )
+			->with( '/time_entries', $data_response )
+			->will( $this->returnValue( $expectedArray ) );
+
+		$this->assertEquals( $expectedArray, $api->create( $data_input ) );
+	}
+
+	/**
 	 * Test updating time entry.
 	 */
 	public function testUpdate() {

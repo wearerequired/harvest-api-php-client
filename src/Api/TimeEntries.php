@@ -111,8 +111,12 @@ class TimeEntries extends AbstractApi implements TimeEntriesInterface {
 			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "task_id" parameter must be a non-empty integer.' );
 		}
 
-		if ( ! \is_string( $parameters['spent_date'] ) || $parameters['spent_date'] instanceof DateTime ) {
+		if ( ! \is_string( $parameters['spent_date'] ) && ! $parameters['spent_date'] instanceof DateTime ) {
 			throw new \Required\Harvest\Exception\InvalidArgumentException( 'The "spent_date" parameter must be DateTime instance or an ISO 8601 formatted date string.' );
+		}
+
+		if ( $parameters['spent_date'] instanceof DateTime ) {
+			$parameters['spent_date'] = $parameters['spent_date']->format( DateTime::ATOM );
 		}
 
 		return $this->post( '/time_entries', $parameters );
